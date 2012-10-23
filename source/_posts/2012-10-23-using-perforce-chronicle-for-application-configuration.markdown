@@ -4,6 +4,7 @@ title: "Using Perforce Chronicle for application configuration"
 date: 2012-10-23 13:54
 comments: false
 categories:
+published: false
 ---
 
 Following Paul Hammant's post [App-config workflow using SCM](http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/) and subsequent [proof of concept](http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/) backed by Git, I will show that an app-config application backed by Perforce is possible using [Perforce Chronicle](http://www.perforce.com/products/chronicle).
