@@ -153,4 +153,8 @@ There is no logic in the appconfig module to catch conflicts if there are two us
 
 ### Working with branches
 
-I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence.
+I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence. For example, we're still trying to figure out how to attach visual clients like P4V to the repository and work independently of Chronicle.
+
+## Kudos
+
+I would like to thank the guys at Perforce for their assistance and answering all my questions as I worked with Chronicle, especially Randy Defauw.
