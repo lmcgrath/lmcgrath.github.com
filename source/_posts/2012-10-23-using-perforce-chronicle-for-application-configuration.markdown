@@ -9,9 +9,13 @@ published: false
 
 Following Paul Hammant's post [App-config workflow using SCM](http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/) and subsequent [proof of concept](http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/) backed by Git, I will show that an app-config application backed by Perforce is possible using [Perforce Chronicle](http://www.perforce.com/products/chronicle).
 
-[Perforce](http://en.wikipedia.org/wiki/Perforce) is an enterprise-class source control management system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it's generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.
+## Perforce and permissions for branches
 
-Perforce Chronicle is a content management system (CMS) using Perforce as the back-end store for configuration and content. The app-config application is built on top of Chronicle because Perforce does not offer a web view into the depot the way Subversion can through Apache. Branches between environments can be managed through the user interface, and Chronicle gives a full user management system as well, so access between different configuration files can be restricted appropriately. The INSTALL.txt file that is distributed with Chronicle helps with an easy install, mine being set up to run locally from `http://localhost`.
+[Perforce](http://en.wikipedia.org/wiki/Perforce) is an enterprise-class source control management (SCM) system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it's generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.
+
+## Perforce CMS as an application server
+
+[Perforce Chronicle](http://www.perforce.com/products/chronicle) is a content management system (CMS) using Perforce as the back-end store for configuration and content. The app-config application is built on top of Chronicle because Perforce does not offer a web view into the depot the way Subversion can through Apache. Branching and maintaining divergence between environments can be managed through the user interface, and Chronicle provides user authentication and management, so access between different configuration files can be restricted appropriately. The INSTALL.txt file that is distributed with Chronicle helps with an easy install, mine being set up to run locally from `http://localhost`.
 
 There is a key issue in using Chronicle, however. The system is designed for the management of _content_ and not necessarily arbitrary _files_. In order to make the app-config application work, I had to add a custom content type and write a module. Configuration and HTML are both plain-text content, so I created a "Plain Text" content type with the fields _title_ and _content_:
 
@@ -42,7 +46,11 @@ display.filters.0 = HtmlSpecialChars
 
 Click "Save".
 
-I've borrowed heavily from Paul's [app-config HTML page](https://github.com/paul-hammant/app-config-app/blob/master/index.html), which uses [AngularJS](http://angularjs.org/) to manage the UI and interaction with the server. The source JSON configuration is the same, albeit sorted:
+## The Config App
+
+I've borrowed heavily from Paul's [app-config HTML page](https://github.com/paul-hammant/app-config-app/blob/master/index.html), which uses [AngularJS](http://angularjs.org/) to manage the UI and interaction with the server. Where Paul's app-config app used the [jshon](http://kmkeen.com/jshon/) command to encode and decode JSON, Zend Framework has a utility class for encoding, decoding, and pretty-printing JSON, and Chronicle also ships with the [simplediff](https://github.com/paulgb/simplediff/) utility for performing diffs with PHP.
+
+The source JSON configuration is the same, albeit sorted:
 
 {% include_code lang:json app-config/stack_configuration.json %}
 
@@ -59,11 +67,13 @@ Both of these assets were added by performing:
 1. Paste in the appropriate "Content"
 1. Click "URL", select "Custom", and enter the same value as "Title" (otherwise, Chronicle will convert underscores to dashes, so be careful!)
 1. Click "Save", enter a commit message, then click the next "Save"
-1. Both assets should be viewable within pages at `http://localhost/index.html` and `http://localhost/stack_configuration.json`
+1. Both assets should be viewable as mangled Chronicle content entries from `http://localhost/index.html` and `http://localhost/stack_configuration.json`. _You normally will not use these URLs_.
 
 At this point, neither asset is actually usable. Most content is heavily decorated with additional HTML and then displayed within a layout template, but I want both the index.html and stack_configuration.json assets to be viewable as standalone files and provide a REST interface for AngularJS to work against.
 
-Chronicle is largely built using [Zend Framework](http://framework.zend.com/manual/1.12/en/manual.html) and makes adding extra modules to the system pretty easy. My module needs to be able to display plaintext assets, update their content using an HTTP POST, and provide diffs between the last commit and the current content.
+## Come back PHP! All is forgiven
+
+Chronicle is largely built using [Zend Framework](http://framework.zend.com/) and makes adding extra modules to the system pretty easy. My module needs to be able to display plaintext assets, update their content using an HTTP POST, and provide diffs between the last commit and the current content.
 
 To create the module, the following paths need to be added:
 
@@ -75,15 +85,19 @@ Declare the module with `INSTALL/application/appconfig/module.ini`:
 
 {% include_code lang:ruby app-config/module/module.ini %}
 
-Add view scripts to `INSTALL/application/appconfig/views/scripts/index`:
+Add a view script for displaying plaintext assets, `INSTALL/application/appconfig/views/scripts/index/index.phtml`:
 
 {% include_code lang:php app-config/module/views/scripts/index/index.phtml %}
+
+Add a view script for displaying diffs, `INSTALL/application/appconfig/views/scripts/index/diffs.phtml`:
 
 {% include_code lang:php app-config/module/views/scripts/index/diffs.phtml %}
 
 And a controller at `INSTALL/application/appconfig/controllers/IndexController.phtml`:
 
 {% include_code lang:php app-config/module/controllers/IndexController.php %}
+
+## AngularJS
 
 After all files are in place, Chronicle needs to be notified that the new module exists by going to "Manage" > "Modules", where the "Appconfig" module will be listed if all goes well :) Both assets will now be viewable from `http://localhost/appconfig/index.html` and `http://localhost/appconfig/stack_configuration.json`. AngularJS' [$resource service](http://code.angularjs.org/0.9.19/docs-0.9.19/#!/api/angular.service.$resource) is used in index.html to fetch stack_configuration.json and post changes back.
 
@@ -103,13 +117,17 @@ To show that edits have in fact been made to stack_configuration.json, go to `ht
 
 {% img /images/app-config/history.png %}
 
+Chronicle also provides an interface for viewing diffs between revisions:
+
+{% img /images/app-config/history-diffs.png %}
+
 ## @TODO
 
 ### Security!
 
-There's one major flaw with the appconfig module: it performs zero access checks. Chronicle can be configured to disallow anonymous access by going to "Manage" > "Permissions" and deselecting all permissions for "anonymous" and "members". Logging out and attempting to access either `http://localhost/appconfig/stack_configuration.json` or `http://localhost/appconfig/index.html` will now give an error page and prompt you to log in. Clicking "New User" will also give an error, as anonymous users don't have the permission to create users.
+There's one major flaw with the appconfig module: it performs zero access checks. By default, Chronicle can be configured to disallow anonymous access by going to "Manage" > "Permissions" and deselecting all permissions for "anonymous" and "members". Logging out and attempting to access either `http://localhost/appconfig/stack_configuration.json` or `http://localhost/appconfig/index.html` will now give an error page and prompt you to log in. Clicking "New User" will also give an error, as anonymous users don't have the permission to create users.
 
-Access rights on content are checked by the content module, but are hard-coded in the associated controllers as IF-statements. A better solution will be required for proper access management in the appconfig module.
+Access rights on content are checked by the content module, but are also hard-coded in the associated controllers as IF-statements. A better solution will be required for proper access management in the appconfig module.
 
 ### Better integration
 
@@ -123,12 +141,16 @@ Before the appconfig module is usable, the plaintext content type has to be crea
 
 ### Making applications aware of updates to configuration
 
-When stack_configuration.json is updated, there's no way to notify applications to the change, and no interface provided so they may poll for changes. I'm not entirely sure at this point what an appropriate solution would look like.
+When stack_configuration.json is updated, there's no way to notify applications to the change, and no interface provided so they may poll for changes. I'm not entirely sure at this point what an appropriate solution would look like. In order to complete the concept, I'd first have to create a client app dependent on that configuration.
 
 ### Better interfaces for manipulating plaintext assets
 
-I had to fiddle with index.html quite a bit. This basically involved editing a local copy of index.html, then pasting the entire contents into the associated form in Chronicle. I have not tried checking out index.html directly from Perforce, and I imagine that any edits would need to be made within Chronicle. An in-browser HTML editor might come in handy here.
+I had to fiddle with index.html quite a bit. This basically involved editing a local copy of index.html, then pasting the entire contents into the associated form in Chronicle. I have not tried checking out index.html directly from Perforce, and I imagine that any edits would need to be made within Chronicle. Github offers an in-browser raw editor, and something like that would be real handy in Chronicle.
 
 ### Handling conflicts
 
-There is no logic in the appconfig module to catch conflicts if there are two users editing the same file. Conflicts are detectible because an exception is thrown if there is a conflict, but I'm not sure what the workflow for resolution is in Chronicle terms, or how to integrate with it.
+There is no logic in the appconfig module to catch conflicts if there are two users editing the same file. Conflicts are detectible because an exception is thrown if there is a conflict, but I'm not sure what the workflow for resolution is in Chronicle terms, or how to integrate with it. Who wins?
+
+### Working with branches
+
+I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence.
