@@ -121,6 +121,10 @@ Chronicle also provides an interface for viewing diffs between revisions:
 
 {% img /images/app-config/history-diffs.png %}
 
+## Disk Usage
+
+Something to remember in using Chronicle is that each resource requested from Perforce is written to disk before being served to the client. This means that for each request to index.html, Chronicle allocates a new Perforce workspace, checks out the associated files, serves it to the client, then deletes the files and the workspace at the end of the request. Thi allocate/checkout/serve/delete cycle executes for stack_configuration.json and every other resource in the system.
+
 ## @TODO
 
 ### Security!
