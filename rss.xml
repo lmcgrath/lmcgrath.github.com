@@ -1,24 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Logan McGrath's Blog]]></title>
-  <link href="http://lmcgrath.github.com/atom.xml" rel="self"/>
-  <link href="http://lmcgrath.github.com/"/>
-  <updated>2012-10-27T10:24:24-05:00</updated>
-  <id>http://lmcgrath.github.com/</id>
-  <author>
-    <name><![CDATA[Logan McGrath]]></name>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title><![CDATA[Logan McGrath's Blog]]></title>
+    <description></description>
+    <generator>Octopress</generator>
+    <link>http://lmcgrath.github.com</link>
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
-
-  
-  <entry>
-    <title type="html"><![CDATA[Using Perforce Chronicle for application configuration]]></title>
-    <link href="http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration/"/>
-    <updated>2012-10-23T13:54:00-05:00</updated>
-    <id>http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration</id>
-    <content type="html"><![CDATA[<p>Following Paul Hammant&#8217;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
+    <item>
+      <title><![CDATA[Using Perforce Chronicle for application configuration]]></title>
+      <description><![CDATA[<p>Following Paul Hammant&#8217;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
 
 <h2>Perforce and permissions for branches</h2>
 
@@ -613,7 +603,12 @@
 <h2>Kudos</h2>
 
 <p>I would like to thank the guys at Perforce for their assistance and answering all my questions as I worked with Chronicle, especially Randy Defauw.</p>
-]]></content>
-  </entry>
-  
-</feed>
+]]></description>
+      <link>http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration/</link>
+      <pubDate>Tue, 23 Oct 2012 13:54:00 -0500</pubDate>
+      <guid>http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration</guid>
+    </item>
+    
+  </channel>
+</rss>
+
