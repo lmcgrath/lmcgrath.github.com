@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using Perforce Chronicle for application configuration"
-date: 2012-10-23 13:54
+date: 2012-11-07 13:54
 comments: false
 categories:
 published: true

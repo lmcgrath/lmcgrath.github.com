@@ -1,0 +1,22 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title><![CDATA[{{ site.title | cdata_escape }}]]></title>
+    <description>{% if site.subtitle %}<![CDATA[{{ site.subtitle | cdata_escape }}]]>{% endif %}</description>
+    <generator>Octopress</generator>
+    <link>{{ site.url | xml_escape }}</link>
+    {% for post in site.posts limit: 20 %}
+    <item>
+      <title><![CDATA[{{ post.title | cdata_escape }}]]></title>
+      <description><![CDATA[{{ post.content | expand_urls: site.url | cdata_escape }}]]></description>
+      <link>{{ site.url | xml_escape }}{{ post.url | xml_escape }}</link>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      <guid>{{ site.url | xml_escape }}{{ post.id | xml_escape }}</guid>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
+
