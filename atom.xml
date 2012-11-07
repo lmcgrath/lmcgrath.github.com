@@ -4,7 +4,7 @@
   <title><![CDATA[Logan McGrath's Blog]]></title>
   <link href="http://lmcgrath.github.com/atom.xml" rel="self"/>
   <link href="http://lmcgrath.github.com/"/>
-  <updated>2012-10-27T10:24:24-05:00</updated>
+  <updated>2012-11-07T11:03:39-06:00</updated>
   <id>http://lmcgrath.github.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Perforce Chronicle for application configuration]]></title>
-    <link href="http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration/"/>
-    <updated>2012-10-23T13:54:00-05:00</updated>
-    <id>http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration</id>
+    <link href="http://lmcgrath.github.com/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/"/>
+    <updated>2012-11-07T13:54:00-06:00</updated>
+    <id>http://lmcgrath.github.com/blog/2012/11/07/using-perforce-chronicle-for-application-configuration</id>
     <content type="html"><![CDATA[<p>Following Paul Hammant&#8217;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
 
 <h2>Perforce and permissions for branches</h2>

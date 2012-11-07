@@ -2,9 +2,9 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>
-            http://lmcgrath.github.com/blog/2012/10/23/using-perforce-chronicle-for-application-configuration/
+            http://lmcgrath.github.com/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/
         </loc>
-        <lastmod>2012-10-25T15:34:43-05:00</lastmod>
+        <lastmod>2012-11-07T11:03:05-06:00</lastmod>
     </url>
     <url>
         <loc>http://lmcgrath.github.com/about-me.html</loc>
@@ -12,11 +12,11 @@
     </url>
     <url>
         <loc>http://lmcgrath.github.com/blog/archives/</loc>
-        <lastmod>2012-10-25T15:34:43-05:00</lastmod>
+        <lastmod>2012-11-07T11:03:05-06:00</lastmod>
     </url>
     <url>
         <loc>http://lmcgrath.github.com/</loc>
-        <lastmod>2012-10-25T15:34:43-05:00</lastmod>
+        <lastmod>2012-11-07T11:03:05-06:00</lastmod>
     </url>
     <url>
         <loc>http://lmcgrath.github.com/rss.xml</loc>
