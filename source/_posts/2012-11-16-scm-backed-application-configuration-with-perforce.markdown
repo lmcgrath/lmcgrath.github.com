@@ -7,7 +7,7 @@ published: true
 categories: [SCM, Continuous Delivery, App Config, Perforce]
 ---
 
-Continuing from my [last post](/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/), I've [forked](https://github.com/lmcgrath/App-Config-App/) Paul Hammant's original [App-Config-App](https://github.com/paul-hammant/App-Config-App/tree/bc987cfb3a45c5e891fc91b502511862a48bc3ea) and modified it to work against Perforce. I've decided not to continue using Perforce Chronicle as it is primarily intended for content management.
+Continuing from my [last post](/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/), I've [forked](https://github.com/lmcgrath/App-Config-App/) Paul Hammant's original App-Config-App and modified it to work against Perforce. I've decided not to continue using Perforce Chronicle as it is primarily intended for content management.
 
 With this version, App-Config-App is written in Ruby, mostly using [Sinatra](http://www.sinatrarb.com/), a lightweight web application framework. I'm still using [AngularJS](http://angularjs.org/), but I've also added a few other things:
 
