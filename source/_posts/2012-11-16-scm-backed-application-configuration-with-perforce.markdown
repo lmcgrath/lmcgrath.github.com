@@ -4,7 +4,7 @@ title: "SCM-Backed Application Configuration with Perforce"
 date: 2012-11-16 07:00
 comments: false
 published: true
-categories: [SCM, Continuous Delivery, App Config, Perforce]
+categories: [SCM, Sinatra, AngularJS, Perforce]
 ---
 
 Continuing from my [last post](/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/), I've [forked](https://github.com/lmcgrath/App-Config-App/) Paul Hammant's original App-Config-App and modified it to work against Perforce. I've decided not to continue using Perforce Chronicle as it is primarily intended for content management.
