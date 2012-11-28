@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SCM | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/scm/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2012-11-21T10:34:28-06:00</updated>
+  <updated>2012-11-28T13:06:50-06:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -14,10 +14,103 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Promoting changes with App-Config-App]]></title>
+    <link href="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app/"/>
+    <updated>2012-11-28T13:04:00-06:00</updated>
+    <id>http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app</id>
+    <content type="html"><![CDATA[<p>The App-Config-App now lets you promote changes between environments!</p>
+
+<h2>How does it work?</h2>
+
+<p>Perforce lets you create mappings to define the relationship between two diverging code branches. This allows for easy integration of changes between the two branches by referencing the name of the mapping.</p>
+
+<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce's documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
+
+<p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
+
+<h2>Promoting changes with App-Config-App</h2>
+
+<p>The App-Config-App <code>setup_example.rb</code> creates four branches with the following mappings:</p>
+
+<p>```</p>
+
+<h2>Mapping        Source    Destination</h2>
+
+<p>dev-qa         dev       qa
+qa-staging     qa        staging
+staging-prod   staging   prod
+```</p>
+
+<p>If you login to App-Config-App and go to "Promote Changes," you get an interface showing these relationships:</p>
+
+<p><img src="/images/app-config3/promote_changes.png"></p>
+
+<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an 'accept-theirs' resolution) and you are then allowed to review the changes by clicking on the "Pending Changes" link.</p>
+
+<p>For example, I've promoted changes from "qa" to "dev":</p>
+
+<p><img src="/images/app-config3/promote_result.png"></p>
+
+<p>I can then review the changes by clicking on "Pending Changes":</p>
+
+<p><img src="/images/app-config3/pending_changes.png"></p>
+
+<p>Changes may be edited or reverted before committing them.</p>
+
+<h2>Promoting changes using P4V</h2>
+
+<p><a href="http://www.perforce.com/product/components/perforce_visual_client">P4V</a> is the Perforce visual client. Using P4V, you have much greater control over how changes get promoted, but it requires a little more work.</p>
+
+<p>I've connected P4V to my App-Config-App user workspace to perform the same promotion from "qa" to "dev":</p>
+
+<p><img src="/images/app-config3/p4v.png"></p>
+
+<p>Select the "qa" folder, then from the menu bar go to "Actions" > "Merge/Integrate". This will bring up a wizard for performing the integration.</p>
+
+<p>Select the following:</p>
+
+<p><code>
+Merge method: "Use branch mapping"
+Branch mapping: "dev-qa"
+Automatically resolve files after merging: checked
+Resolve option: "Accept source"
+</code></p>
+
+<p>And ensure the direction of integration is "Target" &lt; "Source":</p>
+
+<p><img src="/images/app-config3/p4v_integrate.png"></p>
+
+<p>Finally, click "Merge". If you expand the "dev" folder, you can see the where the changes are:</p>
+
+<p><img src="/images/app-config3/p4v_integrate_result.png"></p>
+
+<p>You are now free to modify the files further before finally committing the changes.</p>
+
+<h3>How it compares</h3>
+
+<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App's default behavior is fairly involved. If you aren't paying attention or don't know what you're doing, you might break something :(</p>
+
+<h2>@TODO</h2>
+
+<h3>More options for resolving changes</h3>
+
+<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what's changed in the destination config and possibly edit the config further before finally committing it.</p>
+
+<h3>Conflict resolution</h3>
+
+<p>If a conflict occurs after promoting changes, a screen should be available for viewing and editing the conflicting changes.</p>
+
+<h3>Better error reporting if promotion fails due to permissions</h3>
+
+<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn't actually occur (the files remain unchanged) but the application doesn't report any errors when this happens.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[App-Config-App in action]]></title>
-    <link href="http://loganmcgrath.com/blog/2012/11/21/app-config-app-in-action/"/>
-    <updated>2012-11-21T07:00:00-06:00</updated>
-    <id>http://loganmcgrath.com/blog/2012/11/21/app-config-app-in-action</id>
+    <link href="http://loganmcgrath.com/blog/2012/11/20/app-config-app-in-action/"/>
+    <updated>2012-11-20T07:00:00-06:00</updated>
+    <id>http://loganmcgrath.com/blog/2012/11/20/app-config-app-in-action</id>
     <content type="html"><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I've modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you're able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p>
 
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div></p>

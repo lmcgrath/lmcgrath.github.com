@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Promoting changes with App-Config-App - Logan McGrath's Blog</title>
+  <meta name="author" content="Logan McGrath">
+
+  
+  <meta name="description" content="The App-Config-App now lets you promote changes between environments! How does it work? Perforce lets you create mappings to define the relationship &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36481003-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Logan McGrath's Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/rss.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:loganmcgrath.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about-me.html">About Me</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Promoting Changes With App-Config-App</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-28T13:04:00-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The App-Config-App now lets you promote changes between environments!</p>
+
+<h2>How does it work?</h2>
+
+<p>Perforce lets you create mappings to define the relationship between two diverging code branches. This allows for easy integration of changes between the two branches by referencing the name of the mapping.</p>
+
+<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&#8217;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
+
+<p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
+
+<h2>Promoting changes with App-Config-App</h2>
+
+<p>The App-Config-App <code>setup_example.rb</code> creates four branches with the following mappings:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mapping        Source    Destination
+</span><span class='line'>------------------------------------
+</span><span class='line'>dev-qa         dev       qa
+</span><span class='line'>qa-staging     qa        staging
+</span><span class='line'>staging-prod   staging   prod</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you login to App-Config-App and go to &#8220;Promote Changes,&#8221; you get an interface showing these relationships:</p>
+
+<p><img src="/images/app-config3/promote_changes.png"></p>
+
+<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &#8216;accept-theirs&#8217; resolution) and you are then allowed to review the changes by clicking on the &#8220;Pending Changes&#8221; link.</p>
+
+<p>For example, I&#8217;ve promoted changes from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+
+<p><img src="/images/app-config3/promote_result.png"></p>
+
+<p>I can then review the changes by clicking on &#8220;Pending Changes&#8221;:</p>
+
+<p><img src="/images/app-config3/pending_changes.png"></p>
+
+<p>Changes may be edited or reverted before committing them.</p>
+
+<h2>Promoting changes using P4V</h2>
+
+<p><a href="http://www.perforce.com/product/components/perforce_visual_client">P4V</a> is the Perforce visual client. Using P4V, you have much greater control over how changes get promoted, but it requires a little more work.</p>
+
+<p>I&#8217;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+
+<p><img src="/images/app-config3/p4v.png"></p>
+
+<p>Select the &#8220;qa&#8221; folder, then from the menu bar go to &#8220;Actions&#8221; > &#8220;Merge/Integrate&#8221;. This will bring up a wizard for performing the integration.</p>
+
+<p>Select the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Merge method: "Use branch mapping"
+</span><span class='line'>Branch mapping: "dev-qa"
+</span><span class='line'>Automatically resolve files after merging: checked
+</span><span class='line'>Resolve option: "Accept source"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And ensure the direction of integration is &#8220;Target&#8221; &lt; &#8220;Source&#8221;:</p>
+
+<p><img src="/images/app-config3/p4v_integrate.png"></p>
+
+<p>Finally, click &#8220;Merge&#8221;. If you expand the &#8220;dev&#8221; folder, you can see the where the changes are:</p>
+
+<p><img src="/images/app-config3/p4v_integrate_result.png"></p>
+
+<p>You are now free to modify the files further before finally committing the changes.</p>
+
+<h3>How it compares</h3>
+
+<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&#8217;s default behavior is fairly involved. If you aren&#8217;t paying attention or don&#8217;t know what you&#8217;re doing, you might break something :(</p>
+
+<h2>@TODO</h2>
+
+<h3>More options for resolving changes</h3>
+
+<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&#8217;s changed in the destination config and possibly edit the config further before finally committing it.</p>
+
+<h3>Conflict resolution</h3>
+
+<p>If a conflict occurs after promoting changes, a screen should be available for viewing and editing the conflicting changes.</p>
+
+<h3>Better error reporting if promotion fails due to permissions</h3>
+
+<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&#8217;t actually occur (the files remain unchanged) but the application doesn&#8217;t report any errors when this happens.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Logan McGrath</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-28T13:04:00-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app/" data-via="" data-counturl="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/20/app-config-app-in-action/" title="Previous Post: App-Config-App in action">&laquo; App-Config-App in action</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting changes with App-Config-App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/app-config-app-in-action/">App-Config-App in action</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration with Perforce</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">Using Perforce Chronicle for application configuration</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Logan McGrath -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
