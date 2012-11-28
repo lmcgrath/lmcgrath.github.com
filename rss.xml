@@ -106,8 +106,8 @@
     </item>
     
     <item>
-      <title><![CDATA[App-Config-App in action]]></title>
-      <description><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&#8217;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&#8217;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p>
+      <title><![CDATA[App-Config-App in Action]]></title>
+      <description><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&#8217;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&#8217;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
 
 <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div>
 

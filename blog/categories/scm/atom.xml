@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SCM | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/scm/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2012-11-28T13:06:50-06:00</updated>
+  <updated>2012-11-28T13:13:05-06:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -107,11 +107,11 @@ Resolve option: "Accept source"
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[App-Config-App in action]]></title>
+    <title type="html"><![CDATA[App-Config-App in Action]]></title>
     <link href="http://loganmcgrath.com/blog/2012/11/20/app-config-app-in-action/"/>
     <updated>2012-11-20T07:00:00-06:00</updated>
     <id>http://loganmcgrath.com/blog/2012/11/20/app-config-app-in-action</id>
-    <content type="html"><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I've modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you're able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p>
+    <content type="html"><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I've modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you're able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
 
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div></p>
 
