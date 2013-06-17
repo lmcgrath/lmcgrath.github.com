@@ -3,7 +3,7 @@ layout: post
 title: "Sterling Benchmarks"
 date: 2013-06-16 21:12
 comments: false
-published: false
+published: true
 categories: 
   - Functional Programming
   - Sterling
