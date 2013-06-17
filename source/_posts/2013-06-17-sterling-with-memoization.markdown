@@ -99,11 +99,11 @@ Average for 100 iterations X 1000 executions: 6 milliseconds
 
 ### This benchmark smells funny
 
-Yes, the performance in this benchmark is very contrived. But this does present an interesting property of applications
-written in Sterling: If an application performs a great deal of repeated calculations, it will run faster over time. A
-quick glance at the second bench mark will show that Java is performing the calculation every single time it is called,
-whereas Sterling only requires the first call and then it stores the result. This suggests **O(1)** vs. **O(n)** time
-complexity in Sterling's favor.
+Yes, the performance in this benchmark is very contrived. But this does present an interesting potential property of
+applications written in Sterling: If an application performs a great deal of repeated calculations, it will run faster
+over time. A quick glance at the second bench mark will show that Java is performing the calculation every single time
+it is called, whereas Sterling only requires the first call and then it stores the result. This suggests **O(1)** vs.
+**O(n)** time complexity in Sterling's favor.
 
 You won't get this sort of performance for a web application because of their side effect-driven nature, but for number
 crunching Sterling may very well be a good idea.
