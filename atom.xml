@@ -4,7 +4,7 @@
   <title><![CDATA[Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-06-17T06:27:37-05:00</updated>
+  <updated>2013-06-17T06:41:01-05:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -190,6 +190,14 @@ another benchmark comparing memory requirements of the Fibonacci algorithm betwe
 <p>There may be some cases where you want to recalculate a value for a known argument. For example, if I query a database
 I shouldn&#8217;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
 function should not leverage memoization.</p>
+
+<h2>Links</h2>
+
+<ul>
+<li><a href="https://github.com/lmcgrath/sterling/commit/7d69d49a911d2d916701fa973e02ffabe82afe9d">Commit containing memoization changes</a></li>
+<li><a href="https://github.com/lmcgrath/sterling/blob/5c879ece28194fdbc36ed5dff2a760d6a38a4033/src/test/java/sterling/math/FibonacciBenchmarkTest.java">Benchmark showing O(1) complexity</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
