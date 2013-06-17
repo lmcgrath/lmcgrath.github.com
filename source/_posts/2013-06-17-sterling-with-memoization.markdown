@@ -121,3 +121,8 @@ There may be some cases where you want to recalculate a value for a known argume
 I shouldn't necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
 function should not leverage memoization.
 
+## Links
+
+* [Commit containing memoization changes](https://github.com/lmcgrath/sterling/commit/7d69d49a911d2d916701fa973e02ffabe82afe9d)
+* [Benchmark showing O(1) complexity](https://github.com/lmcgrath/sterling/blob/5c879ece28194fdbc36ed5dff2a760d6a38a4033/src/test/java/sterling/math/FibonacciBenchmarkTest.java)
+
