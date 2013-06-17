@@ -9,9 +9,9 @@
   <meta name="author" content="Logan McGrath">
 
   
-  <meta name="description" content="Since mid January, I’ve been
-developing a functional scripting language I call Sterling. In the past few
-weeks, Sterling has become nearly usable, &hellip;">
+  <meta name="description" content="In my last post I wrote about performance in the
+Sterling programming language with a basic benchmark. Today I&#8217;m ticking off one
+@TODO item: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,213 @@ weeks, Sterling has become nearly usable, &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/17/sterling-with-memoization/">Sterling With Memoization</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T04:26:00-05:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
+<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&#8217;m ticking off one
+<strong>@TODO</strong> item: memoization.</p>
+
+<p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
+recalculation of an already-known value. I&#8217;ve leveraged the benchmark from the previous post, and the difference in
+execution speed is very pronounced:</p>
+
+<figure class='code'><figcaption><span>The Results</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Java Benchmark
+</span><span class='line'>--------------
+</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 6 milliseconds
+</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
+</span><span class='line'>--------------
+</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 4 milliseconds
+</span><span class='line'>
+</span><span class='line'>Sterling Benchmark
+</span><span class='line'>------------------
+</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 648 milliseconds
+</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 1 milliseconds
+</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>------------------
+</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 64 milliseconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sterling without memoization required on average 0.079 seconds to calculate the 20th member of the Fibonacci sequence,
+but with memoization, the amount of time shrinks to 0.006 seconds. The time penalty only applies the first time the
+function is executed for a given argument, so call times become near-instantaneous.</p>
+
+<h2>Sterling is faster than Java!</h2>
+
+<p>Not really. But it is if I fiddle with the benchmark variables a bit (:</p>
+
+<p>By changing the benchmark to execute the Fibonacci function 1000 times for 100 iterations, something interesting
+happens:</p>
+
+<figure class='code'><figcaption><span>Fiddling with the benchmark</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Java Benchmark
+</span><span class='line'>--------------
+</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 42 milliseconds
+</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
+</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
+</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
+</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
+</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
+</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 41 milliseconds
+</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 40 milliseconds
+</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
+</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
+</span><span class='line'>...
+</span><span class='line'>Iteration 99: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
+</span><span class='line'>--------------
+</span><span class='line'>Average <span class="k">for </span>100 iterations X 1000 executions: 39 milliseconds
+</span><span class='line'>
+</span><span class='line'>Sterling Benchmark
+</span><span class='line'>------------------
+</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 629 milliseconds
+</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 1 milliseconds
+</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>...
+</span><span class='line'>Iteration 99: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
+</span><span class='line'>------------------
+</span><span class='line'>Average <span class="k">for </span>100 iterations X 1000 executions: 6 milliseconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>This benchmark smells funny</h3>
+
+<p>Yes, the performance in this benchmark is very contrived. But this does present an interesting property of applications
+written in Sterling: If an application performs a great deal of repeated calculations, it will run faster over time. A
+quick glance at the second bench mark will show that Java is performing the calculation every single time it is called,
+whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs. <strong>O(n)</strong> time
+complexity in Sterling&#8217;s favor.</p>
+
+<p>You won&#8217;t get this sort of performance for a web application because of their side effect-driven nature, but for number
+crunching Sterling may very well be a good idea.</p>
+
+<h2>@TODO</h2>
+
+<h3>How does memoization impact memory?</h3>
+
+<p>Obviously, those calculated values get stored somewhere, and somewhere means memory is being used. I should perform
+another benchmark comparing memory requirements of the Fibonacci algorithm between pure Java and Sterling.</p>
+
+<h3>What if I don&#8217;t want memoization for a particular function?</h3>
+
+<p>There may be some cases where you want to recalculate a value for a known argument. For example, if I query a database
+I shouldn&#8217;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
+function should not leverage memoization.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1296,6 +1503,10 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/17/sterling-with-memoization/">Sterling With Memoization</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/16/sterling-benchmarks/">Sterling Benchmarks</a>
       </li>
     
@@ -1309,10 +1520,6 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
     
       <li class="post">
         <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration with Perforce</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">Using Perforce Chronicle for application configuration</a>
       </li>
     
   </ul>
