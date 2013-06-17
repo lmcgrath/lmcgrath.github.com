@@ -12,7 +12,7 @@ categories:
 
 In my [last post](/blog/2013/06/16/sterling-benchmarks/) I wrote about performance in the
 [Sterling](https://github.com/lmcgrath/sterling) programming language with a basic benchmark. Today I'm ticking off one
-**@TODO** item: memoization.
+**@TODO** item: [Memoization](https://en.wikipedia.org/wiki/Memoization).
 
 Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
 recalculation of an already-known value. I've leveraged the benchmark from the previous post, and the difference in
