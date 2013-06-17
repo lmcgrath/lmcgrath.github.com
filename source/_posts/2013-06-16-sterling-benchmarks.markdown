@@ -7,7 +7,7 @@ published: true
 categories: 
   - Functional Programming
   - Sterling
-  - Language Implementation
+  - Language Design
 ---
 
 Since [mid January](https://github.com/lmcgrath/sterling/tree/8b58ce4d4b080b353f7870ec0c0c30639fb2fa7b), I’ve been
