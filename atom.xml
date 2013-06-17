@@ -4,7 +4,7 @@
   <title><![CDATA[Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-06-17T06:41:01-05:00</updated>
+  <updated>2013-06-17T06:42:36-05:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -169,11 +169,11 @@ happens:</p>
 
 <h3>This benchmark smells funny</h3>
 
-<p>Yes, the performance in this benchmark is very contrived. But this does present an interesting property of applications
-written in Sterling: If an application performs a great deal of repeated calculations, it will run faster over time. A
-quick glance at the second bench mark will show that Java is performing the calculation every single time it is called,
-whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs. <strong>O(n)</strong> time
-complexity in Sterling&#8217;s favor.</p>
+<p>Yes, the performance in this benchmark is very contrived. But this does present an interesting potential property of
+applications written in Sterling: If an application performs a great deal of repeated calculations, it will run faster
+over time. A quick glance at the second bench mark will show that Java is performing the calculation every single time
+it is called, whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs.
+<strong>O(n)</strong> time complexity in Sterling&#8217;s favor.</p>
 
 <p>You won&#8217;t get this sort of performance for a web application because of their side effect-driven nature, but for number
 crunching Sterling may very well be a good idea.</p>
