@@ -56,7 +56,7 @@ function is executed for a given argument, so call times become near-instantaneo
 
 ## Sterling is faster than Java!
 
-Not really. But it is if I fiddle with the benchmark variables a bit (:
+**Not really.** But it is if I fiddle with the benchmark variables a bit (:
 
 By changing the benchmark to execute the Fibonacci function 1000 times for 100 iterations, something interesting
 happens:
