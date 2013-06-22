@@ -4,7 +4,7 @@
   <title><![CDATA[Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-06-17T06:45:06-05:00</updated>
+  <updated>2013-06-22T12:28:14-05:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -93,7 +93,7 @@ function is executed for a given argument, so call times become near-instantaneo
 
 <h2>Sterling is faster than Java!</h2>
 
-<p>Not really. But it is if I fiddle with the benchmark variables a bit (:</p>
+<p><strong>Not really.</strong> But it is if I fiddle with the benchmark variables a bit (:</p>
 
 <p>By changing the benchmark to execute the Fibonacci function 1000 times for 100 iterations, something interesting
 happens:</p>
