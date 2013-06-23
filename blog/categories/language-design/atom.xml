@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Language Design | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/language-design/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-06-22T12:28:14-05:00</updated>
+  <updated>2013-06-23T00:09:03-05:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -19,11 +19,11 @@
     <updated>2013-06-17T04:26:00-05:00</updated>
     <id>http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization</id>
     <content type="html"><![CDATA[<p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
-<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I'm ticking off one
+<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
 
 <p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
-recalculation of an already-known value. I've leveraged the benchmark from the previous post, and the difference in
+recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
 execution speed is very pronounced:</p>
 
 <p>``` bash The Results</p>
@@ -86,7 +86,7 @@ Iteration 6: executions = 1000; elapsed = 41 milliseconds
 Iteration 7: executions = 1000; elapsed = 40 milliseconds
 Iteration 8: executions = 1000; elapsed = 38 milliseconds
 Iteration 9: executions = 1000; elapsed = 38 milliseconds
-...</p>
+&hellip;</p>
 
 <h2>Iteration 99: executions = 1000; elapsed = 39 milliseconds</h2>
 
@@ -104,7 +104,7 @@ Iteration 6: executions = 1000; elapsed = 0 milliseconds
 Iteration 7: executions = 1000; elapsed = 0 milliseconds
 Iteration 8: executions = 1000; elapsed = 1 milliseconds
 Iteration 9: executions = 1000; elapsed = 0 milliseconds
-...</p>
+&hellip;</p>
 
 <h2>Iteration 99: executions = 1000; elapsed = 0 milliseconds</h2>
 
@@ -117,9 +117,9 @@ Iteration 9: executions = 1000; elapsed = 0 milliseconds
 applications written in Sterling: If an application performs a great deal of repeated calculations, it will run faster
 over time. A quick glance at the second bench mark will show that Java is performing the calculation every single time
 it is called, whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs.
-<strong>O(n)</strong> time complexity in Sterling's favor.</p>
+<strong>O(n)</strong> time complexity in Sterling&rsquo;s favor.</p>
 
-<p>You won't get this sort of performance for a web application because of their side effect-driven nature, but for number
+<p>You won&rsquo;t get this sort of performance for a web application because of their side effect-driven nature, but for number
 crunching Sterling may very well be a good idea.</p>
 
 <h2>@TODO</h2>
@@ -129,10 +129,10 @@ crunching Sterling may very well be a good idea.</p>
 <p>Obviously, those calculated values get stored somewhere, and somewhere means memory is being used. I should perform
 another benchmark comparing memory requirements of the Fibonacci algorithm between pure Java and Sterling.</p>
 
-<h3>What if I don't want memoization for a particular function?</h3>
+<h3>What if I don&rsquo;t want memoization for a particular function?</h3>
 
 <p>There may be some cases where you want to recalculate a value for a known argument. For example, if I query a database
-I shouldn't necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
+I shouldn&rsquo;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
 function should not leverage memoization.</p>
 
 <h2>Links</h2>
@@ -160,7 +160,7 @@ calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
 
 <p>``` haskell Sterling Implementation
-fibonacci = n -> if n = 0 then 0</p>
+fibonacci = n &ndash;> if n = 0 then 0</p>
 
 <pre><code>             else if n = 1 then 1
              else fibonacci (n - 1) + fibonacci (n - 2)
@@ -204,7 +204,7 @@ iteration.</p>
 
 <p>``` java Benchmark Pseudo-Java&trade;
 Expression input = IntegerConstant(20);
-Expression sterlingFibonacci = load("sterling/math/fibonacci");</p>
+Expression sterlingFibonacci = load(&ldquo;sterling/math/fibonacci&rdquo;);</p>
 
 <p>void javaBenchmark() {</p>
 

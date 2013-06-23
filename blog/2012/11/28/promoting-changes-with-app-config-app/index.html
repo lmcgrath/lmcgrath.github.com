@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app/">
+  <link rel="canonical" href="http://loganmcgrath.com/blog/2012/11/28/promoting-changes-with-app-config-app">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -107,7 +108,7 @@
 
 <p>Perforce lets you create mappings to define the relationship between two diverging code branches. This allows for easy integration of changes between the two branches by referencing the name of the mapping.</p>
 
-<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&#8217;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
+<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&rsquo;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
 
 <p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
 
@@ -127,17 +128,17 @@
 </span><span class='line'>staging-prod   staging   prod</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you login to App-Config-App and go to &#8220;Promote Changes,&#8221; you get an interface showing these relationships:</p>
+<p>If you login to App-Config-App and go to &ldquo;Promote Changes,&rdquo; you get an interface showing these relationships:</p>
 
 <p><img src="/images/app-config3/promote_changes.png"></p>
 
-<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &#8216;accept-theirs&#8217; resolution) and you are then allowed to review the changes by clicking on the &#8220;Pending Changes&#8221; link.</p>
+<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &lsquo;accept-theirs&rsquo; resolution) and you are then allowed to review the changes by clicking on the &ldquo;Pending Changes&rdquo; link.</p>
 
-<p>For example, I&#8217;ve promoted changes from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+<p>For example, I&rsquo;ve promoted changes from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
 
 <p><img src="/images/app-config3/promote_result.png"></p>
 
-<p>I can then review the changes by clicking on &#8220;Pending Changes&#8221;:</p>
+<p>I can then review the changes by clicking on &ldquo;Pending Changes&rdquo;:</p>
 
 <p><img src="/images/app-config3/pending_changes.png"></p>
 
@@ -147,11 +148,11 @@
 
 <p><a href="http://www.perforce.com/product/components/perforce_visual_client">P4V</a> is the Perforce visual client. Using P4V, you have much greater control over how changes get promoted, but it requires a little more work.</p>
 
-<p>I&#8217;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+<p>I&rsquo;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
 
 <p><img src="/images/app-config3/p4v.png"></p>
 
-<p>Select the &#8220;qa&#8221; folder, then from the menu bar go to &#8220;Actions&#8221; > &#8220;Merge/Integrate&#8221;. This will bring up a wizard for performing the integration.</p>
+<p>Select the &ldquo;qa&rdquo; folder, then from the menu bar go to &ldquo;Actions&rdquo; > &ldquo;Merge/Integrate&rdquo;. This will bring up a wizard for performing the integration.</p>
 
 <p>Select the following:</p>
 
@@ -165,11 +166,11 @@
 </span><span class='line'>Resolve option: "Accept source"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>And ensure the direction of integration is &#8220;Target&#8221; &lt; &#8220;Source&#8221;:</p>
+<p>And ensure the direction of integration is &ldquo;Target&rdquo; &lt; &ldquo;Source&rdquo;:</p>
 
 <p><img src="/images/app-config3/p4v_integrate.png"></p>
 
-<p>Finally, click &#8220;Merge&#8221;. If you expand the &#8220;dev&#8221; folder, you can see the where the changes are:</p>
+<p>Finally, click &ldquo;Merge&rdquo;. If you expand the &ldquo;dev&rdquo; folder, you can see the where the changes are:</p>
 
 <p><img src="/images/app-config3/p4v_integrate_result.png"></p>
 
@@ -177,13 +178,13 @@
 
 <h3>How it compares</h3>
 
-<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&#8217;s default behavior is fairly involved. If you aren&#8217;t paying attention or don&#8217;t know what you&#8217;re doing, you might break something :(</p>
+<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&rsquo;s default behavior is fairly involved. If you aren&rsquo;t paying attention or don&rsquo;t know what you&rsquo;re doing, you might break something :(</p>
 
 <h2>@TODO</h2>
 
 <h3>More options for resolving changes</h3>
 
-<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&#8217;s changed in the destination config and possibly edit the config further before finally committing it.</p>
+<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&rsquo;s changed in the destination config and possibly edit the config further before finally committing it.</p>
 
 <h3>Conflict resolution</h3>
 
@@ -191,7 +192,7 @@
 
 <h3>Better error reporting if promotion fails due to permissions</h3>
 
-<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&#8217;t actually occur (the files remain unchanged) but the application doesn&#8217;t report any errors when this happens.</p>
+<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&rsquo;t actually occur (the files remain unchanged) but the application doesn&rsquo;t report any errors when this happens.</p>
 </div>
 
 
@@ -263,7 +264,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting changes with App-Config-App</a>
+        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a>
       </li>
     
       <li class="post">
@@ -271,12 +272,11 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration with Perforce</a>
+        <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration With Perforce</a>
       </li>
     
   </ul>
 </section>
-
 
 
 

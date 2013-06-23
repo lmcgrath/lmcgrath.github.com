@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://loganmcgrath.com/sitemap.xml 

@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="In my last post I wrote about performance in the
-Sterling programming language with a basic benchmark. Today I&#8217;m ticking off one
+Sterling programming language with a basic benchmark. Today I&rsquo;m ticking off one
 @TODO item: &hellip;">
   
 
@@ -20,13 +20,14 @@ Sterling programming language with a basic benchmark. Today I&#8217;m ticking of
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://loganmcgrath.com/">
+  <link rel="canonical" href="http://loganmcgrath.com">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -107,11 +108,11 @@ Sterling programming language with a basic benchmark. Today I&#8217;m ticking of
 
 
   <div class="entry-content"><p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
-<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&#8217;m ticking off one
+<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
 
 <p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
-recalculation of an already-known value. I&#8217;ve leveraged the benchmark from the previous post, and the difference in
+recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
 execution speed is very pronounced:</p>
 
 <figure class='code'><figcaption><span>The Results</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -261,9 +262,9 @@ happens:</p>
 applications written in Sterling: If an application performs a great deal of repeated calculations, it will run faster
 over time. A quick glance at the second bench mark will show that Java is performing the calculation every single time
 it is called, whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs.
-<strong>O(n)</strong> time complexity in Sterling&#8217;s favor.</p>
+<strong>O(n)</strong> time complexity in Sterling&rsquo;s favor.</p>
 
-<p>You won&#8217;t get this sort of performance for a web application because of their side effect-driven nature, but for number
+<p>You won&rsquo;t get this sort of performance for a web application because of their side effect-driven nature, but for number
 crunching Sterling may very well be a good idea.</p>
 
 <h2>@TODO</h2>
@@ -273,10 +274,10 @@ crunching Sterling may very well be a good idea.</p>
 <p>Obviously, those calculated values get stored somewhere, and somewhere means memory is being used. I should perform
 another benchmark comparing memory requirements of the Fibonacci algorithm between pure Java and Sterling.</p>
 
-<h3>What if I don&#8217;t want memoization for a particular function?</h3>
+<h3>What if I don&rsquo;t want memoization for a particular function?</h3>
 
 <p>There may be some cases where you want to recalculate a value for a known argument. For example, if I query a database
-I shouldn&#8217;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
+I shouldn&rsquo;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
 function should not leverage memoization.</p>
 
 <h2>Links</h2>
@@ -578,7 +579,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <p>Perforce lets you create mappings to define the relationship between two diverging code branches. This allows for easy integration of changes between the two branches by referencing the name of the mapping.</p>
 
-<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&#8217;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
+<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&rsquo;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
 
 <p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
 
@@ -598,17 +599,17 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 </span><span class='line'>staging-prod   staging   prod</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you login to App-Config-App and go to &#8220;Promote Changes,&#8221; you get an interface showing these relationships:</p>
+<p>If you login to App-Config-App and go to &ldquo;Promote Changes,&rdquo; you get an interface showing these relationships:</p>
 
 <p><img src="/images/app-config3/promote_changes.png"></p>
 
-<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &#8216;accept-theirs&#8217; resolution) and you are then allowed to review the changes by clicking on the &#8220;Pending Changes&#8221; link.</p>
+<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &lsquo;accept-theirs&rsquo; resolution) and you are then allowed to review the changes by clicking on the &ldquo;Pending Changes&rdquo; link.</p>
 
-<p>For example, I&#8217;ve promoted changes from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+<p>For example, I&rsquo;ve promoted changes from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
 
 <p><img src="/images/app-config3/promote_result.png"></p>
 
-<p>I can then review the changes by clicking on &#8220;Pending Changes&#8221;:</p>
+<p>I can then review the changes by clicking on &ldquo;Pending Changes&rdquo;:</p>
 
 <p><img src="/images/app-config3/pending_changes.png"></p>
 
@@ -618,11 +619,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <p><a href="http://www.perforce.com/product/components/perforce_visual_client">P4V</a> is the Perforce visual client. Using P4V, you have much greater control over how changes get promoted, but it requires a little more work.</p>
 
-<p>I&#8217;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &#8220;qa&#8221; to &#8220;dev&#8221;:</p>
+<p>I&rsquo;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
 
 <p><img src="/images/app-config3/p4v.png"></p>
 
-<p>Select the &#8220;qa&#8221; folder, then from the menu bar go to &#8220;Actions&#8221; > &#8220;Merge/Integrate&#8221;. This will bring up a wizard for performing the integration.</p>
+<p>Select the &ldquo;qa&rdquo; folder, then from the menu bar go to &ldquo;Actions&rdquo; > &ldquo;Merge/Integrate&rdquo;. This will bring up a wizard for performing the integration.</p>
 
 <p>Select the following:</p>
 
@@ -636,11 +637,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 </span><span class='line'>Resolve option: "Accept source"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>And ensure the direction of integration is &#8220;Target&#8221; &lt; &#8220;Source&#8221;:</p>
+<p>And ensure the direction of integration is &ldquo;Target&rdquo; &lt; &ldquo;Source&rdquo;:</p>
 
 <p><img src="/images/app-config3/p4v_integrate.png"></p>
 
-<p>Finally, click &#8220;Merge&#8221;. If you expand the &#8220;dev&#8221; folder, you can see the where the changes are:</p>
+<p>Finally, click &ldquo;Merge&rdquo;. If you expand the &ldquo;dev&rdquo; folder, you can see the where the changes are:</p>
 
 <p><img src="/images/app-config3/p4v_integrate_result.png"></p>
 
@@ -648,13 +649,13 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>How it compares</h3>
 
-<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&#8217;s default behavior is fairly involved. If you aren&#8217;t paying attention or don&#8217;t know what you&#8217;re doing, you might break something :(</p>
+<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&rsquo;s default behavior is fairly involved. If you aren&rsquo;t paying attention or don&rsquo;t know what you&rsquo;re doing, you might break something :(</p>
 
 <h2>@TODO</h2>
 
 <h3>More options for resolving changes</h3>
 
-<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&#8217;s changed in the destination config and possibly edit the config further before finally committing it.</p>
+<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&rsquo;s changed in the destination config and possibly edit the config further before finally committing it.</p>
 
 <h3>Conflict resolution</h3>
 
@@ -662,7 +663,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>Better error reporting if promotion fails due to permissions</h3>
 
-<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&#8217;t actually occur (the files remain unchanged) but the application doesn&#8217;t report any errors when this happens.</p>
+<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&rsquo;t actually occur (the files remain unchanged) but the application doesn&rsquo;t report any errors when this happens.</p>
 </div>
   
   
@@ -698,16 +699,16 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
   </header>
 
 
-  <div class="entry-content"><p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&#8217;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&#8217;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
+  <div class="entry-content"><p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&rsquo;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&rsquo;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
 
 <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div>
 
 
 <h2>Making it work for yourself</h2>
 
-<p>I&#8217;ve updated the <a href="https://github.com/lmcgrath/app-config-app">App-Config-App</a> with additional configuration to support choosing which instrument the Server-Side Piano will play. A clean install of App-Config-App using <code>setup_examples.rb</code> will provide everything needed to run the Server-Side Piano.</p>
+<p>I&rsquo;ve updated the <a href="https://github.com/lmcgrath/app-config-app">App-Config-App</a> with additional configuration to support choosing which instrument the Server-Side Piano will play. A clean install of App-Config-App using <code>setup_examples.rb</code> will provide everything needed to run the Server-Side Piano.</p>
 
-<p>The application&#8217;s configuration URL and credentials are located in <code>web.xml</code>. Additional details may be found in the application&#8217;s <a href="https://github.com/lmcgrath/angular-java-server-midi/blob/master/README.markdown">README</a>.</p>
+<p>The application&rsquo;s configuration URL and credentials are located in <code>web.xml</code>. Additional details may be found in the application&rsquo;s <a href="https://github.com/lmcgrath/angular-java-server-midi/blob/master/README.markdown">README</a>.</p>
 </div>
   
   
@@ -743,13 +744,13 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
   </header>
 
 
-  <div class="entry-content"><p>Continuing from my <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">last post</a>, I&#8217;ve <a href="https://github.com/lmcgrath/App-Config-App/">forked</a> Paul Hammant&#8217;s original App-Config-App and modified it to work against Perforce. I&#8217;ve decided not to continue using Perforce Chronicle as it is primarily intended for content management.</p>
+  <div class="entry-content"><p>Continuing from my <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">last post</a>, I&rsquo;ve <a href="https://github.com/lmcgrath/App-Config-App/">forked</a> Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve decided not to continue using Perforce Chronicle as it is primarily intended for content management.</p>
 
-<p>With this version, App-Config-App is written in Ruby, mostly using <a href="http://www.sinatrarb.com/">Sinatra</a>, a lightweight web application framework. I&#8217;m still using <a href="http://angularjs.org/">AngularJS</a>, but I&#8217;ve also added a few other things:</p>
+<p>With this version, App-Config-App is written in Ruby, mostly using <a href="http://www.sinatrarb.com/">Sinatra</a>, a lightweight web application framework. I&rsquo;m still using <a href="http://angularjs.org/">AngularJS</a>, but I&rsquo;ve also added a few other things:</p>
 
 <ul>
 <li>A .rvmrc file, so you automagically switch to Ruby 1.9.3</li>
-<li>A Gemfile, so you don&#8217;t have to install everything individually :)</li>
+<li>A Gemfile, so you don&rsquo;t have to install everything individually :)</li>
 <li><a href="https://github.com/sinatra/sinatra-contrib">Sinatra-Contrib</a> for view templating support</li>
 <li><a href="http://nakajima.github.com/rack-flash/">Rack Flash</a> for flash messages</li>
 <li><a href="http://highline.rubyforge.org/">HighLine</a> for masking passwords</li>
@@ -763,12 +764,12 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <ul>
 <li>Ruby 1.9.3 and Bundler</li>
-<li>p4 - the Perforce command line client</li>
-<li>p4d - the Perforce server</li>
+<li>p4 &ndash; the Perforce command line client</li>
+<li>p4d &ndash; the Perforce server</li>
 </ul>
 
 
-<p>All installation and example setup details may be found in <a href="https://github.com/lmcgrath/app-config-app/blob/master/README.md">App-Config-App&#8217;s README</a>.</p>
+<p>All installation and example setup details may be found in <a href="https://github.com/lmcgrath/app-config-app/blob/master/README.md">App-Config-App&rsquo;s README</a>.</p>
 
 <h2>Using App-Config-App</h2>
 
@@ -776,15 +777,15 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <p><img src="/images/app-config2/start.png"></p>
 
-<p>You&#8217;ll notice I made the extra effort to add colors and drop shadows :D The application works from the project root in Perforce, so the files in each branch are viewable here. Clicking on &#8220;Dev&#8221; > &#8220;aardvark_configuration.html&#8221; will bring up a form for editing <code>aardvark_configuration.json</code> as in the previous version:</p>
+<p>You&rsquo;ll notice I made the extra effort to add colors and drop shadows :D The application works from the project root in Perforce, so the files in each branch are viewable here. Clicking on &ldquo;Dev&rdquo; > &ldquo;aardvark_configuration.html&rdquo; will bring up a form for editing <code>aardvark_configuration.json</code> as in the previous version:</p>
 
 <p><img src="/images/app-config2/aardvark_configuration.png"></p>
 
-<p>Changes to the form data are automatically saved. After making a view edits, you can click &#8220;View Diff&#8221; to get the diffs or &#8220;Revert&#8221; your changes. Go ahead and change the email address and fiddle around with the banned nicks, then go click &#8220;Pending Changes&#8221;:</p>
+<p>Changes to the form data are automatically saved. After making a view edits, you can click &ldquo;View Diff&rdquo; to get the diffs or &ldquo;Revert&rdquo; your changes. Go ahead and change the email address and fiddle around with the banned nicks, then go click &ldquo;Pending Changes&rdquo;:</p>
 
 <p><img src="/images/app-config2/changes.png"></p>
 
-<p>This screen shows all files that were changed and their diffs as well. You can &#8220;Revert&#8221; each file individually, and if you want to commit all changes, then enter a commit message and click &#8220;Commit Changes&#8221;. If you commit the changes and go back to &#8220;Dev&#8221; > &#8220;aardvark_configuration.html&#8221;, you&#8217;ll see the new values in the form:</p>
+<p>This screen shows all files that were changed and their diffs as well. You can &ldquo;Revert&rdquo; each file individually, and if you want to commit all changes, then enter a commit message and click &ldquo;Commit Changes&rdquo;. If you commit the changes and go back to &ldquo;Dev&rdquo; > &ldquo;aardvark_configuration.html&rdquo;, you&rsquo;ll see the new values in the form:</p>
 
 <p><img src="/images/app-config2/aardvark_configuration-changed.png"></p>
 
@@ -806,7 +807,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 </span><span class='line'>joe-developer   oranges    dev    </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Logging in as any of these users will hide branches that don&#8217;t have at least read-level access, and branches that don&#8217;t have write-level access won&#8217;t allow changes.</p>
+<p>Logging in as any of these users will hide branches that don&rsquo;t have at least read-level access, and branches that don&rsquo;t have write-level access won&rsquo;t allow changes.</p>
 
 <p><strong>All users created by <code>setup_example.rb</code> are intended only as examples.</strong> In the real world, all application users should be setup with real logins and real permissions.</p>
 
@@ -842,15 +843,15 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>A better model for autosave</h3>
 
-<p>Autosave in AngularJS isn&#8217;t very good. AngularJS doesn&#8217;t integrate with DOM events the way idiomatic JavaScript does, or provide a reasonable abstraction the way Dojo Toolkit or JQuery do. Right now, autosave in App-Config-App triggers with every key press in the config forms, and pummels the back-end server with ajax posts.</p>
+<p>Autosave in AngularJS isn&rsquo;t very good. AngularJS doesn&rsquo;t integrate with DOM events the way idiomatic JavaScript does, or provide a reasonable abstraction the way Dojo Toolkit or JQuery do. Right now, autosave in App-Config-App triggers with every key press in the config forms, and pummels the back-end server with ajax posts.</p>
 
-<p>I&#8217;ve also noticed that the autosave triggers even when a value is invalid. The first time an email address, for example, becomes invalid, AngularJS will post back the JSON, but without the invalid email address field&#8211;the invalid field is entirely left out of the JSON structure. After that, AngularJS will stop autosaving until the value is valid. There are also no measures in place to prevent a user from leaving an invalid value and saving an incomplete JSON file.</p>
+<p>I&rsquo;ve also noticed that the autosave triggers even when a value is invalid. The first time an email address, for example, becomes invalid, AngularJS will post back the JSON, but without the invalid email address field&mdash;the invalid field is entirely left out of the JSON structure. After that, AngularJS will stop autosaving until the value is valid. There are also no measures in place to prevent a user from leaving an invalid value and saving an incomplete JSON file.</p>
 
 <h3>A better model for validation</h3>
 
-<p>AngularJS does not offer a good validation API. The validation API is quite opaque and I haven&#8217;t found any real examples using it. The built-in form validation is inadequate. There are few ng-* HTML attributes exposing more than basic configuration parameters, and no hooks offered as extension points.</p>
+<p>AngularJS does not offer a good validation API. The validation API is quite opaque and I haven&rsquo;t found any real examples using it. The built-in form validation is inadequate. There are few ng-* HTML attributes exposing more than basic configuration parameters, and no hooks offered as extension points.</p>
 
-<p>For example, I&#8217;m using <a href="http://docs.angularjs.org/api/ng.directive:input.text">regular expressions</a> for date validation in App-Config-App. There isn&#8217;t a hook to provide custom validation checks, and regular expressions don&#8217;t perform sanity checks. Values such as &#8220;00/00/0000&#8221; will pass validation.</p>
+<p>For example, I&rsquo;m using <a href="http://docs.angularjs.org/api/ng.directive:input.text">regular expressions</a> for date validation in App-Config-App. There isn&rsquo;t a hook to provide custom validation checks, and regular expressions don&rsquo;t perform sanity checks. Values such as &ldquo;00/00/0000&rdquo; will pass validation.</p>
 
 <h3>More example clients than the Java one needed</h3>
 
@@ -858,7 +859,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>Someone should port this to Subversion or TFS</h3>
 
-<p>App-Config-App should be usable by the largest possible audience. For instance, if you&#8217;re using Subversion, then you should be able to take advantage of the existing infrastructure.</p>
+<p>App-Config-App should be usable by the largest possible audience. For instance, if you&rsquo;re using Subversion, then you should be able to take advantage of the existing infrastructure.</p>
 
 <p>The reason I point out Subversion and TFS is largely due to support of per-branch permissions.</p>
 </div>
@@ -896,21 +897,21 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
   </header>
 
 
-  <div class="entry-content"><p>Following Paul Hammant&#8217;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
+  <div class="entry-content"><p>Following Paul Hammant&rsquo;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
 
 <h2>Perforce and permissions for branches</h2>
 
-<p><a href="http://en.wikipedia.org/wiki/Perforce">Perforce</a> is an enterprise-class source control management (SCM) system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it&#8217;s generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.</p>
+<p><a href="http://en.wikipedia.org/wiki/Perforce">Perforce</a> is an enterprise-class source control management (SCM) system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it&rsquo;s generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.</p>
 
 <h2>Perforce CMS as an application server</h2>
 
 <p><a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a> is a content management system (CMS) using Perforce as the back-end store for configuration and content. The app-config application is built on top of Chronicle because Perforce does not offer a web view into the depot the way Subversion can through Apache. Branching and maintaining divergence between environments can be managed through the user interface, and Chronicle provides user authentication and management, so access between different configuration files can be restricted appropriately. The INSTALL.txt file that is distributed with Chronicle helps with an easy install, mine being set up to run locally from <code>http://localhost</code>.</p>
 
-<p>There is a key issue in using Chronicle, however. The system is designed for the management of <em>content</em> and not necessarily arbitrary <em>files</em>. In order to make the app-config application work, I had to add a custom content type and write a module. Configuration and HTML are both plain-text content, so I created a &#8220;Plain Text&#8221; content type with the fields <em>title</em> and <em>content</em>:</p>
+<p>There is a key issue in using Chronicle, however. The system is designed for the management of <em>content</em> and not necessarily arbitrary <em>files</em>. In order to make the app-config application work, I had to add a custom content type and write a module. Configuration and HTML are both plain-text content, so I created a &ldquo;Plain Text&rdquo; content type with the fields <em>title</em> and <em>content</em>:</p>
 
 <ol>
-<li>Go to &#8220;Manage&#8221; > &#8220;Content Types&#8221;</li>
-<li>Click &#8220;Add Content Type&#8221;</li>
+<li>Go to &ldquo;Manage&rdquo; > &ldquo;Content Types&rdquo;</li>
+<li>Click &ldquo;Add Content Type&rdquo;</li>
 <li>Enter the following information:</li>
 </ol>
 
@@ -953,11 +954,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 </span><span class='line'>display.filters.0 = HtmlSpecialChars</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Click &#8220;Save&#8221;.</p>
+<p>Click &ldquo;Save&rdquo;.</p>
 
 <h2>The Config App</h2>
 
-<p>I&#8217;ve borrowed heavily from Paul&#8217;s <a href="https://github.com/paul-hammant/app-config-app/blob/master/index.html">app-config HTML page</a>, which uses <a href="http://angularjs.org/">AngularJS</a> to manage the UI and interaction with the server. Where Paul&#8217;s app-config app used the <a href="http://kmkeen.com/jshon/">jshon</a> command to encode and decode JSON, Zend Framework has a utility class for encoding, decoding, and pretty-printing JSON, and Chronicle also ships with the <a href="https://github.com/paulgb/simplediff/">simplediff</a> utility for performing diffs with PHP.</p>
+<p>I&rsquo;ve borrowed heavily from Paul&rsquo;s <a href="https://github.com/paul-hammant/app-config-app/blob/master/index.html">app-config HTML page</a>, which uses <a href="http://angularjs.org/">AngularJS</a> to manage the UI and interaction with the server. Where Paul&rsquo;s app-config app used the <a href="http://kmkeen.com/jshon/">jshon</a> command to encode and decode JSON, Zend Framework has a utility class for encoding, decoding, and pretty-printing JSON, and Chronicle also ships with the <a href="https://github.com/paulgb/simplediff/">simplediff</a> utility for performing diffs with PHP.</p>
 
 <p>The source JSON configuration is the same, albeit sorted:</p>
 
@@ -1148,13 +1149,13 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 <p>Both of these assets were added by performing:</p>
 
 <ol>
-<li>Click &#8220;Add&#8221; from the top navbar</li>
-<li>Click &#8220;Add Content&#8221;</li>
-<li>Select &#8220;Assets&#8221; > &#8220;Plain Text&#8221;</li>
-<li>For &#8220;Title&#8221;, enter &#8220;index.html&#8221; or &#8220;stack_configuration.json&#8221;</li>
-<li>Paste in the appropriate &#8220;Content&#8221;</li>
-<li>Click &#8220;URL&#8221;, select &#8220;Custom&#8221;, and enter the same value as &#8220;Title&#8221; (otherwise, Chronicle will convert underscores to dashes, so be careful!)</li>
-<li>Click &#8220;Save&#8221;, enter a commit message, then click the next &#8220;Save&#8221;</li>
+<li>Click &ldquo;Add&rdquo; from the top navbar</li>
+<li>Click &ldquo;Add Content&rdquo;</li>
+<li>Select &ldquo;Assets&rdquo; > &ldquo;Plain Text&rdquo;</li>
+<li>For &ldquo;Title&rdquo;, enter &ldquo;index.html&rdquo; or &ldquo;stack_configuration.json&rdquo;</li>
+<li>Paste in the appropriate &ldquo;Content&rdquo;</li>
+<li>Click &ldquo;URL&rdquo;, select &ldquo;Custom&rdquo;, and enter the same value as &ldquo;Title&rdquo; (otherwise, Chronicle will convert underscores to dashes, so be careful!)</li>
+<li>Click &ldquo;Save&rdquo;, enter a commit message, then click the next &ldquo;Save&rdquo;</li>
 <li>Both assets should be viewable as mangled Chronicle content entries from <code>http://localhost/index.html</code> and <code>http://localhost/stack_configuration.json</code>. <em>You normally will not use these URLs</em>.</li>
 </ol>
 
@@ -1428,21 +1429,21 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h2>AngularJS</h2>
 
-<p>After all files are in place, Chronicle needs to be notified that the new module exists by going to &#8220;Manage&#8221; > &#8220;Modules&#8221;, where the &#8220;Appconfig&#8221; module will be listed if all goes well :) Both assets will now be viewable from <code>http://localhost/appconfig/index.html</code> and <code>http://localhost/appconfig/stack_configuration.json</code>. AngularJS&#8217; <a href="http://code.angularjs.org/0.9.19/docs-0.9.19/#!/api/angular.service.$resource">$resource service</a> is used in index.html to fetch stack_configuration.json and post changes back.</p>
+<p>After all files are in place, Chronicle needs to be notified that the new module exists by going to &ldquo;Manage&rdquo; > &ldquo;Modules&rdquo;, where the &ldquo;Appconfig&rdquo; module will be listed if all goes well :) Both assets will now be viewable from <code>http://localhost/appconfig/index.html</code> and <code>http://localhost/appconfig/stack_configuration.json</code>. AngularJS&#8217; <a href="http://code.angularjs.org/0.9.19/docs-0.9.19/#!/api/angular.service.$resource">$resource service</a> is used in index.html to fetch stack_configuration.json and post changes back.</p>
 
 <p>From <code>http://localhost/appconfig/index.html</code>, the data from stack_configuration.json is loaded into the form:</p>
 
 <p><img src="/images/app-config/start.png"></p>
 
-<p>Edits to stack_configuration.json can be made using the form, and the diffs viewed by clicking on &#8220;View Diffs&#8221;:</p>
+<p>Edits to stack_configuration.json can be made using the form, and the diffs viewed by clicking on &ldquo;View Diffs&rdquo;:</p>
 
 <p><img src="/images/app-config/diffs.png"></p>
 
-<p>The changes can be saved by entering a commit message and clicking &#8220;Commit Changes&#8221;. After which, clicking &#8220;View Diffs&#8221; will show no changes:</p>
+<p>The changes can be saved by entering a commit message and clicking &ldquo;Commit Changes&rdquo;. After which, clicking &ldquo;View Diffs&rdquo; will show no changes:</p>
 
 <p><img src="/images/app-config/diffs-after-commit.png"></p>
 
-<p>To show that edits have in fact been made to stack_configuration.json, go to <code>http://localhost/stack_configuration.json</code>, select &#8220;History&#8221; and click on &#8220;History List&#8221;:</p>
+<p>To show that edits have in fact been made to stack_configuration.json, go to <code>http://localhost/stack_configuration.json</code>, select &ldquo;History&rdquo; and click on &ldquo;History List&rdquo;:</p>
 
 <p><img src="/images/app-config/history.png"></p>
 
@@ -1458,13 +1459,13 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>Security!</h3>
 
-<p>There&#8217;s one major flaw with the appconfig module: it performs zero access checks. By default, Chronicle can be configured to disallow anonymous access by going to &#8220;Manage&#8221; > &#8220;Permissions&#8221; and deselecting all permissions for &#8220;anonymous&#8221; and &#8220;members&#8221;. Logging out and attempting to access either <code>http://localhost/appconfig/stack_configuration.json</code> or <code>http://localhost/appconfig/index.html</code> will now give an error page and prompt you to log in. Clicking &#8220;New User&#8221; will also give an error, as anonymous users don&#8217;t have the permission to create users.</p>
+<p>There&rsquo;s one major flaw with the appconfig module: it performs zero access checks. By default, Chronicle can be configured to disallow anonymous access by going to &ldquo;Manage&rdquo; > &ldquo;Permissions&rdquo; and deselecting all permissions for &ldquo;anonymous&rdquo; and &ldquo;members&rdquo;. Logging out and attempting to access either <code>http://localhost/appconfig/stack_configuration.json</code> or <code>http://localhost/appconfig/index.html</code> will now give an error page and prompt you to log in. Clicking &ldquo;New User&rdquo; will also give an error, as anonymous users don&rsquo;t have the permission to create users.</p>
 
 <p>Access rights on content are checked by the content module, but are also hard-coded in the associated controllers as IF-statements. A better solution will be required for proper access management in the appconfig module.</p>
 
 <h3>Better integration</h3>
 
-<p>Chronicle&#8217;s content module provides JSON integration for most of its actions, but these mostly exist to support the <a href="http://dojotoolkit.org/">Dojo Toolkit-enabled</a> front-end. Integrating with these actions over JSON requires detailed knowledge of Chronicle&#8217;s form structures.</p>
+<p>Chronicle&rsquo;s content module provides JSON integration for most of its actions, but these mostly exist to support the <a href="http://dojotoolkit.org/">Dojo Toolkit-enabled</a> front-end. Integrating with these actions over JSON requires detailed knowledge of Chronicle&rsquo;s form structures.</p>
 
 <p>Chronicle has some nice interfaces for viewing diffs. If I could call those up from index.html I would be major happy :)</p>
 
@@ -1474,7 +1475,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>Making applications aware of updates to configuration</h3>
 
-<p>When stack_configuration.json is updated, there&#8217;s no way to notify applications to the change, and no interface provided so they may poll for changes. I&#8217;m not entirely sure at this point what an appropriate solution would look like. In order to complete the concept, I&#8217;d first have to create a client app dependent on that configuration.</p>
+<p>When stack_configuration.json is updated, there&rsquo;s no way to notify applications to the change, and no interface provided so they may poll for changes. I&rsquo;m not entirely sure at this point what an appropriate solution would look like. In order to complete the concept, I&rsquo;d first have to create a client app dependent on that configuration.</p>
 
 <h3>Better interfaces for manipulating plaintext assets</h3>
 
@@ -1482,11 +1483,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <h3>Handling conflicts</h3>
 
-<p>There is no logic in the appconfig module to catch conflicts if there are two users editing the same file. Conflicts are detectible because an exception is thrown if there is a conflict, but I&#8217;m not sure what the workflow for resolution is in Chronicle terms, or how to integrate with it. Who wins?</p>
+<p>There is no logic in the appconfig module to catch conflicts if there are two users editing the same file. Conflicts are detectible because an exception is thrown if there is a conflict, but I&rsquo;m not sure what the workflow for resolution is in Chronicle terms, or how to integrate with it. Who wins?</p>
 
 <h3>Working with branches</h3>
 
-<p>I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence. For example, we&#8217;re still trying to figure out how to attach visual clients like P4V to the repository and work independently of Chronicle.</p>
+<p>I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence. For example, we&rsquo;re still trying to figure out how to attach visual clients like P4V to the repository and work independently of Chronicle.</p>
 
 <h2>Kudos</h2>
 
@@ -1519,7 +1520,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting changes with App-Config-App</a>
+        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a>
       </li>
     
       <li class="post">
@@ -1527,12 +1528,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration with Perforce</a>
+        <a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration With Perforce</a>
       </li>
     
   </ul>
 </section>
-
 
 
 
