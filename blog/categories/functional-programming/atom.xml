@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Functional Programming | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/functional-programming/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-06-23T00:09:03-05:00</updated>
+  <updated>2013-08-05T09:40:59-07:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -14,9 +14,412 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Lessons from Sterling]]></title>
+    <link href="http://loganmcgrath.com/blog/2013/08/05/lessons-from-sterling/"/>
+    <updated>2013-08-05T09:37:00-07:00</updated>
+    <id>http://loganmcgrath.com/blog/2013/08/05/lessons-from-sterling</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
+Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
+JavaScript. Last week I decided to shelve Sterling.</p>
+
+<h2>How Sterling Worked</h2>
+
+<p>Sterling&rsquo;s evaluation model is very simple and I felt it held a lot of promise because it made the language very
+flexible. Everything in Sterling is an expression. Some expressions accept a single argument&mdash;these were called
+<em>lambdas</em>. All expressions also contain sub-expressions, which could be accessed as <em>attributes</em>. With a little sugar,
+a bag of attributes could be made self-referencing and thus become an <em>object</em>.</p>
+
+<p>```haskell An assortment of basic expression types
+// a constant expression which takes no arguments
+anExpression = 2 + 2</p>
+
+<p>// lambda expressions take only 1 argument
+aLambda = (x) &ndash;> 2 + x</p>
+
+<p>// function expressions take more than 1 argument
+aFunction = (x y) &ndash;> x * y</p>
+
+<p>// an object expression with constructor
+anObject = (constructorArg) &ndash;> object {</p>
+
+<pre><code>madeWith: constructorArg,
+</code></pre>
+
+<p>}</p>
+
+<p>// an object expression that behaves like a lambda after constructed
+invokableObject = (constructorArg) &ndash;> object {</p>
+
+<pre><code>madeWith: constructorArg,
+invoke: (arg) -&gt; "Made with #{self.madeWith} and invoked with #{arg}",
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Expressions could be built up to carry a high amount of capability. Because Sterling is untyped, decoration and
+ducktyping are used heavily to compose ever more features into expressions.</p>
+
+<p>Sterling was directly inspired by <a href="http://en.wikipedia.org/wiki/Lambda_calculus">Lambda Calculus</a>. This had an enormous
+impact on the design of the language, the largest of which was how the language executed at runtime. Expressions in
+Sterling are represented as trees and leaves. Top-level expressions have names, and they could be inserted into other
+expressions by referencing those names.</p>
+
+<p>``` haskell A recursive named expression looks like this:
+fibonacci = (n) &ndash;> if n &lt;= 1 then</p>
+
+<pre><code>                   n
+               else
+                   fibonacci (n - 1) + fibonacci (n - 2)
+               end
+</code></pre>
+
+<p>```</p>
+
+<p>Because each expression was a tree, no expression needed to be executed until its result was absolutely needed. This
+lazy execution model allows for very large, complex expressions to be built in one function then returned to the
+outside world to be further processed and executed. Functions could be created inline and passed as arguments to other
+functions, or constructed within functions and returned.</p>
+
+<p>Sterling&rsquo;s tree-based structure naturally supported a prototype-based object model. To modify an expression tree, the
+tree needed to create a copy of itself with any changes to it. All expressions, thus, were effective prototypes. This
+also had the benefit of directly supporting immutability and helped to enforce a functional programming paradigm.</p>
+
+<h2>What Could Have Been</h2>
+
+<p>I intended Sterling to be a functional scripting language. In some ways, I was looking to create a JavaScript reboot
+that clung closer to JavaScript&rsquo;s functional roots and would be used for general-purpose scripting.</p>
+
+<p>Sterling&rsquo;s syntax was designed to be very terse, readable, and orthogonal. By that I mean everything in Sterling should
+be an expression that can be used <a href="http://brandonbyars.com/2008/07/21/orthogonality/">virtually anywhere for anything</a>.
+Because Sterling was based on lambdas, this worked particularly well for arguments expressions because arguments could
+fold into the function call result on the left:</p>
+
+<p>```haskell Consing a list by folding arguments, left-to-write
+[] 1 2 3 4</p>
+
+<blockquote><p>[1] 2 3 4
+[1, 2] 3 4
+[1, 2, 3] 4
+[1, 2, 3, 4]
+```</p></blockquote>
+
+<p>This folding capability meant that Sterling could support very expressive programming styles. Any function could be
+returned as the result of another function call and continue chaining against arguments. Sterling&rsquo;s terse syntax also
+made defining functions very easy:</p>
+
+<p><code>haskell Some basic functions in Sterling
+identity = (x) -&gt; x
+selfApply = (x) -&gt; x x
+apply = (x y) -&gt; x y
+selectFirst = (x y) -&gt; x
+selectSecond = (x y) -&gt; y
+conditional = (condition) -&gt; if condition.true? then selectFirst else selectSecond end
+friday? = say $ conditional (today.is :friday) 'Yay Friday!' 'Awww...'
+</code></p>
+
+<p>Because Sterling was intended to be immutable, objects would be used to represent state and carry behavior to return
+new state resulting from an operation:</p>
+
+<p>```haskell Printing arguments from an immutable list iterator
+main = (args) &ndash;></p>
+
+<pre><code>print args.iterator // gets an Iterator
+</code></pre>
+
+<p>print = (iterator) &ndash;></p>
+
+<pre><code>say unless iterator.empty? then
+    printNext iterator 0
+else
+    'Empty iterator'
+end
+</code></pre>
+
+<p>printNext = (iterator index) &ndash;></p>
+
+<pre><code>unless iterator.empty? then
+    "arg #{index} =&gt; #{iterator.current}\n" + printNext iterator.tail index.up
+end
+</code></pre>
+
+<p>Iterator = (elements position) &ndash;> object {</p>
+
+<pre><code>empty?: position &gt;= elements.length,
+head: Iterator elements 0,
+current: elements[position],
+tail: iterator elements position.up,
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Paul Hammant at one point suggested baking dependency injection <a href="http://paulhammant.com/blog/crazy-bob-and-type-safety-for-dependency-injection.html/">directly into a language</a>,
+and even offered I do this in Sterling. This drove development of a metadata system in Sterling that could be used to
+support metaprogramming and eventually dependency injection.</p>
+
+<p>```haskell Meta attributes on expressions
+@component { uses: [ :productionDb ] }
+@useWhen (runtime &ndash;> runtime.env is :production)
+Inventory = (db) &ndash;> object {</p>
+
+<pre><code>numberOfItems: db.asInt $ db.scalarQuery "SELECT COUNT(*) FROM thingies",
+priceCheck: (thingy) -&gt; db.asMoney $ db.scalarQuery "SELECT price FROM thingies WHERE id = :id" { id: thingy.id },
+</code></pre>
+
+<p>}</p>
+
+<p>@provides :productionDb
+createDb = &hellip;</p>
+
+<p>@fake? true
+@component { name: :Inventory }
+@useWhen (runtime &ndash;> runtime.env is :development)
+FakeInventory = object &ndash;> {</p>
+
+<pre><code>numberOfItems: 0,
+priceCheck: (thingy) -&gt; thingy.price,
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The metadata system was very flexible and could support arbitrary meta annotations. The above metadata translates to
+the following map structures at runtime:</p>
+
+<p>```javascript What meta attributes look like if they were JavaScript
+Inventory.meta = {</p>
+
+<pre><code>"component": {
+    "uses": [ "productionDb" ]
+},
+"useWhen": {
+    "value": function (runtime) {
+        return runtime["env"] == "production";
+    }
+}
+</code></pre>
+
+<p>};</p>
+
+<p>createDb.meta = {</p>
+
+<pre><code>"provides": {
+    "value": "productionDb",
+}
+</code></pre>
+
+<p>};</p>
+
+<p>FakeInventory.meta = {</p>
+
+<pre><code>"fake?": {
+    "value": true
+},
+"component": {
+    "name": "Inventory"
+},
+"useWhen": {
+    "value": function (runtime) {
+        return runtime["env"] == "development";
+    }
+}
+</code></pre>
+
+<p>};
+```</p>
+
+<p>I felt these functional features and expressive syntax would make for an enjoyable and productive programming
+experience. The meta system in particular I felt could become quite powerful especially for customizing load-time
+behavior of Sterling programs. However, some of my goals came with a few problems.</p>
+
+<h2>The Problems</h2>
+
+<h3>Speed</h3>
+
+<p>Sterling is amazingly slow. A natural consequence of a tree-based language is that trees must be copied and modified
+for many operations, no matter how &ldquo;trivial&rdquo; they may be (integer arithmetic, for example.) Recursive functions like
+the <code>fibonacci</code> expression above had a particularly nasty characteristic of building enormous trees that took a lot of
+time to reduce to single values.</p>
+
+<p>The speed issues in Sterling were partially mitigated using <a href="http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization/">memoization</a>.</p>
+
+<h3>Memoization: Blessing But Possibly A Curse</h3>
+
+<p>Memoization increased the possibility for static state to hang around in an application. Applying arguments to an
+object constructor, for instance, would return a previously-constructed object. I&rsquo;m not entirely sure what the total
+impact of the &ldquo;object constructor problem&rdquo; could have been, as objects are not mutable, but I didn&rsquo;t like this
+charateristic nonetheless. Immutability, however, wasn&rsquo;t entirely true (see &ldquo;Escaping The Matrix&rdquo; below).</p>
+
+<p>Named expressions are persistent in memory. If a named expression took a large argument, or returned a large result,
+then the total memory cost of a memoizing expression could become quite high over time.</p>
+
+<h3>The Impacts Of Typelessness</h3>
+
+<p>Types are actually quite nice to have, and I began to miss them quite a bit the more I worked on Sterling. While
+Sterling is very flexible (because it has no types) it also has very poor support for polymorphism (because it has no
+types). Want to do something else if you receive an <code>Asteroid</code> object rather than a <code>Spaceship</code> object?</p>
+
+<p>The na&iuml;ve solution is to implement an if-case for each expected type:</p>
+
+<p>```haskell
+Spaceship = object {</p>
+
+<pre><code>collideWith: (other) -&gt;
+    if other.meta.name is 'Asteroid' then
+        say 'Spaceship collided with an asteroid!'
+    else if other.meta.name is 'Spaceship' then
+        say 'Spaceships collide!'
+    end
+</code></pre>
+
+<p>}</p>
+
+<p>Asteroid = object {</p>
+
+<pre><code>collideWith: (other) -&gt;
+    if other.meta.name is 'Asteroid' then
+        say 'Asteroids collide!'
+    else if other.meta.name is 'Spaceship' then
+        say 'Asteroid collided with a spaceship!'
+    end
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is fragile, though, and the code is complex. What&rsquo;s worse, is there&rsquo;s no way to ensure that a method is receiving
+an <code>Asteroid</code> and not another object that simply implements its API.  A better solution is to let the colliding object
+select the proper method from the object it&rsquo;s colliding with:</p>
+
+<p>```haskell
+Spaceship = object {</p>
+
+<pre><code>collideWith: (other) -&gt; other.collidedWithSpaceship self,
+collideWithSpaceship: (spaceship) -&gt; say 'Spaceships collide!',
+collideWithAsteroid: (asteroid) -&gt; say 'Spaceship collided with an asteroid!',
+</code></pre>
+
+<p>}</p>
+
+<p>Asteroid = object {</p>
+
+<pre><code>collideWith: (other) -&gt; other.collideWithAsteroid self,
+collideWithSpaceship: (spaceship) -&gt; 'Asteroid collided with a spaceship!',
+collideWithAsteroid: (asteroid) -&gt; 'Asteroids collide!',
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This solution is better. It&rsquo;s also similar to implementing <a href="http://en.wikipedia.org/wiki/Visitor_pattern#Java_example">visitor pattern</a>
+in Java. I still don&rsquo;t like it because there&rsquo;s no type safety and adding support for more types requires violating the
+<a href="http://en.wikipedia.org/wiki/Open/closed_principle">open/closed principle</a>. For instance, in order for a <code>Bunny</code> to be
+correctly collided-with, a <code>collidedWithBunny</code> method must be added to both <code>Spaceship</code> and <code>Asteroid</code>. Developers may
+find it easier instead to allow the <code>Bunny</code> to masquerade as an asteroid:</p>
+
+<p>```haskell Spaceship-eating Bunny
+Bunny = object {</p>
+
+<pre><code>collideWith: (other) -&gt; other.collideWithAsteroid self, // muahaha I'm an asteroid!
+collidedWithSpaceship: (spaceship) -&gt; say 'NOM NOM NOM NOM!',
+collidedWithAsteroid: (asteroid) -&gt; ...
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This <a href="http://en.wikipedia.org/wiki/Multiple_dispatch#Java">single-dispatch behavior</a> means that for any argument
+applied to a method name, the same method will be dispatched. In the case of Java, this is determined by the type of
+a method&rsquo;s arguments at compile time. Adding new methods for similarly-typed arguments requires all client code be
+recompiled. While Sterling may not have typing, it is still single-dispatch.</p>
+
+<p>The lack of types became particularly painful when implementing arithmetic operations and compile-time analysis was
+nearly impossible without collecting a great deal of superfluous metadata.</p>
+
+<h3>Escaping The Matrix</h3>
+
+<p>As I worked on Sterling, I required functionality that wasn&rsquo;t yet directly supportable in the language itself. I solved
+this problem using the &ldquo;glue&rdquo; expression that could tie into a Java-based expression:</p>
+
+<p><code>ruby sterling/collection/_base.ag
+EmptyIterator = glue 'sterling.lang.builtin.EmptyIterator'
+List = glue 'sterling.lang.builtin.ListConstructor'
+Set = glue 'sterling.lang.builtin.SetConstructor'
+Tuple = glue 'sterling.lang.builtin.TupleConstructor'
+Map = glue 'sterling.lang.builtin.MapConstructor'
+</code></p>
+
+<p>For short-term problems, this option isn&rsquo;t too bad, but it allows the programmer to escape the immutable &ldquo;Matrix&rdquo; of
+Sterling. For example, I implemented Sterling&rsquo;s collections as thin wrappers around Java collections, and allowed them
+to be mutable. Actually, a lot of things in Sterling were mutable:</p>
+
+<ul>
+<li>Method collections on expressions</li>
+<li>Object methods</li>
+<li>Maps</li>
+<li>Lists</li>
+</ul>
+
+
+<p>This, coupled with memoization, could cause a lot of issues with static state and had the potential to enable a lot of
+bad design decisions for programs written in Sterling.</p>
+
+<h2>The Good Parts</h2>
+
+<p>Despite the baggage, there&rsquo;s a few takeaways!</p>
+
+<p>Sterling&rsquo;s syntax is very small and terse. I particularly enjoyed not having to type a lot of parentheses, braces,
+commas, and semicolons. Separating arguments by spaces allowed the language read like a book.</p>
+
+<p>Most expressions can be delimited with whitespace alone, and because everything is an expression, objects could be
+created inline and if-cases could be used as arguments.</p>
+
+<p>Operators are just methods. Any object or expression can define a &ldquo;+&rdquo; operator and customize what it does. With
+polymorphism supported with multi-methods, this can become an incredibly powerful feature.</p>
+
+<p>Sterling also has the ability to define arbitrary metadata on any named expression. This metadata is gathered into a
+<code>meta</code> attribute and can be inspected at runtime to support a sort of meta programming.</p>
+
+<h2>What I&rsquo;m Carrying Forward</h2>
+
+<p>I&rsquo;m now working on a new language project that will be borrowing Sterling&rsquo;s syntax. This time, however, I will be using
+types. Algebraic data types hold a certain fascination for me, and I&rsquo;m interested in seeing what I can do with them. At
+the very least, I do intend on using multi-methods for better polymorphism support.</p>
+
+<p>I don&rsquo;t think I like declaring scope. It&rsquo;s verbose. Or declaring types. That should be restricted to places where it
+impacts execution, like function signatures.</p>
+
+<p>While Sterling&rsquo;s meta system didn&rsquo;t really go anywhere, I do intend on carrying it forward as a supplement to algebraic
+types. I may even still bake in dependency injection because I hate all the typing required to tie together an
+application.</p>
+
+<p>I don&rsquo;t believe I will carry forward mandatory immutability, though I may support some form of &ldquo;immutability by
+default&rdquo;.</p>
+
+<p>Sterling&rsquo;s lazy evaluation caused a lot of headaches more than a few times. I&rsquo;ll probably not make any successor
+language lazily evaluated because memoization becomes a near requirement in order to make lazy evaluation useful.</p>
+
+<h2>My Holy Grail</h2>
+
+<ul>
+<li>A language that is interpreted and optionally compiled either AOT or JIT</li>
+<li><a href="http://en.wikipedia.org/wiki/Type_inference">Inferred typing</a> as opposed to <a href="http://en.wikipedia.org/wiki/Nominative_type_system">nominal typing</a></li>
+<li>At least psuedo-declarative</li>
+<li>Dynamic to some degree</li>
+<li>Easy to write, easy to read</li>
+<li>Highly composable</li>
+<li>Simple closures</li>
+<li>First-class functions, if not first-class everything</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Sterling With Memoization]]></title>
     <link href="http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization/"/>
-    <updated>2013-06-17T04:26:00-05:00</updated>
+    <updated>2013-06-17T04:26:00-07:00</updated>
     <id>http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization</id>
     <content type="html"><![CDATA[<p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
 <a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
@@ -148,7 +551,7 @@ function should not leverage memoization.</p>
   <entry>
     <title type="html"><![CDATA[Sterling Benchmarks]]></title>
     <link href="http://loganmcgrath.com/blog/2013/06/16/sterling-benchmarks/"/>
-    <updated>2013-06-16T21:12:00-05:00</updated>
+    <updated>2013-06-16T21:12:00-07:00</updated>
     <id>http://loganmcgrath.com/blog/2013/06/16/sterling-benchmarks</id>
     <content type="html"><![CDATA[<p>Since <a href="https://github.com/lmcgrath/sterling/tree/8b58ce4d4b080b353f7870ec0c0c30639fb2fa7b">mid January</a>, I’ve been
 developing a functional scripting language I call <a href="https://github.com/lmcgrath/sterling">Sterling</a>. In the past few
