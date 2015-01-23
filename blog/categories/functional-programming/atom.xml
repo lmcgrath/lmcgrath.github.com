@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Functional Programming | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/functional-programming/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-23T15:45:46-08:00</updated>
+  <updated>2015-01-23T15:59:18-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -170,6 +170,11 @@ static String username() {
   return msg + &ldquo; &rdquo; + username + &ldquo;!&rdquo;
 }
 ```</p>
+
+<p>I&rsquo;m not entirely sure what performance impact of variables in <code>let</code> would be
+compared to using arguments. Either way, I would be calling the methods associated
+with each declaration and storing them somewhere. The only thing saved is an
+additional function call, so any gains in performance would be minuscule.</p>
 
 <h2>Why The Indecision?</h2>
 

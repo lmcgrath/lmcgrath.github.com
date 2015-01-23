@@ -315,6 +315,11 @@ the declarations are assigned to local variables:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>I&rsquo;m not entirely sure what performance impact of variables in <code>let</code> would be
+compared to using arguments. Either way, I would be calling the methods associated
+with each declaration and storing them somewhere. The only thing saved is an
+additional function call, so any gains in performance would be minuscule.</p>
+
 <h2>Why The Indecision?</h2>
 
 <p>I&rsquo;m not sure I&rsquo;m following the best ways to model <code>let</code>. And I also don&rsquo;t have
