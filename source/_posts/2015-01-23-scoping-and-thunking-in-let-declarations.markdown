@@ -144,7 +144,7 @@ static String username() {
 
 static String greet(String msg) {
   var username = username()
-  log("greeting " + username
+  log("greeting " + username)
   return msg + " " + username + "!"
 }
 ```
