@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Scoping And Thunking In Let Declarations - Logan McGrath's Blog</title>
+  <meta name="author" content="Logan McGrath">
+
+  
+  <meta name="description" content="I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+almost full time in my free time. My latest prototype,
+Scotch, is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36481003-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Logan McGrath's Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/rss.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:loganmcgrath.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about-me.html">About Me</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Scoping and Thunking in Let Declarations</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+almost full time in my free time. My latest prototype,
+<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, is coming close to a point
+where I can start developing the main libraries. Close, but there&rsquo;s a few kinks.</p>
+
+<p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
+of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
+<a href="http://learnyouahaskell.com/syntax-in-functions#let-it-be">Learn You A Haskell</a>.</em>)</p>
+
+<p>In this code, the child declaration <code>y</code> uses child declaration <code>z</code>, which is
+used by the body of the <code>let</code>. Consider for a moment: What if <code>z</code> had side
+effects? Take the following code snippet:</p>
+
+<figure class='code'><figcaption><span>Scotch Let Declaration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">f</span> <span class="ow">::</span> <span class="n">s</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</span><span class='line'><span class="nf">f</span> <span class="n">x</span> <span class="ow">=</span> <span class="kr">let</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">something</span> <span class="n">with</span> <span class="n">z</span>
+</span><span class='line'>          <span class="n">z</span> <span class="ow">=</span> <span class="n">something</span> <span class="kr">else</span>
+</span><span class='line'>          <span class="kr">in</span> <span class="kr">do</span> <span class="n">things</span> <span class="n">with</span> <span class="n">y</span> <span class="n">and</span> <span class="kr">then</span> <span class="n">z</span> <span class="n">again</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>How Are Side Effects A Problem In Child Scopes?</h2>
+
+<p>Scotch is compiled into JVM bytecode. Sparing details, value declarations are
+encoded as static methods returning Java 8 lambdas. The declarations internally
+use <a href="http://stackoverflow.com/questions/2641489/what-is-a-thunk">thunks</a> to
+suspend evaluation but also to retain the evaluated result.</p>
+
+<figure class='code'><figcaption><span>Scotch &#8220;add&#8221; Function Encoded As Static Java Method</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// What x + y would look like compiled:</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="c1">// This uses the runtime support functions applicable() and callable() to</span>
+</span><span class='line'><span class="c1">// automatically generate the relevant thunk types.</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="n">Applicable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Applicable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">add</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nf">applicable</span><span class="o">(</span>
+</span><span class='line'>    <span class="n">augend</span> <span class="o">-&gt;</span> <span class="n">applicable</span><span class="o">(</span>
+</span><span class='line'>      <span class="n">addend</span> <span class="o">-&gt;</span> <span class="n">callable</span><span class="o">(</span>
+</span><span class='line'>        <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">augend</span><span class="o">.</span><span class="na">call</span><span class="o">()</span> <span class="o">+</span> <span class="n">addend</span><span class="o">.</span><span class="na">call</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>    <span class="o">)</span>
+</span><span class='line'>  <span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>What A Thunk Looks Like</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Thunk</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">A</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">A</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">value</span> <span class="o">=</span> <span class="n">evaluate</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">protected</span> <span class="kd">abstract</span> <span class="n">A</span> <span class="nf">evaluate</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The reason for using thunks is to support lazy evaluation. Arguments passed into
+functions are not evaluated until they are referenced. This also comes with the
+benefit that arguments are only ever evaluated once. Because child declarations
+form <a href="http://en.wikipedia.org/wiki/Closure_%28computer_programming%29">closures</a>
+over variables in their parent scope, this also ensures local variables are also
+only evaluated once within these child declarations.</p>
+
+<p>Top-level declarations, like values and functions, are encoded as static Java
+methods. Each time they are referenced, a new thunk is returned. In <code>let</code> declarations,
+this poses a problem because every time a declaration is referenced, it returns
+a new thunk. Say for example we have a child declaration called &ldquo;username&rdquo; which
+fetches a username from a database. Every time the associated thunk is referenced,
+the database is hit:</p>
+
+<figure class='code'><figcaption><span>What It Looks Like in Pseudo-Java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'><span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">())</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This becomes a major problem in Scotch because the values with side-effects
+look like variables!</p>
+
+<figure class='code'><figcaption><span>What it looks like in Scotch</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">greet</span> <span class="n">msg</span> <span class="ow">=</span>
+</span><span class='line'>    <span class="kr">let</span> <span class="n">username</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>          <span class="n">something</span> <span class="n">to</span> <span class="n">get</span>
+</span><span class='line'>          <span class="n">this</span> <span class="n">from</span> <span class="n">a</span> <span class="n">database</span>
+</span><span class='line'>    <span class="kr">in</span> <span class="kr">do</span>
+</span><span class='line'>      <span class="n">log</span> <span class="s">&quot;greeting &quot;</span> <span class="o">++</span> <span class="n">username</span>
+</span><span class='line'>      <span class="n">msg</span> <span class="o">++</span> <span class="s">&quot; &quot;</span> <span class="o">++</span> <span class="n">username</span> <span class="o">++</span> <span class="s">&quot;!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modeling Let As A Function</h2>
+
+<p>I&rsquo;ve been mulling around a few crazy ways to model <code>let</code> declarations. My favorite
+so far is wrapping the <code>let</code> body up in a function, passing in all declarations as
+arguments:</p>
+
+<figure class='code'><figcaption><span>Psuedo-Java `let` Modeled With Values As Arguments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">greet_</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">username</span><span class="o">())</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet_</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">Thunk</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting&quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">.</span><span class="na">get</span><span class="o">())</span>        <span class="c1">// here it evaluates for the first time</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span> <span class="c1">// here it gets the value from the initial evaluation above</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This leverages the existing way of modeling evaluation, but it&rsquo;s kinda ugly. For
+the near term, this solution is decent, however it adds the overhead of extra
+arguments being passed around. I&rsquo;m not entirely sure how this impacts runtime
+performance in compiled code, though I would like another way of modeling <code>let</code>
+declarations to compare side-by-side.</p>
+
+<h2>Storing Nested Values As Variables</h2>
+
+<p>I really like this method of modeling <code>let</code> because it behaves more like how a
+<code>let</code> looks in source code. Instead of wrapping a <code>let</code> within another function,
+the declarations are assigned to local variables:</p>
+
+<figure class='code'><figcaption><span>Values As Variables In Pseudo-Java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">var</span> <span class="n">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">()</span>
+</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting &quot;</span> <span class="o">+</span> <span class="n">username</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Why The Indecision?</h2>
+
+<p>I&rsquo;m not sure I&rsquo;m following the best ways to model <code>let</code>. And I also don&rsquo;t have
+any immediate way to test either solution short of branching the code and spiking
+out the two solutions. The tradeoffs aren&rsquo;t necessarily obvious, and I won&rsquo;t see
+which one is better in the long term compared to the one not chosen.</p>
+
+<p>Compilation is hard. Scotch uses a <a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">multi-pass compiler</a>
+with 12 steps currently, so adding a new language feature or changing an existing
+one can be very arduous tasks. Ideally, I only want to implement <code>let</code> once.</p>
+
+<p>I will be posting on progress and which solution I end up choosing, stay tuned.</p>
+
+<hr />
+
+<h4>Links</h4>
+
+<ul>
+<li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">Multi-pass Compiler</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Thunk">Thunks (Wikipedia)</a></li>
+</ul>
+
+
+<hr />
+
+<h4>Credits</h4>
+
+<p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
+who took time out of his busy day to review my multiple drafts.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Logan McGrath</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations/" data-via="" data-counturl="http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/05/lessons-from-sterling/" title="Previous Post: Lessons from Sterling">&laquo; Lessons from Sterling</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">Scoping and Thunking in Let Declarations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/lessons-from-sterling/">Lessons From Sterling</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/17/sterling-with-memoization/">Sterling With Memoization</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/16/sterling-benchmarks/">Sterling Benchmarks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Logan McGrath -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

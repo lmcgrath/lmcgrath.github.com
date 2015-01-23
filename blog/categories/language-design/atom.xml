@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Language Design | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/language-design/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2013-08-05T09:44:23-07:00</updated>
+  <updated>2015-01-23T08:17:38-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -12,6 +12,197 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scoping And Thunking In Let Declarations]]></title>
+    <link href="http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations/"/>
+    <updated>2015-01-23T08:30:00-08:00</updated>
+    <id>http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations</id>
+    <content type="html"><![CDATA[<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+almost full time in my free time. My latest prototype,
+<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, is coming close to a point
+where I can start developing the main libraries. Close, but there&rsquo;s a few kinks.</p>
+
+<p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
+of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
+<a href="http://learnyouahaskell.com/syntax-in-functions#let-it-be">Learn You A Haskell</a>.</em>)</p>
+
+<p>In this code, the child declaration <code>y</code> uses child declaration <code>z</code>, which is
+used by the body of the <code>let</code>. Consider for a moment: What if <code>z</code> had side
+effects? Take the following code snippet:</p>
+
+<p>```haskell Scotch Let Declaration
+f :: s &ndash;> (a, s)
+f x = let y = something with z</p>
+
+<pre><code>      z = something else
+      in do things with y and then z again
+</code></pre>
+
+<p>```</p>
+
+<h2>How Are Side Effects A Problem In Child Scopes?</h2>
+
+<p>Scotch is compiled into JVM bytecode. Sparing details, value declarations are
+encoded as static methods returning Java 8 lambdas. The declarations internally
+use <a href="http://stackoverflow.com/questions/2641489/what-is-a-thunk">thunks</a> to
+suspend evaluation but also to retain the evaluated result.</p>
+
+<p>```java Scotch &ldquo;add&rdquo; Function Encoded As Static Java Method
+// What x + y would look like compiled:
+//
+// This uses the runtime support functions applicable() and callable() to
+// automatically generate the relevant thunk types.
+public static Applicable&lt;Integer, Applicable&lt;Integer, Integer>> add() {
+  return applicable(</p>
+
+<pre><code>augend -&gt; applicable(
+  addend -&gt; callable(
+    () -&gt; augend.call() + addend.call()
+  )
+)
+</code></pre>
+
+<p>  );
+}
+```</p>
+
+<p>```java What A Thunk Looks Like
+public abstract class Thunk<A> implements Callable<A> {
+  private A value;</p>
+
+<p>  public A call() {</p>
+
+<pre><code>if (value == null) {
+  value = evaluate();
+}
+return value;
+</code></pre>
+
+<p>  }</p>
+
+<p>  protected abstract A evaluate();
+}
+```</p>
+
+<p>The reason for using thunks is to support lazy evaluation. Arguments passed into
+functions are not evaluated until they are referenced. This also comes with the
+benefit that arguments are only ever evaluated once. Because child declarations
+form <a href="http://en.wikipedia.org/wiki/Closure_%28computer_programming%29">closures</a>
+over variables in their parent scope, this also ensures local variables are also
+only evaluated once within these child declarations.</p>
+
+<p>Top-level declarations, like values and functions, are encoded as static Java
+methods. Each time they are referenced, a new thunk is returned. In <code>let</code> declarations,
+this poses a problem because every time a declaration is referenced, it returns
+a new thunk. Say for example we have a child declaration called &ldquo;username&rdquo; which
+fetches a username from a database. Every time the associated thunk is referenced,
+the database is hit:</p>
+
+<p>```java What It Looks Like in Pseudo-Java
+static String username() {
+return new Thunk() { /<em> database query </em>/ }
+}</p>
+
+<p>static String greet(String msg) {
+  log(&ldquo;greeting &rdquo; + username())
+  return msg + &ldquo; &rdquo; + username() + &ldquo;!&rdquo;
+}
+```</p>
+
+<p>This becomes a major problem in Scotch because the values with side-effects
+look like variables!</p>
+
+<p>```haskell What it looks like in Scotch
+greet msg =</p>
+
+<pre><code>let username = do
+      something to get
+      this from a database
+in do
+  log "greeting " ++ username
+  msg ++ " " ++ username ++ "!"
+</code></pre>
+
+<p>```</p>
+
+<h2>Modeling Let As A Function</h2>
+
+<p>I&rsquo;ve been mulling around a few crazy ways to model <code>let</code> declarations. My favorite
+so far is wrapping the <code>let</code> body up in a function, passing in all declarations as
+arguments:</p>
+
+<p><code>``java Psuedo-Java</code>let` Modeled With Values As Arguments
+static String username() {
+  return new Thunk() { /<em> database query </em>/ }
+}</p>
+
+<p>static String greet(String msg) {
+  greet_(msg, username())
+}</p>
+
+<p>static String greet_(String msg, Thunk<String> username) {
+  log(&ldquo;greeting&rdquo; + username.get())        // here it evaluates for the first time
+  return msg + &ldquo; &rdquo; + username.get() + &ldquo;!&rdquo; // here it gets the value from the initial evaluation above
+}
+```</p>
+
+<p>This leverages the existing way of modeling evaluation, but it&rsquo;s kinda ugly. For
+the near term, this solution is decent, however it adds the overhead of extra
+arguments being passed around. I&rsquo;m not entirely sure how this impacts runtime
+performance in compiled code, though I would like another way of modeling <code>let</code>
+declarations to compare side-by-side.</p>
+
+<h2>Storing Nested Values As Variables</h2>
+
+<p>I really like this method of modeling <code>let</code> because it behaves more like how a
+<code>let</code> looks in source code. Instead of wrapping a <code>let</code> within another function,
+the declarations are assigned to local variables:</p>
+
+<p>```java Values As Variables In Pseudo-Java
+static String username() {
+  return new Thunk() { /<em> database query </em>/ }
+}</p>
+
+<p>static String greet(String msg) {
+  var username = username()
+  log(&ldquo;greeting &rdquo; + username
+  return msg + &ldquo; &rdquo; + username + &ldquo;!&rdquo;
+}
+```</p>
+
+<h2>Why The Indecision?</h2>
+
+<p>I&rsquo;m not sure I&rsquo;m following the best ways to model <code>let</code>. And I also don&rsquo;t have
+any immediate way to test either solution short of branching the code and spiking
+out the two solutions. The tradeoffs aren&rsquo;t necessarily obvious, and I won&rsquo;t see
+which one is better in the long term compared to the one not chosen.</p>
+
+<p>Compilation is hard. Scotch uses a <a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">multi-pass compiler</a>
+with 12 steps currently, so adding a new language feature or changing an existing
+one can be very arduous tasks. Ideally, I only want to implement <code>let</code> once.</p>
+
+<p>I will be posting on progress and which solution I end up choosing, stay tuned.</p>
+
+<hr />
+
+<h4>Links</h4>
+
+<ul>
+<li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">Multi-pass Compiler</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Thunk">Thunks (Wikipedia)</a></li>
+</ul>
+
+
+<hr />
+
+<h4>Credits</h4>
+
+<p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
+who took time out of his busy day to review my multiple drafts.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lessons from Sterling]]></title>
