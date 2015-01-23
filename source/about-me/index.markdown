@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "about-me"
+title: "About Me"
 date: 2015-01-23 11:42
 comments: false
 sharing: true
