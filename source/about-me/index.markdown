@@ -1,8 +1,8 @@
 ---
 layout: page
-title: "About Me"
-date: 2012-10-24 18:38
-comments: true
+title: "about-me"
+date: 2015-01-23 11:42
+comments: false
 sharing: true
 footer: true
 ---
@@ -21,4 +21,4 @@ modding is very anemic, and I hope to write more about this as I learn for the
 benefit of other aspiring modders. I should also add I'm deeply addicted to
 minecraft.
 
-More information about me can be found on my [LinkedIn profile](https://www.linkedin.com/pub/logan-mcgrath/36/610/a40).
+More information about me can be found on my [LinkedIn profile](https://www.linkedin.com/pub/logan-mcgrath).
