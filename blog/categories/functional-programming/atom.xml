@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Functional Programming | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/functional-programming/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-23T11:57:00-08:00</updated>
+  <updated>2015-01-23T15:45:46-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -166,7 +166,7 @@ static String username() {
 
 <p>static String greet(String msg) {
   var username = username()
-  log(&ldquo;greeting &rdquo; + username
+  log(&ldquo;greeting &rdquo; + username)
   return msg + &ldquo; &rdquo; + username + &ldquo;!&rdquo;
 }
 ```</p>
