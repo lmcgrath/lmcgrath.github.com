@@ -149,6 +149,11 @@ static String greet(String msg) {
 }
 ```
 
+I'm not entirely sure what performance impact of variables in `let` would be
+compared to using arguments. Either way, I would be calling the methods associated
+with each declaration and storing them somewhere. The only thing saved is an
+additional function call, so any gains in performance would be minuscule.
+
 ## Why The Indecision?
 
 I'm not sure I'm following the best ways to model `let`. And I also don't have
