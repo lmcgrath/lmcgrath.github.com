@@ -9,9 +9,11 @@
     <item>
       <title><![CDATA[Scoping And Thunking In Let Declarations]]></title>
       <description><![CDATA[<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
-almost full time in my free time. My latest prototype,
-<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, is coming close to a point
-where I can start developing the main libraries. Close, but there&rsquo;s a few kinks.</p>
+almost full-time in my free time. My latest prototype,
+<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, which uses Haskell-like syntax
+and semantics, is coming close to a point where I can start developing the main
+libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
+having with <code>let</code> declarations.</p>
 
 <p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
 of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
@@ -19,7 +21,7 @@ of values declared within <code>let</code> declarations. (<em>Read about <code>l
 
 <p>In this code, the child declaration <code>y</code> uses child declaration <code>z</code>, which is
 used by the body of the <code>let</code>. Consider for a moment: What if <code>z</code> had side
-effects? Take the following code snippet:</p>
+effects?</p>
 
 <figure class='code'><figcaption><span>Scotch Let Declaration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -34,7 +36,7 @@ effects? Take the following code snippet:</p>
 
 <h2>How Are Side Effects A Problem In Child Scopes?</h2>
 
-<p>Scotch is compiled into JVM bytecode. Sparing details, value declarations are
+<p>Scotch is compiled into JVM bytecode. Value and function declarations are
 encoded as static methods returning Java 8 lambdas. The declarations internally
 use <a href="http://stackoverflow.com/questions/2641489/what-is-a-thunk">thunks</a> to
 suspend evaluation but also to retain the evaluated result.</p>
@@ -233,6 +235,16 @@ with 12 steps currently, so adding a new language feature or changing an existin
 one can be very arduous tasks. Ideally, I only want to implement <code>let</code> once.</p>
 
 <p>I will be posting on progress and which solution I end up choosing, stay tuned.</p>
+
+<h2>@TODO</h2>
+
+<ul>
+<li>Write-up on lexical scoping in Scotch.</li>
+<li>Details on how Scotch compiles values and functions in Java 8 lambdas.</li>
+<li>How simple, non-recursive closures are implemented.</li>
+<li>Implementation of co-recursive closures.</li>
+</ul>
+
 
 <hr />
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Functional Programming | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/functional-programming/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-23T15:59:18-08:00</updated>
+  <updated>2015-01-26T19:25:36-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -19,9 +19,11 @@
     <updated>2015-01-23T08:30:00-08:00</updated>
     <id>http://loganmcgrath.com/blog/2015/01/23/scoping-and-thunking-in-let-declarations</id>
     <content type="html"><![CDATA[<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
-almost full time in my free time. My latest prototype,
-<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, is coming close to a point
-where I can start developing the main libraries. Close, but there&rsquo;s a few kinks.</p>
+almost full-time in my free time. My latest prototype,
+<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, which uses Haskell-like syntax
+and semantics, is coming close to a point where I can start developing the main
+libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
+having with <code>let</code> declarations.</p>
 
 <p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
 of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
@@ -29,7 +31,7 @@ of values declared within <code>let</code> declarations. (<em>Read about <code>l
 
 <p>In this code, the child declaration <code>y</code> uses child declaration <code>z</code>, which is
 used by the body of the <code>let</code>. Consider for a moment: What if <code>z</code> had side
-effects? Take the following code snippet:</p>
+effects?</p>
 
 <p>```haskell Scotch Let Declaration
 f :: s &ndash;> (a, s)
@@ -43,7 +45,7 @@ f x = let y = something with z</p>
 
 <h2>How Are Side Effects A Problem In Child Scopes?</h2>
 
-<p>Scotch is compiled into JVM bytecode. Sparing details, value declarations are
+<p>Scotch is compiled into JVM bytecode. Value and function declarations are
 encoded as static methods returning Java 8 lambdas. The declarations internally
 use <a href="http://stackoverflow.com/questions/2641489/what-is-a-thunk">thunks</a> to
 suspend evaluation but also to retain the evaluated result.</p>
@@ -188,6 +190,16 @@ with 12 steps currently, so adding a new language feature or changing an existin
 one can be very arduous tasks. Ideally, I only want to implement <code>let</code> once.</p>
 
 <p>I will be posting on progress and which solution I end up choosing, stay tuned.</p>
+
+<h2>@TODO</h2>
+
+<ul>
+<li>Write-up on lexical scoping in Scotch.</li>
+<li>Details on how Scotch compiles values and functions in Java 8 lambdas.</li>
+<li>How simple, non-recursive closures are implemented.</li>
+<li>Implementation of co-recursive closures.</li>
+</ul>
+
 
 <hr />
 
