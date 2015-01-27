@@ -9,9 +9,11 @@ categories:
 ---
 
 I haven't stopped fiddling with language development. Actually, I still do it
-almost full time in my free time. My latest prototype,
-[Scotch](https://github.com/lmcgrath/scotch-lang), is coming close to a point
-where I can start developing the main libraries. Close, but there's a few kinks.
+almost full-time in my free time. My latest prototype,
+[Scotch](https://github.com/lmcgrath/scotch-lang), which uses Haskell-like syntax
+and semantics, is coming close to a point where I can start developing the main
+libraries. Close, but there are a few kinks. Here I'll be covering an issue I'm
+having with `let` declarations.
 
 Specifically, what I'm struggling to get my head around is how to model scoping
 of values declared within `let` declarations. (_Read about `let` declarations in
@@ -19,7 +21,7 @@ of values declared within `let` declarations. (_Read about `let` declarations in
 
 In this code, the child declaration `y` uses child declaration `z`, which is
 used by the body of the `let`. Consider for a moment: What if `z` had side
-effects? Take the following code snippet:
+effects?
 
 ```haskell Scotch Let Declaration
 f :: s -> (a, s)
@@ -30,7 +32,7 @@ f x = let y = something with z
 
 ## How Are Side Effects A Problem In Child Scopes?
 
-Scotch is compiled into JVM bytecode. Sparing details, value declarations are
+Scotch is compiled into JVM bytecode. Value and function declarations are
 encoded as static methods returning Java 8 lambdas. The declarations internally
 use [thunks](http://stackoverflow.com/questions/2641489/what-is-a-thunk) to
 suspend evaluation but also to retain the evaluated result.
@@ -166,6 +168,13 @@ with 12 steps currently, so adding a new language feature or changing an existin
 one can be very arduous tasks. Ideally, I only want to implement `let` once.
 
 I will be posting on progress and which solution I end up choosing, stay tuned.
+
+## @TODO
+
+* Write-up on lexical scoping in Scotch.
+* Details on how Scotch compiles values and functions in Java 8 lambdas.
+* How simple, non-recursive closures are implemented.
+* Implementation of co-recursive closures.
 
 -----------------
 
