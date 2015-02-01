@@ -1,118 +1,67 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Logan McGrath's Blog</title>
-  <meta name="author" content="Logan McGrath">
+	<meta charset="utf-8">
+	
+	<title>Logan McGrath's Blog</title>
+	
 
-  
-  <meta name="description" content="I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+	<meta name="author" content="Logan McGrath">
+	
+	<meta name="description" content="I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
 almost full-time in my free time. My latest prototype,
-Scotch, &hellip;">
-  
+Scotch, &hellip;"> <meta name="keywords" content="">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <link rel="canonical" href="http://loganmcgrath.com">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36481003-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+	<script type="text/javascript" src="/javascripts/libs/jquery.min.js"></script>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Logan McGrath's Blog</a></h1>
-  
-</hgroup>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Logan McGrath's Blog</a></h1>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">About</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/rss.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:loganmcgrath.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/about-me">About Me</a></li>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
+	<div id="main" class="inner">
+		<div id="content">
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">Scoping and Thunking in Let Declarations</a></h1>
+
     
     
-      <p class="meta">
         
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">
+		
+			Scoping and Thunking in Let Declarations</a>
+	</h2>
+	<div class="entry-content">
+		<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
 almost full-time in my free time. My latest prototype,
 <a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, which uses Haskell-like syntax
 and semantics, is coming close to a point where I can start developing the main
 libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
 having with <code>let</code> declarations.</p>
+
+<!--more-->
+
 
 <p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
 of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
@@ -347,7 +296,7 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 
 <hr />
 
-<h4>Links</h4>
+<h3>Links</h3>
 
 <ul>
 <li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
@@ -356,788 +305,143 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 </ul>
 
 
-<hr />
-
-<h4>Credits</h4>
+<h3>Credits</h3>
 
 <p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
 who took time out of his busy day to review my multiple drafts.</p>
+
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>
+
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
+</div>
+</article>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/05/lessons-from-sterling/">Lessons From Sterling</a></h1>
+
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-05T09:37:00-07:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/08/05/lessons-from-sterling/">
+		
+			Lessons From Sterling</a>
+	</h2>
+	<div class="entry-content">
+		<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
 Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
 JavaScript. Last week I decided to shelve Sterling.</p>
 
-<h2>How Sterling Worked</h2>
 
-<p>Sterling&rsquo;s evaluation model is very simple and I felt it held a lot of promise because it made the language very
-flexible. Everything in Sterling is an expression. Some expressions accept a single argument&mdash;these were called
-<em>lambdas</em>. All expressions also contain sub-expressions, which could be accessed as <em>attributes</em>. With a little sugar,
-a bag of attributes could be made self-referencing and thus become an <em>object</em>.</p>
+		
+		<a href="/blog/2013/08/05/lessons-from-sterling/" class="more-link">Read on &rarr;</a>
+	</div>
 
-<figure class='code'><figcaption><span>An assortment of basic expression types</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">//</span> <span class="n">a</span> <span class="n">constant</span> <span class="n">expression</span> <span class="n">which</span> <span class="n">takes</span> <span class="n">no</span> <span class="n">arguments</span>
-</span><span class='line'><span class="nf">anExpression</span> <span class="ow">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="n">lambda</span> <span class="n">expressions</span> <span class="n">take</span> <span class="n">only</span> <span class="mi">1</span> <span class="n">argument</span>
-</span><span class='line'><span class="nf">aLambda</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="n">function</span> <span class="n">expressions</span> <span class="n">take</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">1</span> <span class="n">argument</span>
-</span><span class='line'><span class="nf">aFunction</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="n">an</span> <span class="n">object</span> <span class="n">expression</span> <span class="n">with</span> <span class="n">constructor</span>
-</span><span class='line'><span class="nf">anObject</span> <span class="ow">=</span> <span class="p">(</span><span class="n">constructorArg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">madeWith</span><span class="kt">:</span> <span class="n">constructorArg</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="n">an</span> <span class="n">object</span> <span class="n">expression</span> <span class="n">that</span> <span class="n">behaves</span> <span class="n">like</span> <span class="n">a</span> <span class="n">lambda</span> <span class="n">after</span> <span class="n">constructed</span>
-</span><span class='line'><span class="nf">invokableObject</span> <span class="ow">=</span> <span class="p">(</span><span class="n">constructorArg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">madeWith</span><span class="kt">:</span> <span class="n">constructorArg</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">invoke</span><span class="kt">:</span> <span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="s">&quot;Made with #{self.madeWith} and invoked with #{arg}&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
+<div class="meta">
+	<div class="date">
 
-<p>Expressions could be built up to carry a high amount of capability. Because Sterling is untyped, decoration and
-ducktyping are used heavily to compose ever more features into expressions.</p>
 
-<p>Sterling was directly inspired by <a href="http://en.wikipedia.org/wiki/Lambda_calculus">Lambda Calculus</a>. This had an enormous
-impact on the design of the language, the largest of which was how the language executed at runtime. Expressions in
-Sterling are represented as trees and leaves. Top-level expressions have names, and they could be inserted into other
-expressions by referencing those names.</p>
 
-<figure class='code'><figcaption><span>A recursive named expression looks like this:</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">fibonacci</span> <span class="ow">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="kr">then</span>
-</span><span class='line'>                       <span class="n">n</span>
-</span><span class='line'>                   <span class="kr">else</span>
-</span><span class='line'>                       <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>                   <span class="n">end</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Because each expression was a tree, no expression needed to be executed until its result was absolutely needed. This
-lazy execution model allows for very large, complex expressions to be built in one function then returned to the
-outside world to be further processed and executed. Functions could be created inline and passed as arguments to other
-functions, or constructed within functions and returned.</p>
 
-<p>Sterling&rsquo;s tree-based structure naturally supported a prototype-based object model. To modify an expression tree, the
-tree needed to create a copy of itself with any changes to it. All expressions, thus, were effective prototypes. This
-also had the benefit of directly supporting immutability and helped to enforce a functional programming paradigm.</p>
 
-<h2>What Could Have Been</h2>
 
-<p>I intended Sterling to be a functional scripting language. In some ways, I was looking to create a JavaScript reboot
-that clung closer to JavaScript&rsquo;s functional roots and would be used for general-purpose scripting.</p>
 
-<p>Sterling&rsquo;s syntax was designed to be very terse, readable, and orthogonal. By that I mean everything in Sterling should
-be an expression that can be used <a href="http://brandonbyars.com/2008/07/21/orthogonality/">virtually anywhere for anything</a>.
-Because Sterling was based on lambdas, this worked particularly well for arguments expressions because arguments could
-fold into the function call result on the left:</p>
 
-<figure class='code'><figcaption><span>Consing a list by folding arguments, left-to-write</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">[]</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">3</span> <span class="mi">4</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="mi">4</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
+<time datetime="2013-08-05T09:37:00-07:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time></div>
+	
 
+<div class="tags">
 
-<p>This folding capability meant that Sterling could support very expressive programming styles. Any function could be
-returned as the result of another function call and continue chaining against arguments. Sterling&rsquo;s terse syntax also
-made defining functions very easy:</p>
-
-<figure class='code'><figcaption><span>Some basic functions in Sterling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">identity</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span>
-</span><span class='line'><span class="nf">selfApply</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="n">x</span>
-</span><span class='line'><span class="nf">apply</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="n">y</span>
-</span><span class='line'><span class="nf">selectFirst</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span>
-</span><span class='line'><span class="nf">selectSecond</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">y</span>
-</span><span class='line'><span class="nf">conditional</span> <span class="ow">=</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">condition</span><span class="o">.</span><span class="n">true</span><span class="o">?</span> <span class="kr">then</span> <span class="n">selectFirst</span> <span class="kr">else</span> <span class="n">selectSecond</span> <span class="n">end</span>
-</span><span class='line'><span class="nf">friday</span><span class="o">?</span> <span class="ow">=</span> <span class="n">say</span> <span class="o">$</span> <span class="n">conditional</span> <span class="p">(</span><span class="n">today</span><span class="o">.</span><span class="n">is</span> <span class="kt">:</span><span class="n">friday</span><span class="p">)</span> <span class="sc">&#39;Yay Friday!&#39;</span> <span class="sc">&#39;Awww...&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Because Sterling was intended to be immutable, objects would be used to represent state and carry behavior to return
-new state resulting from an operation:</p>
-
-<figure class='code'><figcaption><span>Printing arguments from an immutable list iterator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">main</span> <span class="ow">=</span> <span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="ow">-&gt;</span>
-</span><span class='line'>    <span class="n">print</span> <span class="n">args</span><span class="o">.</span><span class="n">iterator</span> <span class="o">//</span> <span class="n">gets</span> <span class="n">an</span> <span class="kt">Iterator</span>
-</span><span class='line'>
-</span><span class='line'><span class="nf">print</span> <span class="ow">=</span> <span class="p">(</span><span class="n">iterator</span><span class="p">)</span> <span class="ow">-&gt;</span>
-</span><span class='line'>    <span class="n">say</span> <span class="n">unless</span> <span class="n">iterator</span><span class="o">.</span><span class="n">empty</span><span class="o">?</span> <span class="kr">then</span>
-</span><span class='line'>        <span class="n">printNext</span> <span class="n">iterator</span> <span class="mi">0</span>
-</span><span class='line'>    <span class="kr">else</span>
-</span><span class='line'>        <span class="sc">&#39;Empty iterator&#39;</span>
-</span><span class='line'>    <span class="n">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="nf">printNext</span> <span class="ow">=</span> <span class="p">(</span><span class="n">iterator</span> <span class="n">index</span><span class="p">)</span> <span class="ow">-&gt;</span>
-</span><span class='line'>    <span class="n">unless</span> <span class="n">iterator</span><span class="o">.</span><span class="n">empty</span><span class="o">?</span> <span class="kr">then</span>
-</span><span class='line'>        <span class="s">&quot;arg #{index} =&gt; #{iterator.current}</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">printNext</span> <span class="n">iterator</span><span class="o">.</span><span class="n">tail</span> <span class="n">index</span><span class="o">.</span><span class="n">up</span>
-</span><span class='line'>    <span class="n">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">Iterator</span> <span class="ow">=</span> <span class="p">(</span><span class="n">elements</span> <span class="n">position</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">empty</span><span class="o">?:</span> <span class="n">position</span> <span class="o">&gt;=</span> <span class="n">elements</span><span class="o">.</span><span class="n">length</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">head</span><span class="kt">:</span> <span class="kt">Iterator</span> <span class="n">elements</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">current</span><span class="kt">:</span> <span class="n">elements</span><span class="p">[</span><span class="n">position</span><span class="p">],</span>
-</span><span class='line'>    <span class="n">tail</span><span class="kt">:</span> <span class="n">iterator</span> <span class="n">elements</span> <span class="n">position</span><span class="o">.</span><span class="n">up</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Paul Hammant at one point suggested baking dependency injection <a href="http://paulhammant.com/blog/crazy-bob-and-type-safety-for-dependency-injection.html/">directly into a language</a>,
-and even offered I do this in Sterling. This drove development of a metadata system in Sterling that could be used to
-support metaprogramming and eventually dependency injection.</p>
-
-<figure class='code'><figcaption><span>Meta attributes on expressions</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">@</span><span class="n">component</span> <span class="p">{</span> <span class="n">uses</span><span class="kt">:</span> <span class="p">[</span> <span class="kt">:</span><span class="n">productionDb</span> <span class="p">]</span> <span class="p">}</span>
-</span><span class='line'><span class="o">@</span><span class="n">useWhen</span> <span class="p">(</span><span class="n">runtime</span> <span class="ow">-&gt;</span> <span class="n">runtime</span><span class="o">.</span><span class="n">env</span> <span class="n">is</span> <span class="kt">:</span><span class="n">production</span><span class="p">)</span>
-</span><span class='line'><span class="kt">Inventory</span> <span class="ow">=</span> <span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">numberOfItems</span><span class="kt">:</span> <span class="n">db</span><span class="o">.</span><span class="n">asInt</span> <span class="o">$</span> <span class="n">db</span><span class="o">.</span><span class="n">scalarQuery</span> <span class="s">&quot;SELECT COUNT(*) FROM thingies&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">priceCheck</span><span class="kt">:</span> <span class="p">(</span><span class="n">thingy</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">asMoney</span> <span class="o">$</span> <span class="n">db</span><span class="o">.</span><span class="n">scalarQuery</span> <span class="s">&quot;SELECT price FROM thingies WHERE id = :id&quot;</span> <span class="p">{</span> <span class="n">id</span><span class="kt">:</span> <span class="n">thingy</span><span class="o">.</span><span class="n">id</span> <span class="p">},</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">@</span><span class="n">provides</span> <span class="kt">:</span><span class="n">productionDb</span>
-</span><span class='line'><span class="nf">createDb</span> <span class="ow">=</span> <span class="o">...</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">@</span><span class="n">fake</span><span class="o">?</span> <span class="n">true</span>
-</span><span class='line'><span class="o">@</span><span class="n">component</span> <span class="p">{</span> <span class="n">name</span><span class="kt">:</span> <span class="kt">:Inventory</span> <span class="p">}</span>
-</span><span class='line'><span class="o">@</span><span class="n">useWhen</span> <span class="p">(</span><span class="n">runtime</span> <span class="ow">-&gt;</span> <span class="n">runtime</span><span class="o">.</span><span class="n">env</span> <span class="n">is</span> <span class="kt">:</span><span class="n">development</span><span class="p">)</span>
-</span><span class='line'><span class="kt">FakeInventory</span> <span class="ow">=</span> <span class="n">object</span> <span class="ow">-&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">numberOfItems</span><span class="kt">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">priceCheck</span><span class="kt">:</span> <span class="p">(</span><span class="n">thingy</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">thingy</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The metadata system was very flexible and could support arbitrary meta annotations. The above metadata translates to
-the following map structures at runtime:</p>
-
-<figure class='code'><figcaption><span>What meta attributes look like if they were JavaScript</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Inventory</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>    <span class="s2">&quot;component&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;uses&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;productionDb&quot;</span> <span class="p">]</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="s2">&quot;useWhen&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="nx">runtime</span><span class="p">[</span><span class="s2">&quot;env&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;production&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">createDb</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>    <span class="s2">&quot;provides&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;productionDb&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">FakeInventory</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>    <span class="s2">&quot;fake?&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kc">true</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="s2">&quot;component&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Inventory&quot;</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="s2">&quot;useWhen&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="nx">runtime</span><span class="p">[</span><span class="s2">&quot;env&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I felt these functional features and expressive syntax would make for an enjoyable and productive programming
-experience. The meta system in particular I felt could become quite powerful especially for customizing load-time
-behavior of Sterling programs. However, some of my goals came with a few problems.</p>
-
-<h2>The Problems</h2>
-
-<h3>Speed</h3>
-
-<p>Sterling is amazingly slow. A natural consequence of a tree-based language is that trees must be copied and modified
-for many operations, no matter how &ldquo;trivial&rdquo; they may be (integer arithmetic, for example.) Recursive functions like
-the <code>fibonacci</code> expression above had a particularly nasty characteristic of building enormous trees that took a lot of
-time to reduce to single values.</p>
-
-<p>The speed issues in Sterling were partially mitigated using <a href="http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization/">memoization</a>.</p>
-
-<h3>Memoization: Blessing But Possibly A Curse</h3>
-
-<p>Memoization increased the possibility for static state to hang around in an application. Applying arguments to an
-object constructor, for instance, would return a previously-constructed object. I&rsquo;m not entirely sure what the total
-impact of the &ldquo;object constructor problem&rdquo; could have been, as objects are not mutable, but I didn&rsquo;t like this
-charateristic nonetheless. Immutability, however, wasn&rsquo;t entirely true (see &ldquo;Escaping The Matrix&rdquo; below).</p>
-
-<p>Named expressions are persistent in memory. If a named expression took a large argument, or returned a large result,
-then the total memory cost of a memoizing expression could become quite high over time.</p>
-
-<h3>The Impacts Of Typelessness</h3>
-
-<p>Types are actually quite nice to have, and I began to miss them quite a bit the more I worked on Sterling. While
-Sterling is very flexible (because it has no types) it also has very poor support for polymorphism (because it has no
-types). Want to do something else if you receive an <code>Asteroid</code> object rather than a <code>Spaceship</code> object?</p>
-
-<p>The na&iuml;ve solution is to implement an if-case for each expected type:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Spaceship</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span>
-</span><span class='line'>        <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Asteroid&#39;</span> <span class="kr">then</span>
-</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Spaceship collided with an asteroid!&#39;</span>
-</span><span class='line'>        <span class="kr">else</span> <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Spaceship&#39;</span> <span class="kr">then</span>
-</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Spaceships collide!&#39;</span>
-</span><span class='line'>        <span class="n">end</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">Asteroid</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span>
-</span><span class='line'>        <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Asteroid&#39;</span> <span class="kr">then</span>
-</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Asteroids collide!&#39;</span>
-</span><span class='line'>        <span class="kr">else</span> <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Spaceship&#39;</span> <span class="kr">then</span>
-</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Asteroid collided with a spaceship!&#39;</span>
-</span><span class='line'>        <span class="n">end</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>This is fragile, though, and the code is complex. What&rsquo;s worse, is there&rsquo;s no way to ensure that a method is receiving
-an <code>Asteroid</code> and not another object that simply implements its API.  A better solution is to let the colliding object
-select the proper method from the object it&rsquo;s colliding with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Spaceship</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collidedWithSpaceship</span> <span class="n">self</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">collideWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;Spaceships collide!&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">collideWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;Spaceship collided with an asteroid!&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">Asteroid</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collideWithAsteroid</span> <span class="n">self</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">collideWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="sc">&#39;Asteroid collided with a spaceship!&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">collideWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="sc">&#39;Asteroids collide!&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This solution is better. It&rsquo;s also similar to implementing <a href="http://en.wikipedia.org/wiki/Visitor_pattern#Java_example">visitor pattern</a>
-in Java. I still don&rsquo;t like it because there&rsquo;s no type safety and adding support for more types requires violating the
-<a href="http://en.wikipedia.org/wiki/Open/closed_principle">open/closed principle</a>. For instance, in order for a <code>Bunny</code> to be
-correctly collided-with, a <code>collidedWithBunny</code> method must be added to both <code>Spaceship</code> and <code>Asteroid</code>. Developers may
-find it easier instead to allow the <code>Bunny</code> to masquerade as an asteroid:</p>
-
-<figure class='code'><figcaption><span>Spaceship-eating Bunny</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Bunny</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collideWithAsteroid</span> <span class="n">self</span><span class="p">,</span> <span class="o">//</span> <span class="n">muahaha</span> <span class="kt">I&#39;m</span> <span class="n">an</span> <span class="n">asteroid</span><span class="o">!</span>
-</span><span class='line'>    <span class="n">collidedWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;NOM NOM NOM NOM!&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">collidedWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="o">...</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This <a href="http://en.wikipedia.org/wiki/Multiple_dispatch#Java">single-dispatch behavior</a> means that for any argument
-applied to a method name, the same method will be dispatched. In the case of Java, this is determined by the type of
-a method&rsquo;s arguments at compile time. Adding new methods for similarly-typed arguments requires all client code be
-recompiled. While Sterling may not have typing, it is still single-dispatch.</p>
-
-<p>The lack of types became particularly painful when implementing arithmetic operations and compile-time analysis was
-nearly impossible without collecting a great deal of superfluous metadata.</p>
-
-<h3>Escaping The Matrix</h3>
-
-<p>As I worked on Sterling, I required functionality that wasn&rsquo;t yet directly supportable in the language itself. I solved
-this problem using the &ldquo;glue&rdquo; expression that could tie into a Java-based expression:</p>
-
-<figure class='code'><figcaption><span>sterling/collection/_base.ag</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">EmptyIterator</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.EmptyIterator&#39;</span>
-</span><span class='line'><span class="no">List</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.ListConstructor&#39;</span>
-</span><span class='line'><span class="no">Set</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.SetConstructor&#39;</span>
-</span><span class='line'><span class="no">Tuple</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.TupleConstructor&#39;</span>
-</span><span class='line'><span class="no">Map</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.MapConstructor&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For short-term problems, this option isn&rsquo;t too bad, but it allows the programmer to escape the immutable &ldquo;Matrix&rdquo; of
-Sterling. For example, I implemented Sterling&rsquo;s collections as thin wrappers around Java collections, and allowed them
-to be mutable. Actually, a lot of things in Sterling were mutable:</p>
-
-<ul>
-<li>Method collections on expressions</li>
-<li>Object methods</li>
-<li>Maps</li>
-<li>Lists</li>
-</ul>
-
-
-<p>This, coupled with memoization, could cause a lot of issues with static state and had the potential to enable a lot of
-bad design decisions for programs written in Sterling.</p>
-
-<h2>The Good Parts</h2>
-
-<p>Despite the baggage, there&rsquo;s a few takeaways!</p>
-
-<p>Sterling&rsquo;s syntax is very small and terse. I particularly enjoyed not having to type a lot of parentheses, braces,
-commas, and semicolons. Separating arguments by spaces allowed the language read like a book.</p>
-
-<p>Most expressions can be delimited with whitespace alone, and because everything is an expression, objects could be
-created inline and if-cases could be used as arguments.</p>
-
-<p>Operators are just methods. Any object or expression can define a &ldquo;+&rdquo; operator and customize what it does. With
-polymorphism supported with multi-methods, this can become an incredibly powerful feature.</p>
-
-<p>Sterling also has the ability to define arbitrary metadata on any named expression. This metadata is gathered into a
-<code>meta</code> attribute and can be inspected at runtime to support a sort of meta programming.</p>
-
-<h2>What I&rsquo;m Carrying Forward</h2>
-
-<p>I&rsquo;m now working on a new language project that will be borrowing Sterling&rsquo;s syntax. This time, however, I will be using
-types. Algebraic data types hold a certain fascination for me, and I&rsquo;m interested in seeing what I can do with them. At
-the very least, I do intend on using multi-methods for better polymorphism support.</p>
-
-<p>I don&rsquo;t think I like declaring scope. It&rsquo;s verbose. Or declaring types. That should be restricted to places where it
-impacts execution, like function signatures.</p>
-
-<p>While Sterling&rsquo;s meta system didn&rsquo;t really go anywhere, I do intend on carrying it forward as a supplement to algebraic
-types. I may even still bake in dependency injection because I hate all the typing required to tie together an
-application.</p>
-
-<p>I don&rsquo;t believe I will carry forward mandatory immutability, though I may support some form of &ldquo;immutability by
-default&rdquo;.</p>
-
-<p>Sterling&rsquo;s lazy evaluation caused a lot of headaches more than a few times. I&rsquo;ll probably not make any successor
-language lazily evaluated because memoization becomes a near requirement in order to make lazy evaluation useful.</p>
-
-<h2>My Holy Grail</h2>
-
-<ul>
-<li>A language that is interpreted and optionally compiled either AOT or JIT</li>
-<li><a href="http://en.wikipedia.org/wiki/Type_inference">Inferred typing</a> as opposed to <a href="http://en.wikipedia.org/wiki/Nominative_type_system">nominal typing</a></li>
-<li>At least psuedo-declarative</li>
-<li>Dynamic to some degree</li>
-<li>Easy to write, easy to read</li>
-<li>Highly composable</li>
-<li>Simple closures</li>
-<li>First-class functions, if not first-class everything</li>
-</ul>
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
+</div>
+</article>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/17/sterling-with-memoization/">Sterling With Memoization</a></h1>
+
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-17T04:26:00-07:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/06/17/sterling-with-memoization/">
+		
+			Sterling With Memoization</a>
+	</h2>
+	<div class="entry-content">
+		<p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
 <a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
 
-<p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
-recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
-execution speed is very pronounced:</p>
 
-<figure class='code'><figcaption><span>The Results</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Java Benchmark
-</span><span class='line'>--------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 6 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>--------------
-</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 4 milliseconds
-</span><span class='line'>
-</span><span class='line'>Sterling Benchmark
-</span><span class='line'>------------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 648 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 1 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>------------------
-</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 64 milliseconds
-</span></code></pre></td></tr></table></div></figure>
+		
+		<a href="/blog/2013/06/17/sterling-with-memoization/" class="more-link">Read on &rarr;</a>
+	</div>
 
 
-<p>Sterling without memoization required on average 0.079 seconds to calculate the 20th member of the Fibonacci sequence,
-but with memoization, the amount of time shrinks to 0.006 seconds. The time penalty only applies the first time the
-function is executed for a given argument, so call times become near-instantaneous.</p>
-
-<h2>Sterling is faster than Java!</h2>
-
-<p><strong>Not really.</strong> But it is if I fiddle with the benchmark variables a bit (:</p>
-
-<p>By changing the benchmark to execute the Fibonacci function 1000 times for 100 iterations, something interesting
-happens:</p>
-
-<figure class='code'><figcaption><span>Fiddling with the benchmark</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Java Benchmark
-</span><span class='line'>--------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 42 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 41 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 40 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 38 milliseconds
-</span><span class='line'>...
-</span><span class='line'>Iteration 99: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 39 milliseconds
-</span><span class='line'>--------------
-</span><span class='line'>Average <span class="k">for </span>100 iterations X 1000 executions: 39 milliseconds
-</span><span class='line'>
-</span><span class='line'>Sterling Benchmark
-</span><span class='line'>------------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 629 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 1 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>...
-</span><span class='line'>Iteration 99: <span class="nv">executions</span> <span class="o">=</span> 1000; <span class="nv">elapsed</span> <span class="o">=</span> 0 milliseconds
-</span><span class='line'>------------------
-</span><span class='line'>Average <span class="k">for </span>100 iterations X 1000 executions: 6 milliseconds
-</span></code></pre></td></tr></table></div></figure>
+<div class="meta">
+	<div class="date">
 
 
-<h3>This benchmark smells funny</h3>
 
-<p>Yes, the performance in this benchmark is very contrived. But this does present an interesting potential property of
-applications written in Sterling: If an application performs a great deal of repeated calculations, it will run faster
-over time. A quick glance at the second bench mark will show that Java is performing the calculation every single time
-it is called, whereas Sterling only requires the first call and then it stores the result. This suggests <strong>O(1)</strong> vs.
-<strong>O(n)</strong> time complexity in Sterling&rsquo;s favor.</p>
 
-<p>You won&rsquo;t get this sort of performance for a web application because of their side effect-driven nature, but for number
-crunching Sterling may very well be a good idea.</p>
 
-<h2>@TODO</h2>
 
-<h3>How does memoization impact memory?</h3>
 
-<p>Obviously, those calculated values get stored somewhere, and somewhere means memory is being used. I should perform
-another benchmark comparing memory requirements of the Fibonacci algorithm between pure Java and Sterling.</p>
 
-<h3>What if I don&rsquo;t want memoization for a particular function?</h3>
 
-<p>There may be some cases where you want to recalculate a value for a known argument. For example, if I query a database
-I shouldn&rsquo;t necessarily  expect the same result each time. Sterling should give an easy way of signalling that a
-function should not leverage memoization.</p>
 
-<h2>Links</h2>
+<time datetime="2013-06-17T04:26:00-07:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time></div>
+	
 
-<ul>
-<li><a href="https://github.com/lmcgrath/sterling/commit/7d69d49a911d2d916701fa973e02ffabe82afe9d">Commit containing memoization changes</a></li>
-<li><a href="https://github.com/lmcgrath/sterling/blob/5c879ece28194fdbc36ed5dff2a760d6a38a4033/src/test/java/sterling/math/FibonacciBenchmarkTest.java">Benchmark showing O(1) complexity</a></li>
-</ul>
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
+</div>
+</article>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/16/sterling-benchmarks/">Sterling Benchmarks</a></h1>
+
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-16T21:12:00-07:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Since <a href="https://github.com/lmcgrath/sterling/tree/8b58ce4d4b080b353f7870ec0c0c30639fb2fa7b">mid January</a>, I’ve been
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/06/16/sterling-benchmarks/">
+		
+			Sterling Benchmarks</a>
+	</h2>
+	<div class="entry-content">
+		<p>Since <a href="https://github.com/lmcgrath/sterling/tree/8b58ce4d4b080b353f7870ec0c0c30639fb2fa7b">mid January</a>, I’ve been
 developing a functional scripting language I call <a href="https://github.com/lmcgrath/sterling">Sterling</a>. In the past few
 weeks, Sterling has become nearly usable, but it doesn’t seem to be very fast. So this weekend, I’ve taking the time to
 create a simple (read: na&iuml;ve) benchmark.</p>
@@ -1146,249 +450,49 @@ create a simple (read: na&iuml;ve) benchmark.</p>
 calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>. I’ve implemented
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
 
-<figure class='code'><figcaption><span>Sterling Implementation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">fibonacci</span> <span class="ow">=</span> <span class="n">n</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">n</span> <span class="ow">=</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">0</span>
-</span><span class='line'>                 <span class="kr">else</span> <span class="kr">if</span> <span class="n">n</span> <span class="ow">=</span> <span class="mi">1</span> <span class="kr">then</span> <span class="mi">1</span>
-</span><span class='line'>                 <span class="kr">else</span> <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+
+		
+		<a href="/blog/2013/06/16/sterling-benchmarks/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
 
 
 
 
-<figure class='code'><figcaption><span>Java Implementation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="kt">int</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Why was the Fibonacci sequence chosen for the benchmark?</h3>
-
-<p>The algorithm for calculating the Nth member of the Fibonacci sequence has two key traits:</p>
-
-<ul>
-<li>It’s recursive</li>
-<li>It has O(2<sup>n</sup>) complexity</li>
-</ul>
 
 
-<p>Sterling as of right now performs zero optimizations, so I’m assuming this algorithm will bring out Sterling’s
-worst performance characteristics (muahahaha).</p>
-
-<h2>The benchmark execution plan</h2>
-
-<p>I’m using a very basic benchmark excluding Sterling’s compilation overhead and comparing the results to native Java. I
-will execute the Fibonacci algorithm 100 times for 10 iterations, providing an average of the time elapsed for each
-iteration.</p>
-
-<figure class='code'><figcaption><span>Benchmark Pseudo-Java&trade;</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Expression</span> <span class="n">input</span> <span class="o">=</span> <span class="n">IntegerConstant</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
-</span><span class='line'><span class="n">Expression</span> <span class="n">sterlingFibonacci</span> <span class="o">=</span> <span class="n">load</span><span class="o">(</span><span class="s">&quot;sterling/math/fibonacci&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">javaBenchmark</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">Interval</span><span class="o">&gt;</span> <span class="n">intervals</span><span class="o">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">iterations</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="n">currentTimeMillis</span><span class="o">();</span>
-</span><span class='line'>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">:</span> <span class="n">executions</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">fibonacci</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">intervals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">printIteration</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">intervals</span><span class="o">.</span><span class="na">last</span><span class="o">());</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="n">printAverage</span><span class="o">(</span><span class="n">intervals</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">sterlingBenchmark</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">Interval</span><span class="o">&gt;</span> <span class="n">intervals</span><span class="o">;</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">iterations</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="n">currentTimeMillis</span><span class="o">();</span>
-</span><span class='line'>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">:</span> <span class="n">executions</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">sterlingFibonacci</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">input</span><span class="o">).</span><span class="na">evaluate</span><span class="o">();</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">intervals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">printIteration</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">intervals</span><span class="o">.</span><span class="na">last</span><span class="o">());</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="n">printAverage</span><span class="o">(</span><span class="n">intervals</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>The benchmark results</h2>
+<time datetime="2013-06-16T21:12:00-07:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time></div>
+	
 
-<figure class='code'><figcaption><span>The Results</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Java Benchmark
-</span><span class='line'>--------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 4 milliseconds
-</span><span class='line'>--------------
-</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 4 milliseconds
-</span><span class='line'>
-</span><span class='line'>Sterling Benchmark
-</span><span class='line'>------------------
-</span><span class='line'>Iteration 0: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 8,152 milliseconds
-</span><span class='line'>Iteration 1: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,834 milliseconds
-</span><span class='line'>Iteration 2: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,873 milliseconds
-</span><span class='line'>Iteration 3: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,873 milliseconds
-</span><span class='line'>Iteration 4: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,910 milliseconds
-</span><span class='line'>Iteration 5: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,973 milliseconds
-</span><span class='line'>Iteration 6: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,927 milliseconds
-</span><span class='line'>Iteration 7: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,793 milliseconds
-</span><span class='line'>Iteration 8: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,912 milliseconds
-</span><span class='line'>Iteration 9: <span class="nv">executions</span> <span class="o">=</span> 100; <span class="nv">elapsed</span> <span class="o">=</span> 7,986 milliseconds
-</span><span class='line'>------------------
-</span><span class='line'>Average <span class="k">for </span>10 iterations X 100 executions: 7,923 milliseconds
-</span></code></pre></td></tr></table></div></figure>
+<div class="tags">
 
-
-<h3>Immediate conclusions:</h3>
-
-<p>Sterling is <em><strong>REALLY</strong></em> slow!</p>
-
-<p>Sterling executes directly against an abstract syntax tree representing operations and data. This tree is generally
-immutable, so the execution is performed by effectively rewriting the tree to reduce each node into an “atomic”
-expression, such as an integer constant or lambda (which can’t be further reduced without an applied argument).</p>
-
-<p>References to functions are inserted into the tree by copying the function’s tree into the reference’s node. The
-function is then evaluated with a given argument to reduce the tree to a single node. These copy-and-reduce operations
-are very costly and are a likely reason for Sterling’s poor performance.</p>
-
-<h2>@TODO</h2>
-
-<h3>Memoization</h3>
-
-<p>Copying and reducing a function tree for an argument is expensive. These operations should not need to be performed
-more than once for any function and argument pair.</p>
-
-<h3>Bytecode perhaps?</h3>
-
-<p>Given the shear amount of recursion and method calls being performed to execute Sterling, does it makes sense to
-compile the syntax tree into a bytecode that can be executed in a loop?</p>
-
-<h2>Links</h2>
-
-<ul>
-<li><a href="https://github.com/lmcgrath/sterling">Sterling GitHub Project</a></li>
-<li><a href="https://github.com/lmcgrath/sterling/blob/post_20130616_sterling_benchmark/src/test/java/sterling/math/FibonacciBenchmarkTest.java">Benchmark Code</a></li>
-<li><a href="https://github.com/lmcgrath/sterling/blob/post_20130616_sterling_benchmark/src/main/resources/sterling/math/_base.ag">Sterling Fibonacci Implementation</a></li>
-</ul>
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
+</div>
+</article>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a></h1>
+
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-28T13:04:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The App-Config-App now lets you promote changes between environments!</p>
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">
+		
+			Promoting Changes With App-Config-App</a>
+	</h2>
+	<div class="entry-content">
+		<p>The App-Config-App now lets you promote changes between environments!</p>
 
 <h2>How does it work?</h2>
 
@@ -1398,932 +502,51 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
 
-<h2>Promoting changes with App-Config-App</h2>
 
-<p>The App-Config-App <code>setup_example.rb</code> creates four branches with the following mappings:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Mapping        Source    Destination
-</span><span class='line'>------------------------------------
-</span><span class='line'>dev-qa         dev       qa
-</span><span class='line'>qa-staging     qa        staging
-</span><span class='line'>staging-prod   staging   prod</span></code></pre></td></tr></table></div></figure>
+		
+		<a href="/blog/2012/11/28/promoting-changes-with-app-config-app/" class="more-link">Read on &rarr;</a>
+	</div>
 
 
-<p>If you login to App-Config-App and go to &ldquo;Promote Changes,&rdquo; you get an interface showing these relationships:</p>
-
-<p><img src="/images/app-config3/promote_changes.png"></p>
-
-<p>Changes between environments can be promoted in either direction along a mapping configuration. The receiving environment accepts all changes (developers would know this as an &lsquo;accept-theirs&rsquo; resolution) and you are then allowed to review the changes by clicking on the &ldquo;Pending Changes&rdquo; link.</p>
-
-<p>For example, I&rsquo;ve promoted changes from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
-
-<p><img src="/images/app-config3/promote_result.png"></p>
-
-<p>I can then review the changes by clicking on &ldquo;Pending Changes&rdquo;:</p>
-
-<p><img src="/images/app-config3/pending_changes.png"></p>
-
-<p>Changes may be edited or reverted before committing them.</p>
-
-<h2>Promoting changes using P4V</h2>
-
-<p><a href="http://www.perforce.com/product/components/perforce_visual_client">P4V</a> is the Perforce visual client. Using P4V, you have much greater control over how changes get promoted, but it requires a little more work.</p>
-
-<p>I&rsquo;ve connected P4V to my App-Config-App user workspace to perform the same promotion from &ldquo;qa&rdquo; to &ldquo;dev&rdquo;:</p>
-
-<p><img src="/images/app-config3/p4v.png"></p>
-
-<p>Select the &ldquo;qa&rdquo; folder, then from the menu bar go to &ldquo;Actions&rdquo; > &ldquo;Merge/Integrate&rdquo;. This will bring up a wizard for performing the integration.</p>
-
-<p>Select the following:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Merge method: "Use branch mapping"
-</span><span class='line'>Branch mapping: "dev-qa"
-</span><span class='line'>Automatically resolve files after merging: checked
-</span><span class='line'>Resolve option: "Accept source"</span></code></pre></td></tr></table></div></figure>
+<div class="meta">
+	<div class="date">
 
 
-<p>And ensure the direction of integration is &ldquo;Target&rdquo; &lt; &ldquo;Source&rdquo;:</p>
 
-<p><img src="/images/app-config3/p4v_integrate.png"></p>
 
-<p>Finally, click &ldquo;Merge&rdquo;. If you expand the &ldquo;dev&rdquo; folder, you can see the where the changes are:</p>
 
-<p><img src="/images/app-config3/p4v_integrate_result.png"></p>
 
-<p>You are now free to modify the files further before finally committing the changes.</p>
 
-<h3>How it compares</h3>
 
-<p>You get greater options when using P4V to promote changes, but producing the same result as App-Config-App&rsquo;s default behavior is fairly involved. If you aren&rsquo;t paying attention or don&rsquo;t know what you&rsquo;re doing, you might break something :(</p>
 
-<h2>@TODO</h2>
 
-<h3>More options for resolving changes</h3>
+<time datetime="2012-11-28T13:04:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time></div>
+	
 
-<p>When you promote changes in App-Config-App, the source changes will overwrite the destination. This behavior reduces the chance for a conflict to happen, but it means you really have to pay attention to what&rsquo;s changed in the destination config and possibly edit the config further before finally committing it.</p>
+<div class="tags">
 
-<h3>Conflict resolution</h3>
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
 
-<p>If a conflict occurs after promoting changes, a screen should be available for viewing and editing the conflicting changes.</p>
-
-<h3>Better error reporting if promotion fails due to permissions</h3>
-
-<p>Users with read-only access to multiple environments will still be able to promote changes between them. The promotion doesn&rsquo;t actually occur (the files remain unchanged) but the application doesn&rsquo;t report any errors when this happens.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/20/app-config-app-in-action/">App-Config-App in Action</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-20T07:00:00-08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&rsquo;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&rsquo;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div>
-
-
-<h2>Making it work for yourself</h2>
-
-<p>I&rsquo;ve updated the <a href="https://github.com/lmcgrath/app-config-app">App-Config-App</a> with additional configuration to support choosing which instrument the Server-Side Piano will play. A clean install of App-Config-App using <code>setup_examples.rb</code> will provide everything needed to run the Server-Side Piano.</p>
-
-<p>The application&rsquo;s configuration URL and credentials are located in <code>web.xml</code>. Additional details may be found in the application&rsquo;s <a href="https://github.com/lmcgrath/angular-java-server-midi/blob/master/README.markdown">README</a>.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
+</article>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/16/scm-backed-application-configuration-with-perforce/">SCM-Backed Application Configuration With Perforce</a></h1>
+
+
+<nav id="pagenavi">
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-16T07:00:00-08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
-        
-      </p>
+        <a href="/blog/page/2/" class="next">Next</a>
     
-  </header>
+</nav>
 
-
-  <div class="entry-content"><p>Continuing from my <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">last post</a>, I&rsquo;ve <a href="https://github.com/lmcgrath/App-Config-App/">forked</a> Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve decided not to continue using Perforce Chronicle as it is primarily intended for content management.</p>
-
-<p>With this version, App-Config-App is written in Ruby, mostly using <a href="http://www.sinatrarb.com/">Sinatra</a>, a lightweight web application framework. I&rsquo;m still using <a href="http://angularjs.org/">AngularJS</a>, but I&rsquo;ve also added a few other things:</p>
-
-<ul>
-<li>A .rvmrc file, so you automagically switch to Ruby 1.9.3</li>
-<li>A Gemfile, so you don&rsquo;t have to install everything individually :)</li>
-<li><a href="https://github.com/sinatra/sinatra-contrib">Sinatra-Contrib</a> for view templating support</li>
-<li><a href="http://nakajima.github.com/rack-flash/">Rack Flash</a> for flash messages</li>
-<li><a href="http://highline.rubyforge.org/">HighLine</a> for masking passwords</li>
-<li><a href="http://rubygems.org/gems/json">json</a> to manipulate JSON in native Ruby</li>
-</ul>
-
-
-<h2>Getting it to work.</h2>
-
-<p>App-Config-App requires a couple things to work:</p>
-
-<ul>
-<li>Ruby 1.9.3 and Bundler</li>
-<li>p4 &ndash; the Perforce command line client</li>
-<li>p4d &ndash; the Perforce server</li>
-</ul>
-
-
-<p>All installation and example setup details may be found in <a href="https://github.com/lmcgrath/app-config-app/blob/master/README.md">App-Config-App&rsquo;s README</a>.</p>
-
-<h2>Using App-Config-App</h2>
-
-<p>When you login, you should see this screen:</p>
-
-<p><img src="/images/app-config2/start.png"></p>
-
-<p>You&rsquo;ll notice I made the extra effort to add colors and drop shadows :D The application works from the project root in Perforce, so the files in each branch are viewable here. Clicking on &ldquo;Dev&rdquo; > &ldquo;aardvark_configuration.html&rdquo; will bring up a form for editing <code>aardvark_configuration.json</code> as in the previous version:</p>
-
-<p><img src="/images/app-config2/aardvark_configuration.png"></p>
-
-<p>Changes to the form data are automatically saved. After making a view edits, you can click &ldquo;View Diff&rdquo; to get the diffs or &ldquo;Revert&rdquo; your changes. Go ahead and change the email address and fiddle around with the banned nicks, then go click &ldquo;Pending Changes&rdquo;:</p>
-
-<p><img src="/images/app-config2/changes.png"></p>
-
-<p>This screen shows all files that were changed and their diffs as well. You can &ldquo;Revert&rdquo; each file individually, and if you want to commit all changes, then enter a commit message and click &ldquo;Commit Changes&rdquo;. If you commit the changes and go back to &ldquo;Dev&rdquo; > &ldquo;aardvark_configuration.html&rdquo;, you&rsquo;ll see the new values in the form:</p>
-
-<p><img src="/images/app-config2/aardvark_configuration-changed.png"></p>
-
-<h2>Security and Permissions</h2>
-
-<p>Permissions and security are managed through Perforce. For users to be able to login, they must have a user and client configured in Perforce. Those users must also have permissions configured in order to view or modify files.</p>
-
-<p>The <code>setup_example.rb</code> script creates three test users to demonstrate branch permissions:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Username        Password   Write     Read
-</span><span class='line'>-------------------------------------------------
-</span><span class='line'>sally-runtime   bananas    prod      staging, dev
-</span><span class='line'>jimmy-qa        apples     staging   dev
-</span><span class='line'>joe-developer   oranges    dev    </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Logging in as any of these users will hide branches that don&rsquo;t have at least read-level access, and branches that don&rsquo;t have write-level access won&rsquo;t allow changes.</p>
-
-<p><strong>All users created by <code>setup_example.rb</code> are intended only as examples.</strong> In the real world, all application users should be setup with real logins and real permissions.</p>
-
-<p>It is this support for users and per-branch permissions that I am using Perforce as the SCM backend rather than Git.</p>
-
-<h3>Application Users</h3>
-
-<p>The <code>setup_example.rb</code> script also sets up three application users to demonstrate how an application would consume configuration:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Username   Password   Read
-</span><span class='line'>-----------------------------
-</span><span class='line'>dev-app    s3cret1    dev
-</span><span class='line'>qa-app     s3cret2    staging
-</span><span class='line'>prod-app   s3cret3    prod</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In theory, an application would periodically poll <a href="http://localhost:9292/dev/aardvark_configuration.md5">aardvark_configuration.md5</a> until the hash value changed, then load <a href="http://localhost:9292/dev/aardvark_configuration.json">aardvark_configuration.json</a> and reconfigure itself.</p>
-
-<p>Application user accounts are configured in Perforce like any other user. I highly recommend that application users be given ready-only access to individual files rather than entire branches.</p>
-
-<h2>Divergence</h2>
-
-<p>Right now, App-Config-App offers no UI tools for managing divergence and merging. Merges must be performed outside App-Config-App, and the specific safety nets to prevent nefarious change vulnerabilities are dependent on your branch specs and permissions configuration.</p>
-
-<p>There are also are no tools to manage conflicts of existing edits with incoming changes from another user. If a Perforce sync fails due to a conflict, you are best to revert all changes and enter them again.</p>
-
-<h2>@TODO</h2>
-
-<h3>A better model for autosave</h3>
-
-<p>Autosave in AngularJS isn&rsquo;t very good. AngularJS doesn&rsquo;t integrate with DOM events the way idiomatic JavaScript does, or provide a reasonable abstraction the way Dojo Toolkit or JQuery do. Right now, autosave in App-Config-App triggers with every key press in the config forms, and pummels the back-end server with ajax posts.</p>
-
-<p>I&rsquo;ve also noticed that the autosave triggers even when a value is invalid. The first time an email address, for example, becomes invalid, AngularJS will post back the JSON, but without the invalid email address field&mdash;the invalid field is entirely left out of the JSON structure. After that, AngularJS will stop autosaving until the value is valid. There are also no measures in place to prevent a user from leaving an invalid value and saving an incomplete JSON file.</p>
-
-<h3>A better model for validation</h3>
-
-<p>AngularJS does not offer a good validation API. The validation API is quite opaque and I haven&rsquo;t found any real examples using it. The built-in form validation is inadequate. There are few ng-* HTML attributes exposing more than basic configuration parameters, and no hooks offered as extension points.</p>
-
-<p>For example, I&rsquo;m using <a href="http://docs.angularjs.org/api/ng.directive:input.text">regular expressions</a> for date validation in App-Config-App. There isn&rsquo;t a hook to provide custom validation checks, and regular expressions don&rsquo;t perform sanity checks. Values such as &ldquo;00/00/0000&rdquo; will pass validation.</p>
-
-<h3>More example clients than the Java one needed</h3>
-
-<p>The <a href="https://github.com/lmcgrath/app-config-java">App-Config-Java</a> client is enough to show the basic idea behind caching and reloading configuration from App-Config-App. I would like to create a few more examples in a couple different platforms, possibly also showcasing &ldquo;<a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">hot reconfiguration</a>&rdquo; for feature toggles.</p>
-
-<h3>Someone should port this to Subversion or TFS</h3>
-
-<p>App-Config-App should be usable by the largest possible audience. For instance, if you&rsquo;re using Subversion, then you should be able to take advantage of the existing infrastructure.</p>
-
-<p>The reason I point out Subversion and TFS is largely due to support of per-branch permissions.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">Using Perforce Chronicle for Application Configuration</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-07T13:54:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Following Paul Hammant&rsquo;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
-
-<h2>Perforce and permissions for branches</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Perforce">Perforce</a> is an enterprise-class source control management (SCM) system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it&rsquo;s generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.</p>
-
-<h2>Perforce CMS as an application server</h2>
-
-<p><a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a> is a content management system (CMS) using Perforce as the back-end store for configuration and content. The app-config application is built on top of Chronicle because Perforce does not offer a web view into the depot the way Subversion can through Apache. Branching and maintaining divergence between environments can be managed through the user interface, and Chronicle provides user authentication and management, so access between different configuration files can be restricted appropriately. The INSTALL.txt file that is distributed with Chronicle helps with an easy install, mine being set up to run locally from <code>http://localhost</code>.</p>
-
-<p>There is a key issue in using Chronicle, however. The system is designed for the management of <em>content</em> and not necessarily arbitrary <em>files</em>. In order to make the app-config application work, I had to add a custom content type and write a module. Configuration and HTML are both plain-text content, so I created a &ldquo;Plain Text&rdquo; content type with the fields <em>title</em> and <em>content</em>:</p>
-
-<ol>
-<li>Go to &ldquo;Manage&rdquo; > &ldquo;Content Types&rdquo;</li>
-<li>Click &ldquo;Add Content Type&rdquo;</li>
-<li>Enter the following information:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Id:       plaintext
-</span><span class='line'>Label:    Plain Text
-</span><span class='line'>Group:    Assets
-</span><span class='line'>Elements:
-</span><span class='line'>
-</span><span class='line'>[title]
-</span><span class='line'>type = text
-</span><span class='line'>options.label = Title
-</span><span class='line'>options.required = true
-</span><span class='line'>display.tagName = h1
-</span><span class='line'>display.filters.0 = HtmlSpecialChars
-</span><span class='line'>
-</span><span class='line'>[content]
-</span><span class='line'>type = textarea
-</span><span class='line'>options.label = Content
-</span><span class='line'>options.required = true
-</span><span class='line'>display.tagName = pre
-</span><span class='line'>display.filters.0 = HtmlSpecialChars</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Click &ldquo;Save&rdquo;.</p>
-
-<h2>The Config App</h2>
-
-<p>I&rsquo;ve borrowed heavily from Paul&rsquo;s <a href="https://github.com/paul-hammant/app-config-app/blob/master/index.html">app-config HTML page</a>, which uses <a href="http://angularjs.org/">AngularJS</a> to manage the UI and interaction with the server. Where Paul&rsquo;s app-config app used the <a href="http://kmkeen.com/jshon/">jshon</a> command to encode and decode JSON, Zend Framework has a utility class for encoding, decoding, and pretty-printing JSON, and Chronicle also ships with the <a href="https://github.com/paulgb/simplediff/">simplediff</a> utility for performing diffs with PHP.</p>
-
-<p>The source JSON configuration is the same, albeit sorted:</p>
-
-<figure class='code'><figcaption><span> (stack_configuration.json)</span> <a href='/downloads/code/app-config/stack_configuration.json'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'> <span class="nt">&quot;bannedNicks&quot;</span><span class="p">:[</span>
-</span><span class='line'>  <span class="s2">&quot;derek&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;dino&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;ffff&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;jjjj&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;werwer&quot;</span>
-</span><span class='line'> <span class="p">],</span>
-</span><span class='line'> <span class="nt">&quot;defaultErrorReciever&quot;</span><span class="p">:</span><span class="s2">&quot;piglet@thoughtworks.com&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;lighton&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;loadMaxPercent&quot;</span><span class="p">:</span><span class="s2">&quot;88&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;nextShutdownDate&quot;</span><span class="p">:</span><span class="s2">&quot;8\/9\/2012&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The index.html page has been modified from the original to support only the basic <em>commit</em> and <em>diffs</em> functionality:</p>
-
-<figure class='code'><figcaption><span> (index.html)</span> <a href='/downloads/code/app-config/index.html'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span>
-</span><span class='line'><span class="cp">        &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;title&gt;</span>Configuration application (alpha)<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">ng:autobind</span> <span class="na">src=</span><span class="s">&quot;http://code.angularjs.org/0.9.19/angular-0.9.19.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">ins</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#00CC00</span><span class="p">;</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">del</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#CC0000</span><span class="p">;</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body</span> <span class="na">ng:controller=</span><span class="s">&quot;AppCfg&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="nx">AppCfg</span><span class="p">(</span><span class="nx">$resource</span><span class="p">,</span> <span class="nx">$xhr</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">newNickname</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">svrMessage</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">cfg</span> <span class="o">=</span> <span class="nx">$resource</span><span class="p">(</span><span class="s2">&quot;/appconfig/stack_configuration.json&quot;</span><span class="p">).</span><span class="nx">get</span><span class="p">({});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">save</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">$save</span><span class="p">({</span><span class="nx">message</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">message</span><span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Config saved to server&quot;</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;ERROR on save&quot;</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">newNick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">bannedNicks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">newNickname</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">newNickname</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">diffs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">$xhr</span><span class="p">(</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="s2">&quot;/appconfig/diffs/stack_configuration.json&quot;</span><span class="p">,</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">toJson</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">svrMessage</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">self</span><span class="p">.</span><span class="nx">svrMessage</span> <span class="o">=</span> <span class="nx">svrMessage</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">deleteNick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">nick</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">oldBannedNicks</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">bannedNicks</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">bannedNicks</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'>            <span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">oldBannedNicks</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nx">nick</span> <span class="o">!=</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nx">self</span><span class="p">.</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">bannedNicks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">AppCfg</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;$resource&quot;</span><span class="p">,</span> <span class="s2">&quot;$xhr&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  Light is on:  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;cfg.lighton&quot;</span><span class="nt">/&gt;</span> <span class="nt">&lt;br/&gt;</span>
-</span><span class='line'>  Default Error Reciever (email): <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;cfg.defaultErrorReciever&quot;</span> <span class="na">ng:validate=</span><span class="s">&quot;email&quot;</span><span class="nt">/&gt;</span> <span class="nt">&lt;br/&gt;</span>
-</span><span class='line'>  Max Load Percentage: <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;cfg.loadMaxPercent&quot;</span> <span class="na">ng:validate=</span><span class="s">&quot;number:0:100&quot;</span><span class="nt">/&gt;</span> <span class="nt">&lt;br/&gt;</span>
-</span><span class='line'>  Next Shutdown Date: <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;cfg.nextShutdownDate&quot;</span> <span class="na">ng:validate=</span><span class="s">&quot;date&quot;</span><span class="nt">/&gt;</span> <span class="nt">&lt;br/&gt;</span>
-</span><span class='line'>  Banned nicks:
-</span><span class='line'>      <span class="nt">&lt;ol&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">ng:repeat=</span><span class="s">&quot;nick in cfg.bannedNicks&quot;</span><span class="nt">&gt;&lt;span&gt;</span>{{nick}} <span class="ni">&amp;nbsp;&amp;nbsp;</span><span class="nt">&lt;a</span> <span class="na">ng:click=</span><span class="s">&quot;deleteNick(nick)&quot;</span><span class="nt">&gt;</span>[X]<span class="nt">&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ol&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;form</span> <span class="na">ng:submit=</span><span class="s">&quot;newNick()&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;newNickname&quot;</span> <span class="na">size=</span><span class="s">&quot;20&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;&amp;lt;-- Add Nick&quot;</span><span class="nt">/&gt;&lt;br/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/form&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;hr/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">ng:click=</span><span class="s">&quot;diffs()&quot;</span><span class="nt">&gt;</span>View Diffs<span class="nt">&lt;/button&gt;&lt;br/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">ng:disabled=</span><span class="s">&quot;{{!message}}&quot;</span> <span class="na">ng:click=</span><span class="s">&quot;save()&quot;</span><span class="nt">&gt;</span>Commit Changes<span class="nt">&lt;/button&gt;</span> Commit Message: <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;message&quot;</span><span class="nt">&gt;&lt;/input&gt;&lt;br/&gt;</span>
-</span><span class='line'>  Last Server operation: <span class="nt">&lt;br/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng:bind=</span><span class="s">&quot;svrMessage | html:&#39;unsafe&#39;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Both of these assets were added by performing:</p>
-
-<ol>
-<li>Click &ldquo;Add&rdquo; from the top navbar</li>
-<li>Click &ldquo;Add Content&rdquo;</li>
-<li>Select &ldquo;Assets&rdquo; > &ldquo;Plain Text&rdquo;</li>
-<li>For &ldquo;Title&rdquo;, enter &ldquo;index.html&rdquo; or &ldquo;stack_configuration.json&rdquo;</li>
-<li>Paste in the appropriate &ldquo;Content&rdquo;</li>
-<li>Click &ldquo;URL&rdquo;, select &ldquo;Custom&rdquo;, and enter the same value as &ldquo;Title&rdquo; (otherwise, Chronicle will convert underscores to dashes, so be careful!)</li>
-<li>Click &ldquo;Save&rdquo;, enter a commit message, then click the next &ldquo;Save&rdquo;</li>
-<li>Both assets should be viewable as mangled Chronicle content entries from <code>http://localhost/index.html</code> and <code>http://localhost/stack_configuration.json</code>. <em>You normally will not use these URLs</em>.</li>
-</ol>
-
-
-<p>At this point, neither asset is actually usable. Most content is heavily decorated with additional HTML and then displayed within a layout template, but I want both the index.html and stack_configuration.json assets to be viewable as standalone files and provide a REST interface for AngularJS to work against.</p>
-
-<h2>Come back PHP! All is forgiven</h2>
-
-<p>Chronicle is largely built using <a href="http://framework.zend.com/">Zend Framework</a> and makes adding extra modules to the system pretty easy. My module needs to be able to display plaintext assets, update their content using an HTTP POST, and provide diffs between the last commit and the current content.</p>
-
-<p>To create the module, the following paths need to be added:</p>
-
-<ul>
-<li><code>INSTALL/application/appconfig</code></li>
-<li><code>INSTALL/application/appconfig/controllers</code></li>
-<li><code>INSTALL/application/appconfig/views/scripts/index</code></li>
-</ul>
-
-
-<p>Declare the module with <code>INSTALL/application/appconfig/module.ini</code>:</p>
-
-<figure class='code'><figcaption><span> (module.ini)</span> <a href='/downloads/code/app-config/module/module.ini'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">version</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
-</span><span class='line'><span class="n">description</span> <span class="o">=</span> <span class="no">Application</span> <span class="n">config</span> <span class="n">proof</span> <span class="n">of</span> <span class="n">concept</span>
-</span><span class='line'><span class="n">icon</span> <span class="o">=</span> <span class="n">images</span><span class="o">/</span><span class="n">icon</span><span class="o">.</span><span class="n">png</span>
-</span><span class='line'><span class="n">tags</span> <span class="o">=</span> <span class="n">config</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span><span class="n">maintainer</span><span class="o">]</span>
-</span><span class='line'><span class="nb">name</span> <span class="o">=</span> <span class="no">Perforce</span> <span class="no">Software</span>
-</span><span class='line'><span class="n">email</span> <span class="o">=</span> <span class="n">support</span><span class="vi">@perforce</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">perforce</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span><span class="n">routes</span><span class="o">]</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="no">Zend_Controller_Router_Route_Regex</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">route</span> <span class="o">=</span> <span class="s1">&#39;appconfig/(.+)&#39;</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">appconfig</span><span class="o">/</span><span class="sx">%s</span>
-</span><span class='line'><span class="sx">appconfig.defaults.module = appconfig</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">index</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">index</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="no">Zend_Controller_Router_Route_Regex</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">route</span> <span class="o">=</span> <span class="s1">&#39;appconfig/([^/]+)/(.+)&#39;</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">appconfig</span><span class="o">/%</span><span class="n">s</span><span class="o">/</span><span class="sx">%s</span>
-</span><span class='line'><span class="sx">appconfig-operation.defaults.module = appconfig</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">index</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">index</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'><span class="n">appconfig</span><span class="o">-</span><span class="n">operation</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add a view script for displaying plaintext assets, <code>INSTALL/application/appconfig/views/scripts/index/index.phtml</code>:</p>
-
-<figure class='code'><figcaption><span> (index.phtml)</span> <a href='/downloads/code/app-config/module/views/scripts/index/index.phtml'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?</span><span class="o">=</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add a view script for displaying diffs, <code>INSTALL/application/appconfig/views/scripts/index/diffs.phtml</code>:</p>
-
-<figure class='code'><figcaption><span> (diffs.phtml)</span> <a href='/downloads/code/app-config/module/views/scripts/index/diffs.phtml'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&lt;pre&gt;</span><span class="cp">&lt;?</span><span class="o">=</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">diffs</span> <span class="cp">?&gt;</span><span class="x">&lt;/pre&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And a controller at <code>INSTALL/application/appconfig/controllers/IndexController.phtml</code>:</p>
-
-<figure class='code'><figcaption><span> (IndexController.php)</span> <a href='/downloads/code/app-config/module/controllers/IndexController.php'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;LIBRARY_PATH&#39;</span><span class="p">)</span> <span class="k">or</span> <span class="nb">define</span><span class="p">(</span><span class="s1">&#39;LIBRARY_PATH&#39;</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span><span class="nx">__DIR__</span><span class="p">));</span>
-</span><span class='line'><span class="k">require_once</span> <span class="nx">LIBRARY_PATH</span> <span class="o">.</span> <span class="s1">&#39;/simplediff/simplediff.php&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Appconfig_IndexController</span> <span class="k">extends</span> <span class="nx">Zend_Controller_Action</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">private</span> <span class="nv">$entry</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span> <span class="nv">$mimeTypes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;.html&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/html&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;.json&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">preDispatch</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
-</span><span class='line'>        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setParams</span><span class="p">(</span><span class="nx">Url_Model_Url</span><span class="o">::</span><span class="na">fetch</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;resource&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">());</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span> <span class="o">=</span> <span class="nx">P4Cms_Content</span><span class="o">::</span><span class="na">fetch</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;includeDeleted&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMimeType</span><span class="p">(),</span> <span class="k">true</span><span class="p">);</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">entry</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getJsonPost</span><span class="p">());</span>
-</span><span class='line'>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">));</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span> <span class="k">function</span> <span class="nf">getMimeType</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$url</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nv">$suffix</span> <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$url</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">],</span> <span class="nb">strrpos</span><span class="p">(</span><span class="nv">$url</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$suffix</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mimeTypes</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mimeTypes</span><span class="p">[</span><span class="nv">$suffix</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">diffsAction</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">diffs</span> <span class="o">=</span> <span class="nx">htmlDiff</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entry</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getJsonPost</span><span class="p">());</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">postDispatch</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getHelper</span><span class="p">(</span><span class="s1">&#39;layout&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">disableLayout</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span> <span class="k">function</span> <span class="nf">getJsonPost</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prettyPrint</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">&#39;php://input&#39;</span><span class="p">));</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s1">&#39;Can\&#39;t get JSON without POST&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span> <span class="k">function</span> <span class="nf">prettyPrint</span><span class="p">(</span><span class="nv">$json</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$array</span> <span class="o">=</span> <span class="nx">Zend_Json</span><span class="o">::</span><span class="na">decode</span><span class="p">(</span><span class="nv">$json</span><span class="p">);</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sort</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="nx">Zend_Json</span><span class="o">::</span><span class="na">prettyPrint</span><span class="p">(</span><span class="nx">Zend_Json</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$array</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;indent&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39; &#39;</span><span class="p">));</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span> <span class="k">function</span> <span class="nf">sort</span><span class="p">(</span><span class="k">array</span> <span class="o">&amp;</span><span class="nv">$array</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nb">array_keys</span><span class="p">(</span><span class="nv">$array</span><span class="p">),</span> <span class="s1">&#39;is_string&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nb">ksort</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">foreach</span><span class="p">(</span><span class="nv">$array</span> <span class="k">as</span> <span class="o">&amp;</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sort</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>AngularJS</h2>
-
-<p>After all files are in place, Chronicle needs to be notified that the new module exists by going to &ldquo;Manage&rdquo; > &ldquo;Modules&rdquo;, where the &ldquo;Appconfig&rdquo; module will be listed if all goes well :) Both assets will now be viewable from <code>http://localhost/appconfig/index.html</code> and <code>http://localhost/appconfig/stack_configuration.json</code>. AngularJS&#8217; <a href="http://code.angularjs.org/0.9.19/docs-0.9.19/#!/api/angular.service.$resource">$resource service</a> is used in index.html to fetch stack_configuration.json and post changes back.</p>
-
-<p>From <code>http://localhost/appconfig/index.html</code>, the data from stack_configuration.json is loaded into the form:</p>
-
-<p><img src="/images/app-config/start.png"></p>
-
-<p>Edits to stack_configuration.json can be made using the form, and the diffs viewed by clicking on &ldquo;View Diffs&rdquo;:</p>
-
-<p><img src="/images/app-config/diffs.png"></p>
-
-<p>The changes can be saved by entering a commit message and clicking &ldquo;Commit Changes&rdquo;. After which, clicking &ldquo;View Diffs&rdquo; will show no changes:</p>
-
-<p><img src="/images/app-config/diffs-after-commit.png"></p>
-
-<p>To show that edits have in fact been made to stack_configuration.json, go to <code>http://localhost/stack_configuration.json</code>, select &ldquo;History&rdquo; and click on &ldquo;History List&rdquo;:</p>
-
-<p><img src="/images/app-config/history.png"></p>
-
-<p>Chronicle also provides an interface for viewing diffs between revisions:</p>
-
-<p><img src="/images/app-config/history-diffs.png"></p>
-
-<h2>Disk Usage</h2>
-
-<p>Something to remember in using Chronicle is that each resource requested from Perforce is written to disk before being served to the client. This means that for each request to index.html, Chronicle allocates a new Perforce workspace, checks out the associated file, serves it to the client, then deletes the file and the workspace at the end of the request. This allocate/checkout/serve/delete cycle executes for stack_configuration.json and every other resource in the system.</p>
-
-<h2>@TODO</h2>
-
-<h3>Security!</h3>
-
-<p>There&rsquo;s one major flaw with the appconfig module: it performs zero access checks. By default, Chronicle can be configured to disallow anonymous access by going to &ldquo;Manage&rdquo; > &ldquo;Permissions&rdquo; and deselecting all permissions for &ldquo;anonymous&rdquo; and &ldquo;members&rdquo;. Logging out and attempting to access either <code>http://localhost/appconfig/stack_configuration.json</code> or <code>http://localhost/appconfig/index.html</code> will now give an error page and prompt you to log in. Clicking &ldquo;New User&rdquo; will also give an error, as anonymous users don&rsquo;t have the permission to create users.</p>
-
-<p>Access rights on content are checked by the content module, but are also hard-coded in the associated controllers as IF-statements. A better solution will be required for proper access management in the appconfig module.</p>
-
-<h3>Better integration</h3>
-
-<p>Chronicle&rsquo;s content module provides JSON integration for most of its actions, but these mostly exist to support the <a href="http://dojotoolkit.org/">Dojo Toolkit-enabled</a> front-end. Integrating with these actions over JSON requires detailed knowledge of Chronicle&rsquo;s form structures.</p>
-
-<p>Chronicle has some nice interfaces for viewing diffs. If I could call those up from index.html I would be major happy :)</p>
-
-<h3>Automatic creation of plaintext content type</h3>
-
-<p>Before the appconfig module is usable, the plaintext content type has to be created. I would like to automate creation of the plaintext content type when the module is first enabled.</p>
-
-<h3>Making applications aware of updates to configuration</h3>
-
-<p>When stack_configuration.json is updated, there&rsquo;s no way to notify applications to the change, and no interface provided so they may poll for changes. I&rsquo;m not entirely sure at this point what an appropriate solution would look like. In order to complete the concept, I&rsquo;d first have to create a client app dependent on that configuration.</p>
-
-<h3>Better interfaces for manipulating plaintext assets</h3>
-
-<p>I had to fiddle with index.html quite a bit. This basically involved editing a local copy of index.html, then pasting the entire contents into the associated form in Chronicle. I have not tried checking out index.html directly from Perforce, and I imagine that any edits would need to be made within Chronicle. Github offers an in-browser raw editor, and something like that would be real handy in Chronicle.</p>
-
-<h3>Handling conflicts</h3>
-
-<p>There is no logic in the appconfig module to catch conflicts if there are two users editing the same file. Conflicts are detectible because an exception is thrown if there is a conflict, but I&rsquo;m not sure what the workflow for resolution is in Chronicle terms, or how to integrate with it. Who wins?</p>
-
-<h3>Working with branches</h3>
-
-<p>I did not take the time to see how Chronicle manages branches. I will need to verify that Chronicle and the appconfig module can work with development, staging, and production branches, with maintained divergence. For example, we&rsquo;re still trying to figure out how to attach visual clients like P4V to the repository and work independently of Chronicle.</p>
-
-<h2>Kudos</h2>
-
-<p>I would like to thank the guys at Perforce for their assistance and answering all my questions as I worked with Chronicle, especially Randy Defauw.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
+		<aside class="sidebar">
+			
+				<section>
+  <h2>Recent Posts</h2>
   <ul id="recent_posts">
     
       <li class="post">
@@ -2349,42 +572,49 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
   </ul>
 </section>
 
-
-
-
-
+<section>
+  <h2>GitHub Repos</h2>
+  <ul id="gh_repos">
+    <li class="loading">Loading repositories...</li>
+  </ul>
   
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Logan McGrath -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
+  <p class="github-username"><a href="https://github.com/lmcgrath">@lmcgrath</a> on GitHub</p>
   
-
-
-
-
-
-
-
   <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'lmcgrath',
+            count: 5,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
   </script>
+  <script src="/javascripts/github.js" type="text/javascript"></script>
+</section>
 
 
 
 
+
+			
+		</aside>
+		<div class="clearfix"></div>
+	</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+ Logan McGrath 
+<br>
+Powered by Octopress.
+</footer>
+	
 
 </body>
 </html>

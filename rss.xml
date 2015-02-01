@@ -15,6 +15,9 @@ and semantics, is coming close to a point where I can start developing the main
 libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
 having with <code>let</code> declarations.</p>
 
+<!--more-->
+
+
 <p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
 of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
 <a href="http://learnyouahaskell.com/syntax-in-functions#let-it-be">Learn You A Haskell</a>.</em>)</p>
@@ -248,7 +251,7 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 
 <hr />
 
-<h4>Links</h4>
+<h3>Links</h3>
 
 <ul>
 <li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
@@ -257,9 +260,7 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 </ul>
 
 
-<hr />
-
-<h4>Credits</h4>
+<h3>Credits</h3>
 
 <p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
 who took time out of his busy day to review my multiple drafts.</p>
@@ -274,6 +275,9 @@ who took time out of his busy day to review my multiple drafts.</p>
       <description><![CDATA[<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
 Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
 JavaScript. Last week I decided to shelve Sterling.</p>
+
+<!--more-->
+
 
 <h2>How Sterling Worked</h2>
 
@@ -622,8 +626,6 @@ types). Want to do something else if you receive an <code>Asteroid</code> object
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
-
 <p>This is fragile, though, and the code is complex. What&rsquo;s worse, is there&rsquo;s no way to ensure that a method is receiving
 an <code>Asteroid</code> and not another object that simply implements its API.  A better solution is to let the colliding object
 select the proper method from the object it&rsquo;s colliding with:</p>
@@ -772,6 +774,9 @@ language lazily evaluated because memoization becomes a near requirement in orde
       <description><![CDATA[<p>In my <a href="http://loganmcgrath.com/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
 <a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
+
+<!--more-->
+
 
 <p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
 recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
@@ -965,6 +970,11 @@ create a simple (read: na&iuml;ve) benchmark.</p>
 <p>The benchmark uses a <a href="http://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">recursive algorithm</a> to
 calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>. I’ve implemented
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span>Sterling Implementation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1191,6 +1201,9 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 
 <p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
 
+<!--more-->
+
+
 <h2>Promoting changes with App-Config-App</h2>
 
 <p>The App-Config-App <code>setup_example.rb</code> creates four branches with the following mappings:</p>
@@ -1282,6 +1295,11 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
       <title><![CDATA[App-Config-App in Action]]></title>
       <description><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&rsquo;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&rsquo;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
 
+<!--more-->
+
+
+
+
 <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div>
 
 
@@ -1310,6 +1328,9 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 <li><a href="http://highline.rubyforge.org/">HighLine</a> for masking passwords</li>
 <li><a href="http://rubygems.org/gems/json">json</a> to manipulate JSON in native Ruby</li>
 </ul>
+
+
+<!--more-->
 
 
 <h2>Getting it to work.</h2>
@@ -1358,7 +1379,7 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
 </span><span class='line'>-------------------------------------------------
 </span><span class='line'>sally-runtime   bananas    prod      staging, dev
 </span><span class='line'>jimmy-qa        apples     staging   dev
-</span><span class='line'>joe-developer   oranges    dev    </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>joe-developer   oranges    dev</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Logging in as any of these users will hide branches that don&rsquo;t have at least read-level access, and branches that don&rsquo;t have write-level access won&rsquo;t allow changes.</p>
@@ -1425,6 +1446,9 @@ compile the syntax tree into a bytecode that can be executed in a loop?</p>
     <item>
       <title><![CDATA[Using Perforce Chronicle for application configuration]]></title>
       <description><![CDATA[<p>Following Paul Hammant&rsquo;s post <a href="http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/">App-config workflow using SCM</a> and subsequent <a href="http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/">proof of concept</a> backed by Git, I will show that an app-config application backed by Perforce is possible using <a href="http://www.perforce.com/products/chronicle">Perforce Chronicle</a>.</p>
+
+<!--more-->
+
 
 <h2>Perforce and permissions for branches</h2>
 

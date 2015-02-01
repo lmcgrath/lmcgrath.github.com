@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sterling | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/sterling/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-26T19:25:36-08:00</updated>
+  <updated>2015-01-31T23:04:50-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
 Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
 JavaScript. Last week I decided to shelve Sterling.</p>
+
+<!--more-->
+
 
 <h2>How Sterling Worked</h2>
 
@@ -425,6 +428,9 @@ language lazily evaluated because memoization becomes a near requirement in orde
 <a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
 
+<!--more-->
+
+
 <p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
 recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
 execution speed is very pronounced:</p>
@@ -561,6 +567,9 @@ create a simple (read: na&iuml;ve) benchmark.</p>
 <p>The benchmark uses a <a href="http://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">recursive algorithm</a> to
 calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>. I’ve implemented
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
+
+<!--more-->
+
 
 <p>``` haskell Sterling Implementation
 fibonacci = n &ndash;> if n = 0 then 0</p>

@@ -10,6 +10,11 @@ var github = (function(){
     }
     t.innerHTML = fragment;
   }
+
+  function renderLimit(target) {
+    // var t = $(target)[0];
+    // t.innerHTML = "<li>Repository list unavailable</li>"
+  }
   return {
     showRepos: function(options){
       $.ajax({
@@ -17,14 +22,18 @@ var github = (function(){
         , dataType: 'jsonp'
         , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
         , success: function(data) {
-          var repos = [];
-          if (!data || !data.data) { return; }
-          for (var i = 0; i < data.data.length; i++) {
-            if (options.skip_forks && data.data[i].fork) { continue; }
-            repos.push(data.data[i]);
+          if (data && data.meta && data.meta.status == 403) {
+            renderLimit(options.target);
+          } else {
+            var repos = [];
+            if (!data || !data.data) { return; }
+            for (var i = 0; i < data.data.length; i++) {
+              if (options.skip_forks && data.data[i].fork) { continue; }
+              repos.push(data.data[i]);
+            }
+            if (options.count) { repos.splice(options.count); }
+            render(options.target, repos);
           }
-          if (options.count) { repos.splice(options.count); }
-          render(options.target, repos);
         }
       });
     }

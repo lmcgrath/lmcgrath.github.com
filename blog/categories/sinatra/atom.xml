@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sinatra | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/sinatra/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-26T19:25:36-08:00</updated>
+  <updated>2015-01-31T23:04:50-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -27,6 +27,9 @@
 <blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&rsquo;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
 
 <p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
+
+<!--more-->
+
 
 <h2>Promoting changes with App-Config-App</h2>
 
@@ -113,6 +116,9 @@ Resolve option: "Accept source"
     <id>http://loganmcgrath.com/blog/2012/11/20/app-config-app-in-action</id>
     <content type="html"><![CDATA[<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&rsquo;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&rsquo;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
 
+<!--more-->
+
+
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hZbQhF6fsEo "></iframe></div></p>
 
 <h2>Making it work for yourself</h2>
@@ -140,6 +146,9 @@ Resolve option: "Accept source"
 <li><a href="http://highline.rubyforge.org/">HighLine</a> for masking passwords</li>
 <li><a href="http://rubygems.org/gems/json">json</a> to manipulate JSON in native Ruby</li>
 </ul>
+
+
+<!--more-->
 
 
 <h2>Getting it to work.</h2>
@@ -185,7 +194,7 @@ Resolve option: "Accept source"
 
 <p>sally-runtime   bananas    prod      staging, dev
 jimmy-qa        apples     staging   dev
-joe-developer   oranges    dev<br/>
+joe-developer   oranges    dev
 ```</p>
 
 <p>Logging in as any of these users will hide branches that don&rsquo;t have at least read-level access, and branches that don&rsquo;t have write-level access won&rsquo;t allow changes.</p>

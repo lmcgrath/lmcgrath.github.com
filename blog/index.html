@@ -1,0 +1,359 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	
+	<title>Logan McGrath's Blog</title>
+	
+
+	<meta name="author" content="Logan McGrath">
+	
+	<meta name="description" content="I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+almost full-time in my free time. My latest prototype,
+Scotch, &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<script type="text/javascript" src="/javascripts/libs/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Logan McGrath's Blog</a></h1>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">About</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+
+
+</header>
+	<div id="main" class="inner">
+		<div id="content">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">
+		
+			Scoping and Thunking in Let Declarations</a>
+	</h2>
+	<div class="entry-content">
+		<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
+almost full-time in my free time. My latest prototype,
+<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, which uses Haskell-like syntax
+and semantics, is coming close to a point where I can start developing the main
+libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
+having with <code>let</code> declarations.</p>
+
+
+		
+		<a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>
+
+</div>
+
+
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/08/05/lessons-from-sterling/">
+		
+			Lessons From Sterling</a>
+	</h2>
+	<div class="entry-content">
+		<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
+Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
+JavaScript. Last week I decided to shelve Sterling.</p>
+
+
+		
+		<a href="/blog/2013/08/05/lessons-from-sterling/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-08-05T09:37:00-07:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
+
+</div>
+
+
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/06/17/sterling-with-memoization/">
+		
+			Sterling With Memoization</a>
+	</h2>
+	<div class="entry-content">
+		<p>In my <a href="/blog/2013/06/16/sterling-benchmarks/">last post</a> I wrote about performance in the
+<a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
+<strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
+
+
+		
+		<a href="/blog/2013/06/17/sterling-with-memoization/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-06-17T04:26:00-07:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
+
+</div>
+
+
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/06/16/sterling-benchmarks/">
+		
+			Sterling Benchmarks</a>
+	</h2>
+	<div class="entry-content">
+		<p>Since <a href="https://github.com/lmcgrath/sterling/tree/8b58ce4d4b080b353f7870ec0c0c30639fb2fa7b">mid January</a>, I’ve been
+developing a functional scripting language I call <a href="https://github.com/lmcgrath/sterling">Sterling</a>. In the past few
+weeks, Sterling has become nearly usable, but it doesn’t seem to be very fast. So this weekend, I’ve taking the time to
+create a simple (read: na&iuml;ve) benchmark.</p>
+
+<p>The benchmark uses a <a href="http://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">recursive algorithm</a> to
+calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>. I’ve implemented
+both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
+
+
+		
+		<a href="/blog/2013/06/16/sterling-benchmarks/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-06-16T21:12:00-07:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>, <a class='category' href='/blog/categories/sterling/'>Sterling</a>
+
+</div>
+
+
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">
+		
+			Promoting Changes With App-Config-App</a>
+	</h2>
+	<div class="entry-content">
+		<p>The App-Config-App now lets you promote changes between environments!</p>
+
+<h2>How does it work?</h2>
+
+<p>Perforce lets you create mappings to define the relationship between two diverging code branches. This allows for easy integration of changes between the two branches by referencing the name of the mapping.</p>
+
+<blockquote><p>See <a href="http://www.perforce.com/perforce/doc.current/manuals/p4v/Managing_branch_specifications.html">Perforce&rsquo;s documentation</a> for more details on the how and why of branch mappings.</p></blockquote>
+
+<p>The App-Config-App reads these branch mappings in order to create paths for promotion between environments.</p>
+
+
+		
+		<a href="/blog/2012/11/28/promoting-changes-with-app-config-app/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-11-28T13:04:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
+
+</div>
+
+
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+    
+        <a href="/blog/page/2/" class="next">Next</a>
+    
+</nav>
+</div>
+		<aside class="sidebar">
+			
+				<section>
+  <h2>Recent Posts</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">Scoping and Thunking in Let Declarations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/lessons-from-sterling/">Lessons From Sterling</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/17/sterling-with-memoization/">Sterling With Memoization</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/16/sterling-benchmarks/">Sterling Benchmarks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h2>GitHub Repos</h2>
+  <ul id="gh_repos">
+    <li class="loading">Loading repositories...</li>
+  </ul>
+  
+  <p class="github-username"><a href="https://github.com/lmcgrath">@lmcgrath</a> on GitHub</p>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'lmcgrath',
+            count: 5,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"></script>
+</section>
+
+
+
+
+
+			
+		</aside>
+		<div class="clearfix"></div>
+	</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+ Logan McGrath 
+<br>
+Powered by Octopress.
+</footer>
+	
+
+</body>
+</html>

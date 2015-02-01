@@ -1,108 +1,45 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>SCM-Backed Application Configuration with Perforce - Logan McGrath's Blog</title>
-  <meta name="author" content="Logan McGrath">
+	<meta charset="utf-8">
+	
+	<title>SCM-Backed Application Configuration with Perforce | Logan McGrath's Blog</title>
+	
 
-  
-  <meta name="description" content="Continuing from my last post, I&rsquo;ve forked Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve &hellip;">
-  
+	<meta name="author" content="Logan McGrath">
+	
+	<meta name="description" content="Continuing from my last post, I&rsquo;ve forked Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve &hellip;"> <meta name="keywords" content="">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <link rel="canonical" href="http://loganmcgrath.com/blog/2012/11/16/scm-backed-application-configuration-with-perforce">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<link href="/rss.xml" rel="alternate" title="Logan McGrath's Blog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36481003-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+	<script type="text/javascript" src="/javascripts/libs/jquery.min.js"></script>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Logan McGrath's Blog</a></h1>
-  
-</hgroup>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Logan McGrath's Blog</a></h1>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">About</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/rss.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:loganmcgrath.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/about-me">About Me</a></li>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">SCM-Backed Application Configuration With Perforce</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-16T07:00:00-08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>Continuing from my <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">last post</a>, I&rsquo;ve <a href="https://github.com/lmcgrath/App-Config-App/">forked</a> Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve decided not to continue using Perforce Chronicle as it is primarily intended for content management.</p>
+	<div id="main" class="inner">
+		<div id="content"><article class="post">
+	<h2 class="title">SCM-Backed Application Configuration With Perforce</h2>
+	<div class="entry-content"><p>Continuing from my <a href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/">last post</a>, I&rsquo;ve <a href="https://github.com/lmcgrath/App-Config-App/">forked</a> Paul Hammant&rsquo;s original App-Config-App and modified it to work against Perforce. I&rsquo;ve decided not to continue using Perforce Chronicle as it is primarily intended for content management.</p>
 
 <p>With this version, App-Config-App is written in Ruby, mostly using <a href="http://www.sinatrarb.com/">Sinatra</a>, a lightweight web application framework. I&rsquo;m still using <a href="http://angularjs.org/">AngularJS</a>, but I&rsquo;ve also added a few other things:</p>
 
@@ -114,6 +51,9 @@
 <li><a href="http://highline.rubyforge.org/">HighLine</a> for masking passwords</li>
 <li><a href="http://rubygems.org/gems/json">json</a> to manipulate JSON in native Ruby</li>
 </ul>
+
+
+<!--more-->
 
 
 <h2>Getting it to work.</h2>
@@ -162,7 +102,7 @@
 </span><span class='line'>-------------------------------------------------
 </span><span class='line'>sally-runtime   bananas    prod      staging, dev
 </span><span class='line'>jimmy-qa        apples     staging   dev
-</span><span class='line'>joe-developer   oranges    dev    </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>joe-developer   oranges    dev</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Logging in as any of these users will hide branches that don&rsquo;t have at least read-level access, and branches that don&rsquo;t have write-level access won&rsquo;t allow changes.</p>
@@ -223,14 +163,8 @@
 </div>
 
 
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Logan McGrath</span></span>
-
-      
+<div class="meta">
+	<div class="date">
 
 
 
@@ -239,47 +173,25 @@
 
 
 
-  
 
 
-<time datetime="2012-11-16T07:00:00-08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
-      
+<time datetime="2012-11-16T07:00:00-08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time></div>
+	
 
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
-  
-</span>
+<div class="tags">
 
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
 
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://loganmcgrath.com/blog/2012/11/16/scm-backed-application-configuration-with-perforce/" data-via="" data-counturl="http://loganmcgrath.com/blog/2012/11/16/scm-backed-application-configuration-with-perforce/" >Tweet</a>
-  
-  
-  
 </div>
 
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/11/07/using-perforce-chronicle-for-application-configuration/" title="Previous Post: Using Perforce Chronicle for application configuration">&laquo; Using Perforce Chronicle for application configuration</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/11/20/app-config-app-in-action/" title="Next Post: App-Config-App in Action">App-Config-App in Action &raquo;</a>
-      
-    </p>
-  </footer>
+
+</div>
 </article>
-
 </div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
+		<aside class="sidebar">
+			
+				<section>
+  <h2>Recent Posts</h2>
   <ul id="recent_posts">
     
       <li class="post">
@@ -305,43 +217,49 @@
   </ul>
 </section>
 
-
-
-
-
+<section>
+  <h2>GitHub Repos</h2>
+  <ul id="gh_repos">
+    <li class="loading">Loading repositories...</li>
+  </ul>
   
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Logan McGrath -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
+  <p class="github-username"><a href="https://github.com/lmcgrath">@lmcgrath</a> on GitHub</p>
   
-
-
-
-
-
-
-
   <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'lmcgrath',
+            count: 5,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
   </script>
+  <script src="/javascripts/github.js" type="text/javascript"></script>
+</section>
 
 
 
 
+
+			
+		</aside>
+		<div class="clearfix"></div>
+	</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+ Logan McGrath 
+<br>
+Powered by Octopress.
+</footer>
+	
 
 </body>
 </html>

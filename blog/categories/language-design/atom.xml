@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Language Design | Logan McGrath's Blog]]></title>
   <link href="http://loganmcgrath.com/blog/categories/language-design/atom.xml" rel="self"/>
   <link href="http://loganmcgrath.com/"/>
-  <updated>2015-01-26T19:25:36-08:00</updated>
+  <updated>2015-01-31T23:04:50-08:00</updated>
   <id>http://loganmcgrath.com/</id>
   <author>
     <name><![CDATA[Logan McGrath]]></name>
@@ -24,6 +24,9 @@ almost full-time in my free time. My latest prototype,
 and semantics, is coming close to a point where I can start developing the main
 libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
 having with <code>let</code> declarations.</p>
+
+<!--more-->
+
 
 <p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
 of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
@@ -203,7 +206,7 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 
 <hr />
 
-<h4>Links</h4>
+<h3>Links</h3>
 
 <ul>
 <li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
@@ -212,9 +215,7 @@ one can be very arduous tasks. Ideally, I only want to implement <code>let</code
 </ul>
 
 
-<hr />
-
-<h4>Credits</h4>
+<h3>Credits</h3>
 
 <p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
 who took time out of his busy day to review my multiple drafts.</p>
@@ -229,6 +230,9 @@ who took time out of his busy day to review my multiple drafts.</p>
     <content type="html"><![CDATA[<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
 Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
 JavaScript. Last week I decided to shelve Sterling.</p>
+
+<!--more-->
+
 
 <h2>How Sterling Worked</h2>
 
@@ -633,6 +637,9 @@ language lazily evaluated because memoization becomes a near requirement in orde
 <a href="https://github.com/lmcgrath/sterling">Sterling</a> programming language with a basic benchmark. Today I&rsquo;m ticking off one
 <strong>@TODO</strong> item: <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a>.</p>
 
+<!--more-->
+
+
 <p>Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
 recalculation of an already-known value. I&rsquo;ve leveraged the benchmark from the previous post, and the difference in
 execution speed is very pronounced:</p>
@@ -769,6 +776,9 @@ create a simple (read: na&iuml;ve) benchmark.</p>
 <p>The benchmark uses a <a href="http://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">recursive algorithm</a> to
 calculate the Nth member of the <a href="http://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>. I’ve implemented
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.</p>
+
+<!--more-->
+
 
 <p>``` haskell Sterling Implementation
 fibonacci = n &ndash;> if n = 0 then 0</p>
