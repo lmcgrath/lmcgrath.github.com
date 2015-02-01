@@ -18,6 +18,8 @@ With this version, App-Config-App is written in Ruby, mostly using [Sinatra](htt
 * [HighLine](http://highline.rubyforge.org/) for masking passwords
 * [json](http://rubygems.org/gems/json) to manipulate JSON in native Ruby
 
+<!--more-->
+
 ## Getting it to work.
 
 App-Config-App requires a couple things to work:
@@ -57,7 +59,7 @@ Username        Password   Write     Read
 -------------------------------------------------
 sally-runtime   bananas    prod      staging, dev
 jimmy-qa        apples     staging   dev
-joe-developer   oranges    dev 	
+joe-developer   oranges    dev
 ```
 
 Logging in as any of these users will hide branches that don't have at least read-level access, and branches that don't have write-level access won't allow changes.
@@ -100,7 +102,7 @@ I've also noticed that the autosave triggers even when a value is invalid. The f
 
 AngularJS does not offer a good validation API. The validation API is quite opaque and I haven't found any real examples using it. The built-in form validation is inadequate. There are few ng-* HTML attributes exposing more than basic configuration parameters, and no hooks offered as extension points.
 
-For example, I'm using [regular expressions](http://docs.angularjs.org/api/ng.directive:input.text) for date validation in App-Config-App. There isn't a hook to provide custom validation checks, and regular expressions don't perform sanity checks. Values such as "00/00/0000" will pass validation. 
+For example, I'm using [regular expressions](http://docs.angularjs.org/api/ng.directive:input.text) for date validation in App-Config-App. There isn't a hook to provide custom validation checks, and regular expressions don't perform sanity checks. Values such as "00/00/0000" will pass validation.
 
 ### More example clients than the Java one needed
 

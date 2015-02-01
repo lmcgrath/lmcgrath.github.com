@@ -4,7 +4,7 @@ title: "Sterling Benchmarks"
 date: 2013-06-16 21:12
 comments: false
 published: true
-categories: 
+categories:
   - Functional Programming
   - Sterling
   - Language Design
@@ -18,6 +18,8 @@ create a simple (read: na&iuml;ve) benchmark.
 The benchmark uses a [recursive algorithm](http://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence) to
 calculate the Nth member of the [Fibonacci sequence](http://en.wikipedia.org/wiki/Fibonacci_sequence). I’ve implemented
 both Sterling and Java versions of the algorithm and I will be benchmarking each for comparison.
+
+<!--more-->
 
 ``` haskell Sterling Implementation
 fibonacci = n -> if n = 0 then 0
@@ -148,4 +150,3 @@ compile the syntax tree into a bytecode that can be executed in a loop?
 * [Sterling GitHub Project](https://github.com/lmcgrath/sterling)
 * [Benchmark Code](https://github.com/lmcgrath/sterling/blob/post_20130616_sterling_benchmark/src/test/java/sterling/math/FibonacciBenchmarkTest.java)
 * [Sterling Fibonacci Implementation](https://github.com/lmcgrath/sterling/blob/post_20130616_sterling_benchmark/src/main/resources/sterling/math/_base.ag)
-

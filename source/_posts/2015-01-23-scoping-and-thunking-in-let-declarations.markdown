@@ -15,6 +15,8 @@ and semantics, is coming close to a point where I can start developing the main
 libraries. Close, but there are a few kinks. Here I'll be covering an issue I'm
 having with `let` declarations.
 
+<!--more-->
+
 Specifically, what I'm struggling to get my head around is how to model scoping
 of values declared within `let` declarations. (_Read about `let` declarations in
 [Learn You A Haskell](http://learnyouahaskell.com/syntax-in-functions#let-it-be)._)
@@ -176,17 +178,15 @@ I will be posting on progress and which solution I end up choosing, stay tuned.
 * How simple, non-recursive closures are implemented.
 * Implementation of co-recursive closures.
 
------------------
+--------------------------
 
-#### Links
+### Links
 
 * [Scotch Source](https://github.com/lmcgrath/scotch-lang)
 * [Multi-pass Compiler](http://en.wikipedia.org/wiki/Multi-pass_compiler)
 * [Thunks \(Wikipedia\)](http://en.wikipedia.org/wiki/Thunk)
 
------------------
-
-#### Credits
+### Credits
 
 Thanks to my dear friend [Alexander Zagniotov](https://github.com/azagniotov)
 who took time out of his busy day to review my multiple drafts.

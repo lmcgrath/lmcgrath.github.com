@@ -7,6 +7,8 @@ sharing: true
 footer: true
 ---
 
+## About Me
+
 Hi, I'm Logan McGrath, and I'm a software engineer.
 
 Most of my free time is spent doing full time language development. Mostly for

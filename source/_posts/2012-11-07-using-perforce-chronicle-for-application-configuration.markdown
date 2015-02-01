@@ -9,6 +9,8 @@ published: true
 
 Following Paul Hammant's post [App-config workflow using SCM](http://paulhammant.com/2012/07/10/app-config-workflow-using-scm/) and subsequent [proof of concept](http://paulhammant.com/2012/08/14/app-config-using-git-and-angular/) backed by Git, I will show that an app-config application backed by Perforce is possible using [Perforce Chronicle](http://www.perforce.com/products/chronicle).
 
+<!--more-->
+
 ## Perforce and permissions for branches
 
 [Perforce](http://en.wikipedia.org/wiki/Perforce) is an enterprise-class source control management (SCM) system, remarkably similar to Subversion (Subversion was inspired by Perforce :) Perforce is more bulletproof than Subversion in many ways and it's generally faster. Git does not impose any security constraints or permissions on branches, Perforce gives comprehensive security options allowing you to control access to different branches: for example, development, staging, and production. Subversion, however, can support permissions on branches with some extra configuration (Apache plus mod_dav_svn/mod_dav_authz). For these reasons, Perforce is a better option for storing configuration data than either Git or Subversion.

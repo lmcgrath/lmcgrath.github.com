@@ -17,6 +17,8 @@ Perforce lets you create mappings to define the relationship between two divergi
 
 The App-Config-App reads these branch mappings in order to create paths for promotion between environments.
 
+<!--more-->
+
 ## Promoting changes with App-Config-App
 
 The App-Config-App `setup_example.rb` creates four branches with the following mappings:

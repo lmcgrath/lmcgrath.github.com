@@ -13,6 +13,8 @@ I've spent the last seven months developing a language called [Sterling](https:/
 Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
 JavaScript. Last week I decided to shelve Sterling.
 
+<!--more-->
+
 ## How Sterling Worked
 
 Sterling's evaluation model is very simple and I felt it held a lot of promise because it made the language very
@@ -64,7 +66,7 @@ outside world to be further processed and executed. Functions could be created i
 functions, or constructed within functions and returned.
 
 Sterling's tree-based structure naturally supported a prototype-based object model. To modify an expression tree, the
-tree needed to create a copy of itself with any changes to it. All expressions, thus, were effective prototypes. This 
+tree needed to create a copy of itself with any changes to it. All expressions, thus, were effective prototypes. This
 also had the benefit of directly supporting immutability and helped to enforce a functional programming paradigm.
 
 ## What Could Have Been
@@ -237,7 +239,7 @@ Asteroid = object {
             say 'Asteroid collided with a spaceship!'
         end
 }
-``` 
+```
 
 This is fragile, though, and the code is complex. What's worse, is there's no way to ensure that a method is receiving
 an `Asteroid` and not another object that simply implements its API.  A better solution is to let the colliding object
@@ -274,7 +276,7 @@ Bunny = object {
 This [single-dispatch behavior](http://en.wikipedia.org/wiki/Multiple_dispatch#Java) means that for any argument
 applied to a method name, the same method will be dispatched. In the case of Java, this is determined by the type of
 a method's arguments at compile time. Adding new methods for similarly-typed arguments requires all client code be
-recompiled. While Sterling may not have typing, it is still single-dispatch. 
+recompiled. While Sterling may not have typing, it is still single-dispatch.
 
 The lack of types became particularly painful when implementing arithmetic operations and compile-time analysis was
 nearly impossible without collecting a great deal of superfluous metadata.
@@ -349,4 +351,3 @@ language lazily evaluated because memoization becomes a near requirement in orde
 * Highly composable
 * Simple closures
 * First-class functions, if not first-class everything
-

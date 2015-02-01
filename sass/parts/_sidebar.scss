@@ -1,0 +1,23 @@
+aside.sidebar {
+	.github-username {
+		text-align: right;
+  	font-weight: 400;
+	}
+
+	h2 {
+		font-size: 24px;
+		font-weight: 300;
+		padding: 16px 0 8px;
+		border-bottom: 1px solid $color-gray04;
+		position: relative;
+		line-height: 1.2em;
+
+		&:before {
+			content: "";
+			position: absolute;
+			bottom: -2px;
+			border-bottom: 1px solid $color-gray05;
+			width: 100%;
+		}
+	}
+}

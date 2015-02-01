@@ -4,7 +4,7 @@ title: "Sterling With Memoization"
 date: 2013-06-17 04:26
 comments: false
 published: true
-categories: 
+categories:
   - Sterling
   - Functional Programming
   - Language Design
@@ -13,6 +13,8 @@ categories:
 In my [last post](/blog/2013/06/16/sterling-benchmarks/) I wrote about performance in the
 [Sterling](https://github.com/lmcgrath/sterling) programming language with a basic benchmark. Today I'm ticking off one
 **@TODO** item: [Memoization](https://en.wikipedia.org/wiki/Memoization).
+
+<!--more-->
 
 Sterling now stores the results of each function/argument pair, returning respective results rather than forcing a
 recalculation of an already-known value. I've leveraged the benchmark from the previous post, and the difference in
@@ -125,4 +127,3 @@ function should not leverage memoization.
 
 * [Commit containing memoization changes](https://github.com/lmcgrath/sterling/commit/7d69d49a911d2d916701fa973e02ffabe82afe9d)
 * [Benchmark showing O(1) complexity](https://github.com/lmcgrath/sterling/blob/5c879ece28194fdbc36ed5dff2a760d6a38a4033/src/test/java/sterling/math/FibonacciBenchmarkTest.java)
-
