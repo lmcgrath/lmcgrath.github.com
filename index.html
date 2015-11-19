@@ -9,9 +9,8 @@
 
 	<meta name="author" content="Logan McGrath">
 	
-	<meta name="description" content="I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
-almost full-time in my free time. My latest prototype,
-Scotch, &hellip;"> <meta name="keywords" content="">
+	<meta name="description" content="I&rsquo;ve spent the last seven months developing a language called Sterling.
+Sterling was intended to be an untyped functional scripting language, &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -48,48 +47,26 @@ Scotch, &hellip;"> <meta name="keywords" content="">
         <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">
+		<a href="/blog/2013/08/05/lessons-from-sterling/">
 		
-			Scoping and Thunking in Let Declarations</a>
+			Lessons From Sterling</a>
 	</h2>
 	<div class="entry-content">
-		<p>I haven&rsquo;t stopped fiddling with language development. Actually, I still do it
-almost full-time in my free time. My latest prototype,
-<a href="https://github.com/lmcgrath/scotch-lang">Scotch</a>, which uses Haskell-like syntax
-and semantics, is coming close to a point where I can start developing the main
-libraries. Close, but there are a few kinks. Here I&rsquo;ll be covering an issue I&rsquo;m
-having with <code>let</code> declarations.</p>
+		<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
+Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
+JavaScript. Last week I decided to shelve Sterling.</p>
 
 <!--more-->
 
 
-<p>Specifically, what I&rsquo;m struggling to get my head around is how to model scoping
-of values declared within <code>let</code> declarations. (<em>Read about <code>let</code> declarations in
-<a href="http://learnyouahaskell.com/syntax-in-functions#let-it-be">Learn You A Haskell</a>.</em>)</p>
+<h2>How Sterling Worked</h2>
 
-<p>In this code, the child declaration <code>y</code> uses child declaration <code>z</code>, which is
-used by the body of the <code>let</code>. Consider for a moment: What if <code>z</code> had side
-effects?</p>
+<p>Sterling&rsquo;s evaluation model is very simple and I felt it held a lot of promise because it made the language very
+flexible. Everything in Sterling is an expression. Some expressions accept a single argument&mdash;these were called
+<em>lambdas</em>. All expressions also contain sub-expressions, which could be accessed as <em>attributes</em>. With a little sugar,
+a bag of attributes could be made self-referencing and thus become an <em>object</em>.</p>
 
-<figure class='code'><figcaption><span>Scotch Let Declaration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">f</span> <span class="ow">::</span> <span class="n">s</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-</span><span class='line'><span class="nf">f</span> <span class="n">x</span> <span class="ow">=</span> <span class="kr">let</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">something</span> <span class="n">with</span> <span class="n">z</span>
-</span><span class='line'>          <span class="n">z</span> <span class="ow">=</span> <span class="n">something</span> <span class="kr">else</span>
-</span><span class='line'>          <span class="kr">in</span> <span class="kr">do</span> <span class="n">things</span> <span class="n">with</span> <span class="n">y</span> <span class="n">and</span> <span class="kr">then</span> <span class="n">z</span> <span class="n">again</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>How Are Side Effects A Problem In Child Scopes?</h2>
-
-<p>Scotch is compiled into JVM bytecode. Value and function declarations are
-encoded as static methods returning Java 8 lambdas. The declarations internally
-use <a href="http://stackoverflow.com/questions/2641489/what-is-a-thunk">thunks</a> to
-suspend evaluation but also to retain the evaluated result.</p>
-
-<figure class='code'><figcaption><span>Scotch &#8220;add&#8221; Function Encoded As Static Java Method</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>An assortment of basic expression types</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -102,25 +79,112 @@ suspend evaluation but also to retain the evaluated result.</p>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// What x + y would look like compiled:</span>
-</span><span class='line'><span class="c1">//</span>
-</span><span class='line'><span class="c1">// This uses the runtime support functions applicable() and callable() to</span>
-</span><span class='line'><span class="c1">// automatically generate the relevant thunk types.</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="n">Applicable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Applicable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">add</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nf">applicable</span><span class="o">(</span>
-</span><span class='line'>    <span class="n">augend</span> <span class="o">-&gt;</span> <span class="n">applicable</span><span class="o">(</span>
-</span><span class='line'>      <span class="n">addend</span> <span class="o">-&gt;</span> <span class="n">callable</span><span class="o">(</span>
-</span><span class='line'>        <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">augend</span><span class="o">.</span><span class="na">call</span><span class="o">()</span> <span class="o">+</span> <span class="n">addend</span><span class="o">.</span><span class="na">call</span><span class="o">()</span>
-</span><span class='line'>      <span class="o">)</span>
-</span><span class='line'>    <span class="o">)</span>
-</span><span class='line'>  <span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">//</span> <span class="n">a</span> <span class="n">constant</span> <span class="n">expression</span> <span class="n">which</span> <span class="n">takes</span> <span class="n">no</span> <span class="n">arguments</span>
+</span><span class='line'><span class="nf">anExpression</span> <span class="ow">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="n">lambda</span> <span class="n">expressions</span> <span class="n">take</span> <span class="n">only</span> <span class="mi">1</span> <span class="n">argument</span>
+</span><span class='line'><span class="nf">aLambda</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="n">function</span> <span class="n">expressions</span> <span class="n">take</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">1</span> <span class="n">argument</span>
+</span><span class='line'><span class="nf">aFunction</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="n">an</span> <span class="n">object</span> <span class="n">expression</span> <span class="n">with</span> <span class="n">constructor</span>
+</span><span class='line'><span class="nf">anObject</span> <span class="ow">=</span> <span class="p">(</span><span class="n">constructorArg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">madeWith</span><span class="kt">:</span> <span class="n">constructorArg</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="n">an</span> <span class="n">object</span> <span class="n">expression</span> <span class="n">that</span> <span class="n">behaves</span> <span class="n">like</span> <span class="n">a</span> <span class="n">lambda</span> <span class="n">after</span> <span class="n">constructed</span>
+</span><span class='line'><span class="nf">invokableObject</span> <span class="ow">=</span> <span class="p">(</span><span class="n">constructorArg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">madeWith</span><span class="kt">:</span> <span class="n">constructorArg</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">invoke</span><span class="kt">:</span> <span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="s">&quot;Made with #{self.madeWith} and invoked with #{arg}&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>Expressions could be built up to carry a high amount of capability. Because Sterling is untyped, decoration and
+ducktyping are used heavily to compose ever more features into expressions.</p>
+
+<p>Sterling was directly inspired by <a href="http://en.wikipedia.org/wiki/Lambda_calculus">Lambda Calculus</a>. This had an enormous
+impact on the design of the language, the largest of which was how the language executed at runtime. Expressions in
+Sterling are represented as trees and leaves. Top-level expressions have names, and they could be inserted into other
+expressions by referencing those names.</p>
+
+<figure class='code'><figcaption><span>A recursive named expression looks like this:</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">fibonacci</span> <span class="ow">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="kr">then</span>
+</span><span class='line'>                       <span class="n">n</span>
+</span><span class='line'>                   <span class="kr">else</span>
+</span><span class='line'>                       <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>                   <span class="n">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span>What A Thunk Looks Like</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Because each expression was a tree, no expression needed to be executed until its result was absolutely needed. This
+lazy execution model allows for very large, complex expressions to be built in one function then returned to the
+outside world to be further processed and executed. Functions could be created inline and passed as arguments to other
+functions, or constructed within functions and returned.</p>
+
+<p>Sterling&rsquo;s tree-based structure naturally supported a prototype-based object model. To modify an expression tree, the
+tree needed to create a copy of itself with any changes to it. All expressions, thus, were effective prototypes. This
+also had the benefit of directly supporting immutability and helped to enforce a functional programming paradigm.</p>
+
+<h2>What Could Have Been</h2>
+
+<p>I intended Sterling to be a functional scripting language. In some ways, I was looking to create a JavaScript reboot
+that clung closer to JavaScript&rsquo;s functional roots and would be used for general-purpose scripting.</p>
+
+<p>Sterling&rsquo;s syntax was designed to be very terse, readable, and orthogonal. By that I mean everything in Sterling should
+be an expression that can be used <a href="http://brandonbyars.com/2008/07/21/orthogonality/">virtually anywhere for anything</a>.
+Because Sterling was based on lambdas, this worked particularly well for arguments expressions because arguments could
+fold into the function call result on the left:</p>
+
+<figure class='code'><figcaption><span>Consing a list by folding arguments, left-to-write</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">[]</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">3</span> <span class="mi">4</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="mi">4</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This folding capability meant that Sterling could support very expressive programming styles. Any function could be
+returned as the result of another function call and continue chaining against arguments. Sterling&rsquo;s terse syntax also
+made defining functions very easy:</p>
+
+<figure class='code'><figcaption><span>Some basic functions in Sterling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">identity</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span>
+</span><span class='line'><span class="nf">selfApply</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="n">x</span>
+</span><span class='line'><span class="nf">apply</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="n">y</span>
+</span><span class='line'><span class="nf">selectFirst</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span>
+</span><span class='line'><span class="nf">selectSecond</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">y</span>
+</span><span class='line'><span class="nf">conditional</span> <span class="ow">=</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">condition</span><span class="o">.</span><span class="n">true</span><span class="o">?</span> <span class="kr">then</span> <span class="n">selectFirst</span> <span class="kr">else</span> <span class="n">selectSecond</span> <span class="n">end</span>
+</span><span class='line'><span class="nf">friday</span><span class="o">?</span> <span class="ow">=</span> <span class="n">say</span> <span class="o">$</span> <span class="n">conditional</span> <span class="p">(</span><span class="n">today</span><span class="o">.</span><span class="n">is</span> <span class="kt">:</span><span class="n">friday</span><span class="p">)</span> <span class="sc">&#39;Yay Friday!&#39;</span> <span class="sc">&#39;Awww...&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because Sterling was intended to be immutable, objects would be used to represent state and carry behavior to return
+new state resulting from an operation:</p>
+
+<figure class='code'><figcaption><span>Printing arguments from an immutable list iterator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -132,81 +196,44 @@ suspend evaluation but also to retain the evaluated result.</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Thunk</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">A</span> <span class="n">value</span><span class="o">;</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">main</span> <span class="ow">=</span> <span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>    <span class="n">print</span> <span class="n">args</span><span class="o">.</span><span class="n">iterator</span> <span class="o">//</span> <span class="n">gets</span> <span class="n">an</span> <span class="kt">Iterator</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">A</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">value</span> <span class="o">=</span> <span class="n">evaluate</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="nf">print</span> <span class="ow">=</span> <span class="p">(</span><span class="n">iterator</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>    <span class="n">say</span> <span class="n">unless</span> <span class="n">iterator</span><span class="o">.</span><span class="n">empty</span><span class="o">?</span> <span class="kr">then</span>
+</span><span class='line'>        <span class="n">printNext</span> <span class="n">iterator</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="kr">else</span>
+</span><span class='line'>        <span class="sc">&#39;Empty iterator&#39;</span>
+</span><span class='line'>    <span class="n">end</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="kd">protected</span> <span class="kd">abstract</span> <span class="n">A</span> <span class="nf">evaluate</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="nf">printNext</span> <span class="ow">=</span> <span class="p">(</span><span class="n">iterator</span> <span class="n">index</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>    <span class="n">unless</span> <span class="n">iterator</span><span class="o">.</span><span class="n">empty</span><span class="o">?</span> <span class="kr">then</span>
+</span><span class='line'>        <span class="s">&quot;arg #{index} =&gt; #{iterator.current}</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">printNext</span> <span class="n">iterator</span><span class="o">.</span><span class="n">tail</span> <span class="n">index</span><span class="o">.</span><span class="n">up</span>
+</span><span class='line'>    <span class="n">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">Iterator</span> <span class="ow">=</span> <span class="p">(</span><span class="n">elements</span> <span class="n">position</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">empty</span><span class="o">?:</span> <span class="n">position</span> <span class="o">&gt;=</span> <span class="n">elements</span><span class="o">.</span><span class="n">length</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">head</span><span class="kt">:</span> <span class="kt">Iterator</span> <span class="n">elements</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">current</span><span class="kt">:</span> <span class="n">elements</span><span class="p">[</span><span class="n">position</span><span class="p">],</span>
+</span><span class='line'>    <span class="n">tail</span><span class="kt">:</span> <span class="n">iterator</span> <span class="n">elements</span> <span class="n">position</span><span class="o">.</span><span class="n">up</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The reason for using thunks is to support lazy evaluation. Arguments passed into
-functions are not evaluated until they are referenced. This also comes with the
-benefit that arguments are only ever evaluated once. Because child declarations
-form <a href="http://en.wikipedia.org/wiki/Closure_%28computer_programming%29">closures</a>
-over variables in their parent scope, this also ensures local variables are also
-only evaluated once within these child declarations.</p>
+<p>Paul Hammant at one point suggested baking dependency injection <a href="http://paulhammant.com/blog/crazy-bob-and-type-safety-for-dependency-injection.html/">directly into a language</a>,
+and even offered I do this in Sterling. This drove development of a metadata system in Sterling that could be used to
+support metaprogramming and eventually dependency injection.</p>
 
-<p>Top-level declarations, like values and functions, are encoded as static Java
-methods. Each time they are referenced, a new thunk is returned. In <code>let</code> declarations,
-this poses a problem because every time a declaration is referenced, it returns
-a new thunk. Say for example we have a child declaration called &ldquo;username&rdquo; which
-fetches a username from a database. Every time the associated thunk is referenced,
-the database is hit:</p>
-
-<figure class='code'><figcaption><span>What It Looks Like in Pseudo-Java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'><span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">())</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This becomes a major problem in Scotch because the values with side-effects
-look like variables!</p>
-
-<figure class='code'><figcaption><span>What it looks like in Scotch</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">greet</span> <span class="n">msg</span> <span class="ow">=</span>
-</span><span class='line'>    <span class="kr">let</span> <span class="n">username</span> <span class="ow">=</span> <span class="kr">do</span>
-</span><span class='line'>          <span class="n">something</span> <span class="n">to</span> <span class="n">get</span>
-</span><span class='line'>          <span class="n">this</span> <span class="n">from</span> <span class="n">a</span> <span class="n">database</span>
-</span><span class='line'>    <span class="kr">in</span> <span class="kr">do</span>
-</span><span class='line'>      <span class="n">log</span> <span class="s">&quot;greeting &quot;</span> <span class="o">++</span> <span class="n">username</span>
-</span><span class='line'>      <span class="n">msg</span> <span class="o">++</span> <span class="s">&quot; &quot;</span> <span class="o">++</span> <span class="n">username</span> <span class="o">++</span> <span class="s">&quot;!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Modeling Let As A Function</h2>
-
-<p>I&rsquo;ve been mulling around a few crazy ways to model <code>let</code> declarations. My favorite
-so far is wrapping the <code>let</code> body up in a function, passing in all declarations as
-arguments:</p>
-
-<figure class='code'><figcaption><span>Psuedo-Java `let` Modeled With Values As Arguments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Meta attributes on expressions</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -218,34 +245,35 @@ arguments:</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">@</span><span class="n">component</span> <span class="p">{</span> <span class="n">uses</span><span class="kt">:</span> <span class="p">[</span> <span class="kt">:</span><span class="n">productionDb</span> <span class="p">]</span> <span class="p">}</span>
+</span><span class='line'><span class="o">@</span><span class="n">useWhen</span> <span class="p">(</span><span class="n">runtime</span> <span class="ow">-&gt;</span> <span class="n">runtime</span><span class="o">.</span><span class="n">env</span> <span class="n">is</span> <span class="kt">:</span><span class="n">production</span><span class="p">)</span>
+</span><span class='line'><span class="kt">Inventory</span> <span class="ow">=</span> <span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">numberOfItems</span><span class="kt">:</span> <span class="n">db</span><span class="o">.</span><span class="n">asInt</span> <span class="o">$</span> <span class="n">db</span><span class="o">.</span><span class="n">scalarQuery</span> <span class="s">&quot;SELECT COUNT(*) FROM thingies&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">priceCheck</span><span class="kt">:</span> <span class="p">(</span><span class="n">thingy</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">asMoney</span> <span class="o">$</span> <span class="n">db</span><span class="o">.</span><span class="n">scalarQuery</span> <span class="s">&quot;SELECT price FROM thingies WHERE id = :id&quot;</span> <span class="p">{</span> <span class="n">id</span><span class="kt">:</span> <span class="n">thingy</span><span class="o">.</span><span class="n">id</span> <span class="p">},</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">greet_</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">username</span><span class="o">())</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">@</span><span class="n">provides</span> <span class="kt">:</span><span class="n">productionDb</span>
+</span><span class='line'><span class="nf">createDb</span> <span class="ow">=</span> <span class="o">...</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet_</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">Thunk</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting&quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">.</span><span class="na">get</span><span class="o">())</span>        <span class="c1">// here it evaluates for the first time</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span> <span class="c1">// here it gets the value from the initial evaluation above</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">@</span><span class="n">fake</span><span class="o">?</span> <span class="n">true</span>
+</span><span class='line'><span class="o">@</span><span class="n">component</span> <span class="p">{</span> <span class="n">name</span><span class="kt">:</span> <span class="kt">:Inventory</span> <span class="p">}</span>
+</span><span class='line'><span class="o">@</span><span class="n">useWhen</span> <span class="p">(</span><span class="n">runtime</span> <span class="ow">-&gt;</span> <span class="n">runtime</span><span class="o">.</span><span class="n">env</span> <span class="n">is</span> <span class="kt">:</span><span class="n">development</span><span class="p">)</span>
+</span><span class='line'><span class="kt">FakeInventory</span> <span class="ow">=</span> <span class="n">object</span> <span class="ow">-&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">numberOfItems</span><span class="kt">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">priceCheck</span><span class="kt">:</span> <span class="p">(</span><span class="n">thingy</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">thingy</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This leverages the existing way of modeling evaluation, but it&rsquo;s kinda ugly. For
-the near term, this solution is decent, however it adds the overhead of extra
-arguments being passed around. I&rsquo;m not entirely sure how this impacts runtime
-performance in compiled code, though I would like another way of modeling <code>let</code>
-declarations to compare side-by-side.</p>
+<p>The metadata system was very flexible and could support arbitrary meta annotations. The above metadata translates to
+the following map structures at runtime:</p>
 
-<h2>Storing Nested Values As Variables</h2>
-
-<p>I really like this method of modeling <code>let</code> because it behaves more like how a
-<code>let</code> looks in source code. Instead of wrapping a <code>let</code> within another function,
-the declarations are assigned to local variables:</p>
-
-<figure class='code'><figcaption><span>Values As Variables In Pseudo-Java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>What meta attributes look like if they were JavaScript</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -254,108 +282,268 @@ the declarations are assigned to local variables:</p>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">username</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nf">Thunk</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* database query */</span> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Inventory</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;component&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;uses&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;productionDb&quot;</span> <span class="p">]</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="s2">&quot;useWhen&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nx">runtime</span><span class="p">[</span><span class="s2">&quot;env&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;production&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">static</span> <span class="n">String</span> <span class="nf">greet</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">var</span> <span class="n">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">()</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">(</span><span class="s">&quot;greeting &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="o">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="nx">createDb</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;provides&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;productionDb&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">FakeInventory</span><span class="p">.</span><span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;fake?&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="s2">&quot;component&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Inventory&quot;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="s2">&quot;useWhen&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nx">runtime</span><span class="p">[</span><span class="s2">&quot;env&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>I&rsquo;m not entirely sure what performance impact of variables in <code>let</code> would be
-compared to using arguments. Either way, I would be calling the methods associated
-with each declaration and storing them somewhere. The only thing saved is an
-additional function call, so any gains in performance would be minuscule.</p>
+<p>I felt these functional features and expressive syntax would make for an enjoyable and productive programming
+experience. The meta system in particular I felt could become quite powerful especially for customizing load-time
+behavior of Sterling programs. However, some of my goals came with a few problems.</p>
 
-<h2>Why The Indecision?</h2>
+<h2>The Problems</h2>
 
-<p>I&rsquo;m not sure I&rsquo;m following the best ways to model <code>let</code>. And I also don&rsquo;t have
-any immediate way to test either solution short of branching the code and spiking
-out the two solutions. The tradeoffs aren&rsquo;t necessarily obvious, and I won&rsquo;t see
-which one is better in the long term compared to the one not chosen.</p>
+<h3>Speed</h3>
 
-<p>Compilation is hard. Scotch uses a <a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">multi-pass compiler</a>
-with 12 steps currently, so adding a new language feature or changing an existing
-one can be very arduous tasks. Ideally, I only want to implement <code>let</code> once.</p>
+<p>Sterling is amazingly slow. A natural consequence of a tree-based language is that trees must be copied and modified
+for many operations, no matter how &ldquo;trivial&rdquo; they may be (integer arithmetic, for example.) Recursive functions like
+the <code>fibonacci</code> expression above had a particularly nasty characteristic of building enormous trees that took a lot of
+time to reduce to single values.</p>
 
-<p>I will be posting on progress and which solution I end up choosing, stay tuned.</p>
+<p>The speed issues in Sterling were partially mitigated using <a href="http://loganmcgrath.com/blog/2013/06/17/sterling-with-memoization/">memoization</a>.</p>
 
-<h2>@TODO</h2>
+<h3>Memoization: Blessing But Possibly A Curse</h3>
+
+<p>Memoization increased the possibility for static state to hang around in an application. Applying arguments to an
+object constructor, for instance, would return a previously-constructed object. I&rsquo;m not entirely sure what the total
+impact of the &ldquo;object constructor problem&rdquo; could have been, as objects are not mutable, but I didn&rsquo;t like this
+charateristic nonetheless. Immutability, however, wasn&rsquo;t entirely true (see &ldquo;Escaping The Matrix&rdquo; below).</p>
+
+<p>Named expressions are persistent in memory. If a named expression took a large argument, or returned a large result,
+then the total memory cost of a memoizing expression could become quite high over time.</p>
+
+<h3>The Impacts Of Typelessness</h3>
+
+<p>Types are actually quite nice to have, and I began to miss them quite a bit the more I worked on Sterling. While
+Sterling is very flexible (because it has no types) it also has very poor support for polymorphism (because it has no
+types). Want to do something else if you receive an <code>Asteroid</code> object rather than a <code>Spaceship</code> object?</p>
+
+<p>The na&iuml;ve solution is to implement an if-case for each expected type:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Spaceship</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>        <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Asteroid&#39;</span> <span class="kr">then</span>
+</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Spaceship collided with an asteroid!&#39;</span>
+</span><span class='line'>        <span class="kr">else</span> <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Spaceship&#39;</span> <span class="kr">then</span>
+</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Spaceships collide!&#39;</span>
+</span><span class='line'>        <span class="n">end</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">Asteroid</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>        <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Asteroid&#39;</span> <span class="kr">then</span>
+</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Asteroids collide!&#39;</span>
+</span><span class='line'>        <span class="kr">else</span> <span class="kr">if</span> <span class="n">other</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">name</span> <span class="n">is</span> <span class="sc">&#39;Spaceship&#39;</span> <span class="kr">then</span>
+</span><span class='line'>            <span class="n">say</span> <span class="sc">&#39;Asteroid collided with a spaceship!&#39;</span>
+</span><span class='line'>        <span class="n">end</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is fragile, though, and the code is complex. What&rsquo;s worse, is there&rsquo;s no way to ensure that a method is receiving
+an <code>Asteroid</code> and not another object that simply implements its API.  A better solution is to let the colliding object
+select the proper method from the object it&rsquo;s colliding with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Spaceship</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collidedWithSpaceship</span> <span class="n">self</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">collideWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;Spaceships collide!&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">collideWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;Spaceship collided with an asteroid!&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">Asteroid</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collideWithAsteroid</span> <span class="n">self</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">collideWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="sc">&#39;Asteroid collided with a spaceship!&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">collideWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="sc">&#39;Asteroids collide!&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solution is better. It&rsquo;s also similar to implementing <a href="http://en.wikipedia.org/wiki/Visitor_pattern#Java_example">visitor pattern</a>
+in Java. I still don&rsquo;t like it because there&rsquo;s no type safety and adding support for more types requires violating the
+<a href="http://en.wikipedia.org/wiki/Open/closed_principle">open/closed principle</a>. For instance, in order for a <code>Bunny</code> to be
+correctly collided-with, a <code>collidedWithBunny</code> method must be added to both <code>Spaceship</code> and <code>Asteroid</code>. Developers may
+find it easier instead to allow the <code>Bunny</code> to masquerade as an asteroid:</p>
+
+<figure class='code'><figcaption><span>Spaceship-eating Bunny</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Bunny</span> <span class="ow">=</span> <span class="n">object</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collideWith</span><span class="kt">:</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">collideWithAsteroid</span> <span class="n">self</span><span class="p">,</span> <span class="o">//</span> <span class="n">muahaha</span> <span class="kt">I&#39;m</span> <span class="n">an</span> <span class="n">asteroid</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">collidedWithSpaceship</span><span class="kt">:</span> <span class="p">(</span><span class="n">spaceship</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">say</span> <span class="sc">&#39;NOM NOM NOM NOM!&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">collidedWithAsteroid</span><span class="kt">:</span> <span class="p">(</span><span class="n">asteroid</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This <a href="http://en.wikipedia.org/wiki/Multiple_dispatch#Java">single-dispatch behavior</a> means that for any argument
+applied to a method name, the same method will be dispatched. In the case of Java, this is determined by the type of
+a method&rsquo;s arguments at compile time. Adding new methods for similarly-typed arguments requires all client code be
+recompiled. While Sterling may not have typing, it is still single-dispatch.</p>
+
+<p>The lack of types became particularly painful when implementing arithmetic operations and compile-time analysis was
+nearly impossible without collecting a great deal of superfluous metadata.</p>
+
+<h3>Escaping The Matrix</h3>
+
+<p>As I worked on Sterling, I required functionality that wasn&rsquo;t yet directly supportable in the language itself. I solved
+this problem using the &ldquo;glue&rdquo; expression that could tie into a Java-based expression:</p>
+
+<figure class='code'><figcaption><span>sterling/collection/_base.ag</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">EmptyIterator</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.EmptyIterator&#39;</span>
+</span><span class='line'><span class="no">List</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.ListConstructor&#39;</span>
+</span><span class='line'><span class="no">Set</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.SetConstructor&#39;</span>
+</span><span class='line'><span class="no">Tuple</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.TupleConstructor&#39;</span>
+</span><span class='line'><span class="no">Map</span> <span class="o">=</span> <span class="n">glue</span> <span class="s1">&#39;sterling.lang.builtin.MapConstructor&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For short-term problems, this option isn&rsquo;t too bad, but it allows the programmer to escape the immutable &ldquo;Matrix&rdquo; of
+Sterling. For example, I implemented Sterling&rsquo;s collections as thin wrappers around Java collections, and allowed them
+to be mutable. Actually, a lot of things in Sterling were mutable:</p>
 
 <ul>
-<li>Write-up on lexical scoping in Scotch.</li>
-<li>Details on how Scotch compiles values and functions in Java 8 lambdas.</li>
-<li>How simple, non-recursive closures are implemented.</li>
-<li>Implementation of co-recursive closures.</li>
+<li>Method collections on expressions</li>
+<li>Object methods</li>
+<li>Maps</li>
+<li>Lists</li>
 </ul>
 
 
-<hr />
+<p>This, coupled with memoization, could cause a lot of issues with static state and had the potential to enable a lot of
+bad design decisions for programs written in Sterling.</p>
 
-<h3>Links</h3>
+<h2>The Good Parts</h2>
+
+<p>Despite the baggage, there&rsquo;s a few takeaways!</p>
+
+<p>Sterling&rsquo;s syntax is very small and terse. I particularly enjoyed not having to type a lot of parentheses, braces,
+commas, and semicolons. Separating arguments by spaces allowed the language read like a book.</p>
+
+<p>Most expressions can be delimited with whitespace alone, and because everything is an expression, objects could be
+created inline and if-cases could be used as arguments.</p>
+
+<p>Operators are just methods. Any object or expression can define a &ldquo;+&rdquo; operator and customize what it does. With
+polymorphism supported with multi-methods, this can become an incredibly powerful feature.</p>
+
+<p>Sterling also has the ability to define arbitrary metadata on any named expression. This metadata is gathered into a
+<code>meta</code> attribute and can be inspected at runtime to support a sort of meta programming.</p>
+
+<h2>What I&rsquo;m Carrying Forward</h2>
+
+<p>I&rsquo;m now working on a new language project that will be borrowing Sterling&rsquo;s syntax. This time, however, I will be using
+types. Algebraic data types hold a certain fascination for me, and I&rsquo;m interested in seeing what I can do with them. At
+the very least, I do intend on using multi-methods for better polymorphism support.</p>
+
+<p>I don&rsquo;t think I like declaring scope. It&rsquo;s verbose. Or declaring types. That should be restricted to places where it
+impacts execution, like function signatures.</p>
+
+<p>While Sterling&rsquo;s meta system didn&rsquo;t really go anywhere, I do intend on carrying it forward as a supplement to algebraic
+types. I may even still bake in dependency injection because I hate all the typing required to tie together an
+application.</p>
+
+<p>I don&rsquo;t believe I will carry forward mandatory immutability, though I may support some form of &ldquo;immutability by
+default&rdquo;.</p>
+
+<p>Sterling&rsquo;s lazy evaluation caused a lot of headaches more than a few times. I&rsquo;ll probably not make any successor
+language lazily evaluated because memoization becomes a near requirement in order to make lazy evaluation useful.</p>
+
+<h2>My Holy Grail</h2>
 
 <ul>
-<li><a href="https://github.com/lmcgrath/scotch-lang">Scotch Source</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Multi-pass_compiler">Multi-pass Compiler</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Thunk">Thunks (Wikipedia)</a></li>
+<li>A language that is interpreted and optionally compiled either AOT or JIT</li>
+<li><a href="http://en.wikipedia.org/wiki/Type_inference">Inferred typing</a> as opposed to <a href="http://en.wikipedia.org/wiki/Nominative_type_system">nominal typing</a></li>
+<li>At least psuedo-declarative</li>
+<li>Dynamic to some degree</li>
+<li>Easy to write, easy to read</li>
+<li>Highly composable</li>
+<li>Simple closures</li>
+<li>First-class functions, if not first-class everything</li>
 </ul>
 
 
-<h3>Credits</h3>
-
-<p>Thanks to my dear friend <a href="https://github.com/azagniotov">Alexander Zagniotov</a>
-who took time out of his busy day to review my multiple drafts.</p>
-
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-
-
-<time datetime="2015-01-23T08:30:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2015</time></div>
-	
-
-<div class="tags">
-
-	<a class='category' href='/blog/categories/functional-programming/'>Functional Programming</a>, <a class='category' href='/blog/categories/language-design/'>Language Design</a>
-
-</div>
-
-
-</div>
-</article>
-    
-
-    
-    
-        <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/08/05/lessons-from-sterling/">
-		
-			Lessons From Sterling</a>
-	</h2>
-	<div class="entry-content">
-		<p>I&rsquo;ve spent the last seven months developing a language called <a href="https://github.com/lmcgrath/sterling">Sterling</a>.
-Sterling was intended to be an untyped functional scripting language, something like lazily-evaluated, immutable
-JavaScript. Last week I decided to shelve Sterling.</p>
-
-
-		
-		<a href="/blog/2013/08/05/lessons-from-sterling/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -534,6 +722,50 @@ both Sterling and Java versions of the algorithm and I will be benchmarking each
 </article>
     
 
+    
+    
+        <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/20/app-config-app-in-action/">
+		
+			App-Config-App in Action</a>
+	</h2>
+	<div class="entry-content">
+		<p>Paul Hammant found this cool <a href="https://github.com/lmcgrath/angular-java-server-midi">Server-Side Piano</a> and I&rsquo;ve modified it to be configurable from a running App-Config-App. Because the sound is generated at the server, you&rsquo;re able to see (hear) the Server-Side Piano change its configuration without reloading the UI.</p></p>
+
+
+		
+		<a href="/blog/2012/11/20/app-config-app-in-action/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-11-20T07:00:00-08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/perforce/'>Perforce</a>, <a class='category' href='/blog/categories/scm/'>SCM</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
+
+</div>
+
+
+</div>
+</article>
+    
+
 
 <nav id="pagenavi">
     
@@ -550,10 +782,6 @@ both Sterling and Java versions of the algorithm and I will be benchmarking each
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/01/23/scoping-and-thunking-in-let-declarations/">Scoping and Thunking in Let Declarations</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/08/05/lessons-from-sterling/">Lessons From Sterling</a>
       </li>
     
@@ -567,6 +795,10 @@ both Sterling and Java versions of the algorithm and I will be benchmarking each
     
       <li class="post">
         <a href="/blog/2012/11/28/promoting-changes-with-app-config-app/">Promoting Changes With App-Config-App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/app-config-app-in-action/">App-Config-App in Action</a>
       </li>
     
   </ul>
